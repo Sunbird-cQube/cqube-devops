@@ -1,0 +1,30 @@
+- name: copying dockerfile script to ingestion repository
+  template:
+    src: Dockerfile.j2
+    dest: "../microservices/ingestion-ms/Dockerfile"
+    mode: "0644"  
+  tags: [ install, update ]
+
+- name: Creating environmental variables
+  file:
+    path: ../microservices/ingestion-ms/.env
+    state: touch
+    mode: u+rw,g+rw,o+rw
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/ingestion-ms/.env
+    block: |
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      NIFI_IP = 'nifi_app'
+      NIFI_PORT = 8096
+      URL = "https://{{ api_endpoint }}"
+      WRK_DIR_PYTHON = '/python_files'
+      PYTHON_PATH = '/usr/bin/python3.7'
+      FLASKAPI = 'http://flask_app'
+      FLASK_PORT = 3003

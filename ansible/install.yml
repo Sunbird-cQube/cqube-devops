@@ -1,0 +1,17 @@
+---
+- name: Installing cQube
+  hosts: localhost
+  gather_facts: true
+  remote_user: root
+  become: true
+  vars_files:
+    - ../config.yml
+
+  roles:
+          - configurations
+          - postgres 
+          - python
+          - ingestion
+          - spec
+          - flask
+          - nifi

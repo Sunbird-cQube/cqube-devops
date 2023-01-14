@@ -1,0 +1,6 @@
+---
+- include_tasks: configure_flask.yml
+  tags: install
+
+- include_tasks: build_flask.yml
+  tags: install

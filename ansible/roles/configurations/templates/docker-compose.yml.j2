@@ -1,0 +1,55 @@
+version: '3.88888888'
+services:
+  postgres_app:
+    image: postgres_ms:1
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB={{ db_name }}
+      - POSTGRES_USER={{ db_user }}
+      - POSTGRES_PASSWORD={{ db_password }}
+    networks:
+      - cqube_net
+  python_app:
+    image: python_ms:1
+    volumes:
+      - python_executable_env:/usr/local/lib/python3.7/site-packages
+    networks:
+      - cqube_net
+  ingest_app:
+    image: ingestion_ms:1
+    ports:
+      - 3000:3000
+    networks:
+      - cqube_net
+  spec_app:
+    image: spec_ms:1
+    ports:
+      - 3001:3001
+    networks:
+      - cqube_net
+  flask_app:
+    image: flask_ms:1
+    ports:
+      - 3003:3003
+    volumes:
+      - shared_python_files:/python_flask
+    networks:
+      - cqube_net
+  nifi_app:
+    image: nifi_ms:1
+    ports:
+      - 8096:8096
+    volumes:
+      - shared_python_files:/python_files
+      - python_executable_env:/usr/local/lib/python3.7/dist-packages
+    environment:
+      - NIFI_WEB_HTTP_HOST=0.0.0.0
+      - NIFI_WEB_HTTP_PORT=8096
+    networks:
+      - cqube_net
+networks:
+  cqube_net:
+volumes:
+  shared_python_files:
+  python_executable_env:

@@ -1,0 +1,34 @@
+- name: copying dockerfile script to spec repository
+  template:
+    src: Dockerfile.j2
+    dest: "../microservices/spec-ms/Dockerfile"
+    mode: "0644"  
+  tags: [ install, update ]
+
+- name: copying dockerfile script to spec repository
+  template:
+    src: config.ini.j2
+    dest: "../microservices/spec-ms/python/config.ini"
+  tags: [ install, update ]
+
+- name: Creating environmental variables
+  file:
+    path: ../microservices/spec-ms/.env
+    state: touch
+    mode: u+rw,g+rw,o+rw
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/spec-ms/.env
+    block: |
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      NIFI_IP = 'nifi_app'
+      NIFI_PORT = 8096
+      URL = "https://{{ api_endpoint }}"
+      FLASKAPI = 'http://flask_app'
+      FLASK_PORT = 3003

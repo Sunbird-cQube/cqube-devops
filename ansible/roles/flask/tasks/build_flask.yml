@@ -1,0 +1,7 @@
+- name: docker build flask ms
+  docker_image:
+    name: flask_ms
+    tag: '1'
+    build:
+      path: ../microservices/spec-ms/python
+    source: build

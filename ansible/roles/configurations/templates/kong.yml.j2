@@ -1,0 +1,23 @@
+_format_version: "2.1"
+   
+services:
+  - name: ingestion-ms
+    url: http://ingest_app:3000
+    routes:
+      - name: ingestion-ms
+        paths:
+          - /api/ingestion
+
+  - name: spec-ms
+    url: http://spec_app:3001
+    routes:
+      - name: spec-ms
+        paths:
+          - /api/spec
+
+  - name: flask-ms
+    url: http://flask_app:3003/api/generator
+    routes:
+      - name: flask-ms
+        paths:
+          - /api/generator

@@ -1,0 +1,7 @@
+- name: docker build postgres
+  docker_image:
+    name: postgres_ms
+    tag: '1'
+    build:
+      path: ../microservices/postgres-ms/
+    source: build
