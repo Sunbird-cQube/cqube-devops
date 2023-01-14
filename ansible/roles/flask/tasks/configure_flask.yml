@@ -1,0 +1,19 @@
+- name: copying dockerfile script to flask generator folder
+  template:
+    src: Dockerfile.j2
+    dest: "../microservices/spec-ms/python/Dockerfile"
+    mode: "0644"  
+  tags: [ install, update ]
+
+- name: copying dockerfile script to flask generator folder
+  template:
+    src: requirements.txt.j2
+    dest: "../microservices/spec-ms/python/requirements.txt"
+    mode: "0644"  
+  tags: [ install, update ]
+
+- name: copying database config to generator folder
+  template:
+    src: config.ini.j2
+    dest: "../microservices/spec-ms/python/transformer_generator/transformers/config.ini"
+  tags: [ install, update ]

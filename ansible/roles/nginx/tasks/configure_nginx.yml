@@ -1,0 +1,7 @@
+- name: copying configuration file to nginx repository
+  template:
+    src: default.conf.j2
+    dest: "../microservices/nginx-ms/default.conf"
+    mode: "0644"  
+  tags: [ install, update ]
+

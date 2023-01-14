@@ -1,0 +1,5 @@
+---
+- include_tasks: configure_nginx.yml
+  tags: install
+- include_tasks: build_nginx.yml
+  tags: install

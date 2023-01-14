@@ -1,0 +1,7 @@
+- name: docker build spec ms
+  docker_image:
+    name: spec_ms
+    tag: '1'
+    build:
+      path: ../microservices/spec-ms/
+    source: build

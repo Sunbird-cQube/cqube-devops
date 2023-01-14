@@ -1,0 +1,7 @@
+- name: docker build ingestion ms
+  docker_image:
+    name: ingestion_ms
+    tag: '1'
+    build:
+      path: ../microservices/ingestion-ms/
+    source: build

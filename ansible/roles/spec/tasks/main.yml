@@ -1,0 +1,7 @@
+---
+- include_tasks: configure_spec.yml
+  tags: install
+
+- include_tasks: build_spec.yml
+  tags: install
+

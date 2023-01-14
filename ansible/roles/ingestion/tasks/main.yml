@@ -1,0 +1,6 @@
+---
+- include_tasks: configure_ingestion.yml
+  tags: install
+
+- include_tasks: build_ingestion.yml
+  tags: install
