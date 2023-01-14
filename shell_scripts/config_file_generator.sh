@@ -13,7 +13,7 @@ check_length(){
 check_sys_user(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Type who in the terminal to get the system username${normal}"
+echo -e "\e[0;36m${bold}Hint: Type 'whoami' in the terminal to get the system username${normal}"
 echo -e "\e[0;38m${bold}please enter the system_user_name:${normal}"
 read username
 result=`who | head -1 | awk '{print $1}'`
