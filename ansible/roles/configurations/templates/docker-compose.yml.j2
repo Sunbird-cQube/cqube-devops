@@ -30,10 +30,10 @@ services:
       - cqube_net
   generator_app:
     image: generator_ms:1
-    ports:
-      - 3003:3003
     volumes:
       - shared_python_files:/python_flask
+    ports:
+      - 3003:3003
     networks:
       - cqube_net
   nifi_app:
