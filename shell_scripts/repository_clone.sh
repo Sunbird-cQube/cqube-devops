@@ -13,3 +13,9 @@ git clone https://github.com/Sunbird-cQube/ingestion-ms.git
 cd "ingestion-ms"
 git checkout dev
 cd ../../
+
+cd "$MY_PATH"
+git clone https://github.com/Sunbird-cQube/generator-ms.git
+cd "generator-ms"
+git checkout dev
+cd ../../
