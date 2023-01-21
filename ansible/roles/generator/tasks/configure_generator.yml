@@ -1,5 +1,5 @@
 - name: copying database config to generator folder
   template:
     src: config.ini.j2
-    dest: "../microservices/spec-ms/python/transformer_generator/transformers/config.ini"
+    dest: "../microservices/generator-ms/config.ini"
   tags: [ install, update ]
