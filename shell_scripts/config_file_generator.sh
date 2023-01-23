@@ -18,7 +18,7 @@ check_aws_key(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: AWS Access key for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_acess_key ?${normal}"
+echo -e "\e[0;38m${bold}please enter the aws_acess_key ${normal}"
 read aws_acess_key
     aws_key_status=0
     export AWS_ACCESS_KEY_ID=$aws_acess_key
@@ -40,7 +40,7 @@ check_aws_secret_key(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_secret_key ?${normal}"
+echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
 aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 read aws_secret_key
     aws_key_status=0
@@ -63,19 +63,19 @@ check_aws_default_region(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: aws default region for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_default_region ?${normal}"
-read aws_default_reg
+echo -e "\e[0;38m${bold}please enter the aws_default_region ${normal}"
+read aws_default_region
     region_len=${#aws_default_region}
-    if [[ $region_len -ge 9 ]] && [[ $region_len -le 15 ]]; then
+   # if [[ $region_len -ge 9 ]] && [[ $region_len -le 15 ]]; then
         curl https://s3.$aws_default_region.amazonaws.com > /dev/null 2>&1
         if [[ ! $? == 0 ]]; then
             echo -e "\e[0;31m${bold}Error - There is a problem reaching the aws default region. Please check the value.${normal}"; fail=1
             else
-  printf "aws_default_region: $aws_default_reg\n" >> config.yml
+  printf "aws_default_region: $aws_default_region\n" >> config.yml
   break;
          fi
 
-    fi
+    #fi
 done
 }
 
@@ -147,7 +147,7 @@ check_state(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Please enter state code ( refer to state_list )${normal}"
-        echo -e "\e[0;38m${bold}please enter the state_name?${normal} "
+        echo -e "\e[0;38m${bold}please enter the state_name ${normal} "
              read state_name
 
 state_found=0
@@ -170,7 +170,7 @@ check_api_endpoint(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: enter domain name ( Example: cqubeprojects.com )${normal}"     
-echo -e "\e[0;38m${bold}please enter the api_endpoint?${normal}"
+echo -e "\e[0;38m${bold}please enter the api_endpoint ${normal}"
 read api_endpoint
 if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
     echo -e "\e[0;31m${bold}Error - Please provide the proper api endpoint${normal}"; fail=1
@@ -205,7 +205,7 @@ check_db_user(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Create your own username for the cQube database,Provide the length between 3 and 63${normal}"
-echo -e "\e[0;38m${bold}please enter the db_user?${normal} "
+echo -e "\e[0;38m${bold}please enter the db_user ${normal} "
 read dbuser
     if [[ ! $dbuser =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
         echo -e "\e[0;31m${bold}Error - Naming convention is not correct. Please change the value of db_user.${normal}"; fail=1
@@ -227,7 +227,7 @@ check_db_name(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Create your own database name for the cQube database,Provide the length between 3 and 63${normal}"
-echo -e "\e[0;38m${bold}please enter the db_name?${normal}"
+echo -e "\e[0;38m${bold}please enter the db_name ${normal}"
 read dbname
     if [[ ! $dbname =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
         echo -e "\e[0;31m${bold}Error - Naming convention is not correct. Please change the value of db_name.${normal}"; fail=1
@@ -249,7 +249,7 @@ check_db_password(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Create your own password to for the cQube database, password should contain atleast 1 lower,upper,number,special character (only @!%^*? allowed) and minimum 8 characters${normal}"     
-echo -e "\e[0;38m${bold}please enter the db_password?${normal}"
+echo -e "\e[0;38m${bold}please enter the db_password ${normal}"
 read dbpass
 
     len="${#dbpass}"
@@ -275,9 +275,9 @@ check_config_db(){
         #while true; do
 echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with db_name , db_user and db_password  Follow Installation process with below config values.${normal}"
 echo -e "\e[0;38m${bold} db_user: cqube_user ${normal}"
-echo -e "\e[0;38m${bold} db_name: cqube_name ${normal}"
-echo -e "\e[0;38m${bold} db_password: Tibil@123 ${normal}"
-echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes.${normal}"
+echo -e "\e[0;38m${bold} db_name: cqube ${normal}"
+echo -e "\e[0;38m${bold} db_password: cQube@123 ${normal}"
+echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes, and if you want to follow the Installation process with above value please enter no .${normal}"
             while true; do
 
              read -p "Do you still want to edit the database credentials (yes/no)? " yn
