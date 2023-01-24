@@ -7,7 +7,9 @@ result=`who | head -1 | awk '{print $1}'`
 check_ip()
 {
         is_local_ip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | cut -d ' ' -f 2` > /dev/null 2>&1
-	printf "local_ipv4_address: $is_local_ip\n" >> config.yml
+	echo $is_local_ip > .ip
+               ip=$(cut -d " " -f 2 .ip)
+	printf "local_ipv4_address: $ip\n" >> config.yml
 
 }
 
