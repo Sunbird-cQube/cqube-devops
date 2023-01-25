@@ -49,8 +49,8 @@ read aws_secret_key
     aws s3api list-buckets > /dev/null 2>&1
     if [ ! $? -eq 0 ]; then 
 	    echo -e "\e[0;31m${bold}Error - Invalid aws access or secret keys.${normal}"; fail=1
-
-        aws_key_status=1
+         check_aws_key
+      #  aws_key_status=1
         else
   printf "aws_secret_key: $aws_secret_key\n" >> config.yml
   break;
@@ -60,23 +60,7 @@ done
 }
 
 check_aws_default_region(){
-while true
-do
-echo -e "\e[0;36m${bold}Hint: aws default region for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_default_region ${normal}"
-read aws_default_region
-    region_len=${#aws_default_region}
-   # if [[ $region_len -ge 9 ]] && [[ $region_len -le 15 ]]; then
-        curl https://s3.$aws_default_region.amazonaws.com > /dev/null 2>&1
-        if [[ ! $? == 0 ]]; then
-            echo -e "\e[0;31m${bold}Error - There is a problem reaching the aws default region. Please check the value.${normal}"; fail=1
-            else
-  printf "aws_default_region: $aws_default_region\n" >> config.yml
-  break;
-         fi
-
-    #fi
-done
+  printf "aws_default_region: ap-south-1\n" >> config.yml
 }
 
 check_processing_buc(){
@@ -204,7 +188,7 @@ check_length(){
 check_db_user(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Create your own username for the cQube database,Provide the length between 3 and 63${normal}"
+echo -e "\e[0;36m${bold}Hint: Create your own username for the cQube database, numbers are not allowed, Provide the length between 3 and 63${normal}"
 echo -e "\e[0;38m${bold}please enter the db_user ${normal} "
 read dbuser
     if [[ ! $dbuser =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
@@ -226,7 +210,7 @@ done
 check_db_name(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Create your own database name for the cQube database,Provide the length between 3 and 63${normal}"
+echo -e "\e[0;36m${bold}Hint: Create your own database name for the cQube database, numbers are not allowed, Provide the length between 3 and 63${normal}"
 echo -e "\e[0;38m${bold}please enter the db_name ${normal}"
 read dbname
     if [[ ! $dbname =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
