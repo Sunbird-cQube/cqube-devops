@@ -13,9 +13,12 @@ fi
 chmod u+x shell_scripts/basic_requirements.sh
 . "shell_scripts/basic_requirements.sh"
 
+chmod u+x shell_scripts/install_aws_cli.sh
+. "shell_scripts/install_aws_cli.sh"
+
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/config_file_generator.sh
-echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refet to the hints provided and enter the correct value${normal}"
+echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/config_file_generator.sh"
 
 #Running script to clone ingestion, spec repository
