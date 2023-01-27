@@ -38,7 +38,6 @@ fi
 
 ansible-playbook ansible/install.yml
 ansible-playbook ansible/compose.yml
-ansible-playbook ansible/install_nginx.yml
 
 if [ $? = 0 ]; then
 api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)

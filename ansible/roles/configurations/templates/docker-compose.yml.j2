@@ -48,6 +48,13 @@ services:
       - NIFI_WEB_HTTP_PORT=8096
     networks:
       - cqube_net
+  nginx_app:
+    image: nginx_ms:1
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - cqube_net
 networks:
   cqube_net:
 volumes:
