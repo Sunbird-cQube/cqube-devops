@@ -34,14 +34,25 @@ done
 
 }
 
-aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+check_aws(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: # AWS Access key for creation of s3 bucket${normal}"
+echo -e "\e[0;38m${bold}please enter the aws_acess_key ?${normal}"
+read aws_acess_key_id
+sed -i "/aws_acess_key: /d" config.yml
+printf  "aws_acess_key: $aws_acess_key_id\n"  >> config.yml
+  break;
+done
+
+}
 
 check_aws_secret_key(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
-aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+aws_acess_key=$(awk ''/^aws_acess_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 read aws_secret_key
     aws_key_status=0
     export AWS_ACCESS_KEY_ID=$aws_acess_key
@@ -49,8 +60,8 @@ read aws_secret_key
     aws s3api list-buckets > /dev/null 2>&1
     if [ ! $? -eq 0 ]; then 
 	    echo -e "\e[0;31m${bold}Error - Invalid aws access or secret keys.${normal}"; fail=1
-         check_aws_key
-      #  aws_key_status=1
+         check_aws
+        aws_key_status=1
         else
   printf "aws_secret_key: $aws_secret_key\n" >> config.yml
   break;
