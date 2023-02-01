@@ -28,3 +28,6 @@
       PYTHON_PATH = '/usr/bin/python3.7'
       FLASKAPI = 'http://flask_app'
       FLASK_PORT = 3003
+      AWS_ACCESS_KEY = "{{ aws_acess_key }}"
+      AWS_SECRET_KEY = "{{ aws_secret_key }}"
+      PROCESS_BUCKET= "{{ s3_processing_bucket }}"
