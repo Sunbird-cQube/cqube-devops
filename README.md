@@ -22,8 +22,6 @@
 - Configure cname of ec2 instance to the domain name
 - Create a SSL certificate for the domain name.
 
-
-
 # Installation Steps:
 - Open Terminal
 - Clone the cqube-devops repository using following command
@@ -35,7 +33,6 @@
   git checkout dev
   git pull
   ```
-
 
 - Enter the configuration details for the below mentioned list in config.yml (* all the values are mandatory)
 
@@ -71,9 +68,9 @@
   
 - cQube_devops installation process installs the components in a sequence as mentioned below:
 - Following are the details of the microservices which get installed in the cqube server.
-- Ingestion-ms:
-- Spec-ms:
-- Generator-ms:
+- Ingestion-ms:The ingestion-ms is used to upload the data of the events, datasets, dimensions, transformers and pipeline. All these apis will be to  ingesting the data into the cQube
+- Spec-ms:The spec-ms is used to import schema of the events, datasets, dimensions, transformers and pipeline. All these specs will be defined by the cQube platform prior to ingesting the data into the cQube. These specifications are derived by considering the KPIs as the Indicator
+- Generator-ms:The generator-ms is used to create the specs & transformers for the derived datasets. Performed aggregation logics, updating data to datasets based on transformation. Status update of file processing
 - Nifi-ms: Apache NiFi is used as a real-time integrated data logistics and simple event processing platform
 - Postgres-ms: Postgres microservice contains the schema and tables
 - Nginx-ms: It is commonly used as a reverse proxy and load balancer to manage incoming traffic and distribute it to slower upstream servers
@@ -97,6 +94,6 @@
   ```
 
 Once installation is completed without any errors, you will be prompted the following message. 
-```**CQube installed successfully!!**```
+```**cQube installed successfully!!**```
 
 
