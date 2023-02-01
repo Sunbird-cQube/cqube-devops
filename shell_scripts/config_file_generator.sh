@@ -311,7 +311,6 @@ check_api_endpoint
 check_aws_key
 check_aws_secret_key
 check_aws_default_region
-check_processing_buc
 check_archived_buc
 check_error_buc
 check_config_db
@@ -346,7 +345,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                                 check_aws_key
                                 check_aws_secret_key
                                 check_aws_default_region
-				check_processing_buc
 				check_archived_buc
 				check_error_buc
 				check_config_db
