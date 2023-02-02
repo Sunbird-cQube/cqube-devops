@@ -28,7 +28,7 @@ read aws_access_key
 #           echo "Error - Invalid aws access or secret keys"; fail=1
         #aws_key_status=1
 #       else
-  printf "aws_access_key: $aws_ac/access_key\n" >> config.yml
+  printf "aws_access_key: $aws_access_key\n" >> config.yml
   break;
 done
 
