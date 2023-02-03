@@ -47,9 +47,9 @@ services:
     volumes:
       - generator_volume:/generator_data
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
-      - input_volume:/input-data
-      - archived_volume:/archived-data
-      - processing_volume:/processing-data
+      - input_volume:/input_data
+      - archived_volume:/archived_data
+      - processing_volume:/processing_data
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
