@@ -35,7 +35,7 @@ services:
   generator_app:
     image: generator_ms:1
     volumes:
-      - generator_volume:/python_flask/transformer_generator/transformers
+      - generator_volume:/python_flask
     ports:
       - 3003:3003
     networks:
