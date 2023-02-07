@@ -1,9 +1,10 @@
 #!/bin/bash
 
 MY_PATH=microservices
-REPOSITORY=dev
+REPOSITORY=staging
 
 cd "$MY_PATH"
+
 if ! [[ -d spec-ms ]]; then
 	git clone https://github.com/Sunbird-cQube/spec-ms.git
 	cd "spec-ms"
