@@ -5,6 +5,3 @@
     build:
       path: ../microservices/nginx-ms/
     source: build
-
-- name: run the nginx service
-  shell: docker run --name cqube_nginx_app -d -p 80:80 nginx_ms:1

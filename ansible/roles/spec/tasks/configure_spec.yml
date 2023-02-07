@@ -30,7 +30,11 @@
       NIFI_IP = 'nifi_app'
       NIFI_PORT = 8096
       URL = "http://{{ api_endpoint }}"
-      WRK_DIR_PYTHON = '/python_files/transformer_generator/transformers/'
+      WRK_DIR_PYTHON = '/generator_data/transformer_generator/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       FLASKAPI = 'http://flask_app'
       FLASK_PORT = 3003
+      AWS_ACCESS_KEY = "{{ aws_access_key }}"
+      AWS_SECRET_KEY = "{{ aws_secret_key }}"
+      ARCHIVED_BUCKET= "{{ s3_archived_bucket }}"
+      ERROR_BUCKET= "{{ s3_error_bucket }}"
