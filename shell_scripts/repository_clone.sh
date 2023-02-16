@@ -43,3 +43,17 @@ else
 	cd ../../
 
 fi
+
+cd "$MY_PATH"
+if ! [[ -d dashboard-ms ]]; then
+        git clone https://github.com/Sunbird-cQube/dashboard-ms.git
+        cd "dashboard-ms"
+        git checkout $REPOSITORY
+        cd ../../
+else
+        cd "dashboard-ms"
+        git checkout $REPOSITORY
+        git pull
+        cd ../../
+
+fi
