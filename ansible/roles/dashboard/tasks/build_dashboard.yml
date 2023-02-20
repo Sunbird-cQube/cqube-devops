@@ -1,0 +1,7 @@
+- name: docker build dashboard ms
+  docker_image:
+    name: dashboard_ms
+    tag: '1'
+    build:
+      path: ../microservices/dashboard-ms/
+    source: build

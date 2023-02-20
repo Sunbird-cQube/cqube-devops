@@ -24,7 +24,7 @@
       NIFI_IP = 'nifi_app'
       NIFI_PORT = 8096
       URL = "http://{{ api_endpoint }}"
-      WRK_DIR_PYTHON = '/generator_data/transformer_generator/transformers/python_files'
+      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       FLASKAPI = 'http://generator_app'
       FLASK_PORT = 3003

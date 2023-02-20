@@ -1,3 +1,6 @@
 ---
 - include_tasks: configure_compose.yml
   tags: install
+
+- include_tasks: configure_kong.yml
+  tags: install
