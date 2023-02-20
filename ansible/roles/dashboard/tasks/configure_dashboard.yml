@@ -1,0 +1,5 @@
+- name: copying environment.prod.ts file into the dashboard-ms 
+  template:
+    src: environment.prod.ts.j2
+    dest: "../microservices/dashboard-ms/src/environments/environment.prod.ts"
+  tags: [ install, update ]
