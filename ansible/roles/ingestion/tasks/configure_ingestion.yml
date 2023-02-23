@@ -25,8 +25,6 @@
       NIFI_PORT = 8096
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
-      FLASKAPI = 'http://generator_app'
-      FLASK_PORT = 3003
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       ARCHIVED_BUCKET= "{{ s3_archived_bucket }}"
