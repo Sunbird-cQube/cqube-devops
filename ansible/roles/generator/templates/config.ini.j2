@@ -2,14 +2,18 @@
 
 # Postgres credentials ####################
 
-db_host     = postgres_app
-db_port     = 5432
+db_host = postgres_app
+db_port = 5432
 database = {{ db_name }}
-db_user     = {{ db_user }}
+db_user = {{ db_user }}
 db_password = {{ db_password }}
 server_url = http://{{ api_endpoint }}
 nifi_host = nifi_app
 nifi_port = 8096
+spec_host = http://spec_app
+spec_port = 3001
+generator_host = http://generator_app
+generator_port = 3003
 error_bucket_name = {{ s3_error_bucket }}
 archived_bucket_name = {{ s3_archived_bucket }}
 s3_access_key = {{ aws_access_key }}
