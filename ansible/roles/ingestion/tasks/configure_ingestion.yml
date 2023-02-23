@@ -21,9 +21,8 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      NIFI_HOST = 'nifi_app'
+      NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = "http://{{ api_endpoint }}"
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       FLASKAPI = 'http://generator_app'
