@@ -29,10 +29,10 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
+      GENERATOR_HOST = 'http://generator_app'
+      GENERATOR_PORT = 3003
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
-      FLASKAPI = 'http://generator_app'
-      FLASK_PORT = 3003
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       ARCHIVED_BUCKET= "{{ s3_archived_bucket }}"
