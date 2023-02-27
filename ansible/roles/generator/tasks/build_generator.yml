@@ -1,4 +1,4 @@
-- name: docker build flask ms
+- name: docker build generator ms
   docker_image:
     name: generator_ms
     tag: '1'

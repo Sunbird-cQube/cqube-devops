@@ -40,8 +40,9 @@ ansible-playbook ansible/install.yml
 ansible-playbook ansible/compose.yml
 
 if [ $? = 0 ]; then
-api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 echo "cQube installed successfully!!"
-echo "cQube ingestion api's can be accessible using $api_endpoint/ingestion"
-echo "cQube spec api's can be accessible using $api_endpoint/spec"
 fi
+
+#Running script to display important links
+chmod u+x shell_scripts/generate_access_links.sh
+. "shell_scripts/generate_access_links.sh"

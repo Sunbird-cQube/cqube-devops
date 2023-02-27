@@ -1,0 +1,6 @@
+---
+- include_tasks: configure_dashboard.yml
+  tags: install
+
+- include_tasks: build_dashboard.yml
+  tags: install

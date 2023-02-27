@@ -14,5 +14,6 @@
           - ingestion
           - spec
           - generator
+          - dashboard
           - nifi
           - nginx
