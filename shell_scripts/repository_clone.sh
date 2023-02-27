@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MY_PATH=microservices
-REPOSITORY=dev
+REPOSITORY=stable-feb24
 
 cd "$MY_PATH"
 
