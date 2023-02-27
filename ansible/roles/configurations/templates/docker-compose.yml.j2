@@ -18,6 +18,9 @@ services:
       - cqube_net
   ingest_app:
     image: ingestion_ms:1
+    volumes:
+      - input_volume:/app/input-files
+      - error_volume:/app/error-files
     ports:
       - 3000:3000
     networks:
@@ -31,9 +34,15 @@ services:
   generator_app:
     image: generator_ms:1
     volumes:
-      - shared_python_files:/python_flask
+      - generator_volume:/python_flask
     ports:
       - 3003:3003
+    networks:
+      - cqube_net
+  dashboard_app:
+    image: dashboard_ms:1
+    ports:
+      - 4200:80
     networks:
       - cqube_net
   nifi_app:
@@ -41,15 +50,45 @@ services:
     ports:
       - 8096:8096
     volumes:
-      - shared_python_files:/python_files
+      - generator_volume:/generator_data
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
+      - input_volume:/input_data
+      - error_volume:/error_data
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
     networks:
       - cqube_net
+  kong_app:
+    image: kong:latest
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001
+    ports:
+      - "8000:8000"
+      - "8433:8433"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:8444:8444"
+    networks:
+      - cqube_net
+  nginx_app:
+    image: nginx_ms:1
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - cqube_net
 networks:
   cqube_net:
 volumes:
-  shared_python_files:
   python_executable_env:
+  generator_volume:
+  input_volume:
+  error_volume:

@@ -18,23 +18,34 @@ check_aws_key(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: AWS Access key for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_acess_key ${normal}"
-read aws_acess_key
+echo -e "\e[0;38m${bold}please enter the aws_access_key ${normal}"
+read aws_access_key
     aws_key_status=0
-    export AWS_ACCESS_KEY_ID=$aws_acess_key
+    export AWS_ACCESS_KEY_ID=$aws_access_key
     export AWS_SECRET_ACCESS_KEY=$2
     aws s3api list-buckets > /dev/null 2>&1
 #    if [ ! $? -eq 0 ]; then
 #           echo "Error - Invalid aws access or secret keys"; fail=1
         #aws_key_status=1
 #       else
-  printf "aws_acess_key: $aws_acess_key\n" >> config.yml
+  printf "aws_access_key: $aws_access_key\n" >> config.yml
   break;
 done
 
 }
 
-aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+check_aws(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: # AWS Access key for creation of s3 bucket${normal}"
+echo -e "\e[0;38m${bold}please enter the aws_access_key ?${normal}"
+read aws_access_key_id
+sed -i "/aws_access_key: /d" config.yml
+printf  "aws_access_key: $aws_access_key_id\n"  >> config.yml
+  break;
+done
+
+}
 
 check_aws_secret_key(){
 while true
@@ -44,13 +55,13 @@ echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
 aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 read aws_secret_key
     aws_key_status=0
-    export AWS_ACCESS_KEY_ID=$aws_acess_key
+    export AWS_ACCESS_KEY_ID=$aws_access_key
     export AWS_SECRET_ACCESS_KEY=$aws_secret_key
     aws s3api list-buckets > /dev/null 2>&1
     if [ ! $? -eq 0 ]; then 
 	    echo -e "\e[0;31m${bold}Error - Invalid aws access or secret keys.${normal}"; fail=1
-         check_aws_key
-      #  aws_key_status=1
+         check_aws
+        aws_key_status=1
         else
   printf "aws_secret_key: $aws_secret_key\n" >> config.yml
   break;
@@ -300,7 +311,6 @@ check_api_endpoint
 check_aws_key
 check_aws_secret_key
 check_aws_default_region
-check_processing_buc
 check_archived_buc
 check_error_buc
 check_config_db
@@ -335,7 +345,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                                 check_aws_key
                                 check_aws_secret_key
                                 check_aws_default_region
-				check_processing_buc
 				check_archived_buc
 				check_error_buc
 				check_config_db
