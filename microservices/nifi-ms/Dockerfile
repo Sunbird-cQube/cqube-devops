@@ -4,4 +4,6 @@ RUN mkdir /generator_data /processing_data /archived_data
 
 RUN apt-get --allow-releaseinfo-change-suite update && apt-get update -y && apt-get install python3.7 -y && apt-get install python3-pip -y
 
-RUN echo "java.arg.8=-Duser.timezone=Asia/Kolkata" >> conf/bootstrap.conf
+RUN rm -rf conf/bootstrap.conf
+
+COPY bootstrap.conf conf/bootstrap.conf
