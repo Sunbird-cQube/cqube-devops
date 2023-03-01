@@ -1,0 +1,5 @@
+- name: Run a api_integration.py
+  community.docker.docker_container_exec:
+    container: ansible_nifi_app_1
+    command: /bin/bash -c "python3 /generator_data/api_integration.py"
+    chdir: /opt/nifi/nifi-current
