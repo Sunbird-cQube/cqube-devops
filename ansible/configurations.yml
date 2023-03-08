@@ -1,0 +1,9 @@
+---
+- name: Installing cQube
+  hosts: localhost
+  gather_facts: true
+  remote_user: root
+  become: true
+
+  roles:
+          - python_configurations
