@@ -1,0 +1,7 @@
+- name: docker build querybuilder
+  docker_image:
+    name: querybuilder_ms
+    tag: '1'
+    build:
+      path: ../microservices/query-builder/
+    source: build
