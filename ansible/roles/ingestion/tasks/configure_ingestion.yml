@@ -23,7 +23,7 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'http://{{ api_endpoint }}/api'
+      URL = 'http://{{ api_endpoint }}'
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
