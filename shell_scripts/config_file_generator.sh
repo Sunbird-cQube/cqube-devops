@@ -17,6 +17,8 @@ check_ip()
 check_aws_key(){
 while true
 do
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then	
 echo -e "\e[0;36m${bold}Hint: AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ${normal}"
 read aws_access_key
@@ -24,12 +26,9 @@ read aws_access_key
     export AWS_ACCESS_KEY_ID=$aws_access_key
     export AWS_SECRET_ACCESS_KEY=$2
     aws s3api list-buckets > /dev/null 2>&1
-#    if [ ! $? -eq 0 ]; then
-#           echo "Error - Invalid aws access or secret keys"; fail=1
-        #aws_key_status=1
-#       else
   printf "aws_access_key: $aws_access_key\n" >> config.yml
   break;
+fi
 done
 
 }
@@ -37,12 +36,15 @@ done
 check_aws(){
 while true
 do
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: # AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ?${normal}"
 read aws_access_key_id
 sed -i "/aws_access_key: /d" config.yml
 printf  "aws_access_key: $aws_access_key_id\n"  >> config.yml
   break;
+fi
 done
 
 }
@@ -50,6 +52,8 @@ done
 check_aws_secret_key(){
 while true
 do
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
 aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
@@ -66,12 +70,16 @@ read aws_secret_key
   printf "aws_secret_key: $aws_secret_key\n" >> config.yml
   break;
     fi
+    fi
 done
 
 }
 
 check_aws_default_region(){
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then	
   printf "aws_default_region: ap-south-1\n" >> config.yml
+fi
 }
 
 check_processing_buc(){
@@ -97,6 +105,8 @@ done
 check_archived_buc(){
 while true
 do
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: aws s3 archived bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the s3_archived_bucket ${normal}"
 read s3_bucket_2
@@ -111,12 +121,15 @@ read s3_bucket_2
                  break;
 
         fi
+fi
 done
 }
 
 check_error_buc(){
 while true
 do
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: aws s3 error bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the s3_error_bucket ${normal}"
 read s3_bucket_3
@@ -131,8 +144,31 @@ read s3_bucket_3
                  break;
 
         fi
+fi
 done
 }
+
+check_error_dir(){
+        system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       if [[ $storage_type == local ]]; then
+                rm -rf /home/$system_user_name/error_directory
+                mkdir /home/$system_user_name/error_directory
+                printf "local_error_dir: /home/$system_user_name/error_directory\n" >> config.yml
+
+        fi
+}
+check_archived_dir(){
+        system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+        if [[ $storage_type == local ]]; then
+                rm -rf /home/$system_user_name/archived_directory
+                mkdir /home/$system_user_name/archived_directory
+                printf "local_archived_dir: /home/$system_user_name/archived_directory\n" >> config.yml
+        fi
+
+}
+
 
 check_base_dir(){
         printf "base_dir: /opt\n" >> config.yml
@@ -265,6 +301,33 @@ break;
 done
 }
 
+check_mode_of_installation(){
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == aws ]]; then
+        printf "mode_of_installation: public\n" >> config.yml
+fi
+if [[ $storage_type == "local" ]]; then
+        printf "mode_of_installation: localhost\n" >> config.yml
+    fi
+
+}
+
+check_storage_type(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: enter aws or local${normal}"     
+echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
+read storage_typ
+
+    if ! [[ $storage_typ == "aws" || $storage_typ == "local" ]]; then
+        echo "Error - Please enter either aws or local"; fail=1
+else
+        printf "storage_type: $storage_typ\n" >> config.yml
+        break;
+        fi
+done
+}
 
 check_config_db(){
         #while true; do
@@ -289,14 +352,46 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
                                 check_db_password
                           fi
 
-         #    done
-
 	    if [[ $yn == no ]]; then
 printf "db_user: cqube_user\n" >> config.yml
 printf "db_name: cqube\n" >> config.yml
 printf "db_password: cQube@123\n" >> config.yml
 
 	    fi
+
+    }
+
+check_config_read_only_db(){
+        #while true; do
+echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_name , read_only_db_user and read_only_db_password  Follow Installation process with below config values.${normal}"
+echo -e "\e[0;38m${bold} read_only_db_user: cqube_db_user ${normal}"
+echo -e "\e[0;38m${bold} read_only_db_name: cqube_db ${normal}"
+echo -e "\e[0;38m${bold} read_only_db_password: cQube@123 ${normal}"
+echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes.${normal}"
+            while true; do
+
+             read -p "Do you still want to edit the read only database credentials (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+            if [[ $yn == yes ]]; then
+                                check_read_only_db_user
+                                check_read_only_db_name
+                                check_read_only_db_password
+                          fi
+
+         #    done
+
+            if [[ $yn == no ]]; then
+printf "read_only_db_user: cqube_db_user\n" >> config.yml
+printf "read_only_db_name: cqube_db\n" >> config.yml
+printf "read_only_db_password: cQube@123\n" >> config.yml
+
+            fi
 
     }
 
@@ -307,14 +402,21 @@ check_base_dir
 check_sys_user
 check_state
 check_ip
+check_storage_type
+check_mode_of_installation
 check_api_endpoint
+if [[ $storage_type == local ]]; then
+check_error_dir
+check_archived_dir
+fi
+if [[ $storage_type == aws ]]; then
 check_aws_key
 check_aws_secret_key
-check_aws_default_region
 check_archived_buc
 check_error_buc
+fi
 check_config_db
-	
+check_config_read_only_db
 fi
 
 check_config_file(){
@@ -337,18 +439,26 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm config.yml
                                 touch config.yml
-                                check_base_dir
+				check_base_dir
 				check_sys_user
-                                check_state
-                                check_ip
+				check_state
+				check_ip
+				check_storage_type
+				check_mode_of_installatio		n
 				check_api_endpoint
-                                check_aws_key
-                                check_aws_secret_key
-                                check_aws_default_region
+				if [[ $storage_type == local ]]; then
+				check_error_dir
+				check_archived_dir
+				fi
+				if [[ $storage_type == aws ]]; then
+				check_aws_key
+				check_aws_secret_key
 				check_archived_buc
 				check_error_buc
+				fi
 				check_config_db
-                          fi
+				check_config_read_only_db
+                          	fi
              fi
            done
 fi
@@ -360,3 +470,4 @@ if [[ $yn == no ]]; then
 }
 
 check_config_file
+
