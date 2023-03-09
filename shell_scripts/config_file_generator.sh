@@ -321,13 +321,62 @@ echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
 read storage_typ
 
     if ! [[ $storage_typ == "aws" || $storage_typ == "local" ]]; then
-        echo "Error - Please enter either aws or local"; fail=1
+        echo echo -e "\e[0;31m${bold}Error - Please enter either aws or local${normal}"; fail=1
 else
         printf "storage_type: $storage_typ\n" >> config.yml
         break;
         fi
 done
 }
+
+check_read_only_db_user(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Create your own username for the cQube read_only_database,Provide the length between 3 and 63${normal}"
+echo -e "\e[0;38m${bold}please enter the read_only_db_user?${normal} "
+read read_only_dbuser
+    if [[ ! $read_only_dbuser =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
+        echo -e "\e[0;31m${bold}Error - Naming convention is not correct. Please change the value of read_only_db_user.${normal}"; fail=1
+   else
+check_length $read_only_dbuser
+if ! [[ $? == 0 ]]; then
+    echo -e "\e[0;31m${bold}Error - Length of the value read_only_db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
+else
+    printf "read_only_db_user: $read_only_dbuser\n" >> config.yml
+    break;
+    fi
+fi
+
+done
+
+}
+
+check_read_only_db_password(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Create your own password to for the cQube read_only_database, password should contain atleast 1 lower,upper,number,special character (only @!%^*? allowed) and minimum 8 characters${normal}"
+echo -e "\e[0;38m${bold}please enter the read_only_db_password${normal}"
+read read_only_dbpass
+
+    len="${#read_only_dbpass}"
+   # if [[ $len -ge 8 ]]; then
+        echo "$read_only_dbpass" | grep "[A-Z]" | grep "[a-z]" | grep "[0-9]" | grep "[@%^*!?]" > /dev/null 2>&1
+        if [[ ! $? -eq 0 ]]; then
+            echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
+
+    else
+            len="${#read_only_dbpass}"
+            if ! [[ $len -ge 8 ]]; then
+                echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
+        else
+ printf "read_only_db_password: $read_only_dbpass\n" >> config.yml
+break;
+    fi
+    fi
+done
+}
+
+
 
 check_config_db(){
         #while true; do
@@ -365,7 +414,6 @@ check_config_read_only_db(){
         #while true; do
 echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_name , read_only_db_user and read_only_db_password  Follow Installation process with below config values.${normal}"
 echo -e "\e[0;38m${bold} read_only_db_user: cqube_db_user ${normal}"
-echo -e "\e[0;38m${bold} read_only_db_name: cqube_db ${normal}"
 echo -e "\e[0;38m${bold} read_only_db_password: cQube@123 ${normal}"
 echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes.${normal}"
             while true; do
@@ -380,7 +428,6 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
 
             if [[ $yn == yes ]]; then
                                 check_read_only_db_user
-                                check_read_only_db_name
                                 check_read_only_db_password
                           fi
 
