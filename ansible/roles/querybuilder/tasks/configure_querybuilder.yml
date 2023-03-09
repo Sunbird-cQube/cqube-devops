@@ -1,0 +1,17 @@
+- name: Creating environmental variables
+  file:
+    path: ../microservices/query-builder/.env
+    state: touch
+    mode: u+rw,g+rw,o+rw
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/query-builder/.env
+    block: |
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      PORT= 3002

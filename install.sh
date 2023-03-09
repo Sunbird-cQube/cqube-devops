@@ -38,6 +38,7 @@ fi
 
 ansible-playbook ansible/install.yml
 ansible-playbook ansible/compose.yml
+ansible-playbook ansible/configurations.yml
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"

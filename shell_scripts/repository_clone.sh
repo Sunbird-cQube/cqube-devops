@@ -57,3 +57,17 @@ else
         cd ../../
 
 fi
+
+cd "$MY_PATH"
+if ! [[ -d query-builder ]]; then
+        git clone https://github.com/Sunbird-cQube/query-builder.git
+        cd "query-builder"
+        git checkout $REPOSITORY
+        cd ../../
+else
+        cd "query-builder"
+        git checkout $REPOSITORY
+        git pull
+        cd ../../
+
+fi
