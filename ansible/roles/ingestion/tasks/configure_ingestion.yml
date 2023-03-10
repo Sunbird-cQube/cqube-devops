@@ -23,10 +23,31 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'http://{{ api_endpoint }}'
+      URL = 'http://{{ api_endpoint }}/api'
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       ARCHIVED_BUCKET= "{{ s3_archived_bucket }}"
       ERROR_BUCKET= "{{ s3_error_bucket }}"
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/ingestion-ms/.env
+    block: |
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
+      URL = 'http://{{ api_endpoint }}:3000/api'
+      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
+      PYTHON_PATH = '/usr/bin/python3.7'
+      ARCHIVED_DIRECTORY= "{{ local_archived_dir }}"
+      ERROR_DIRECTORY= "{{ local_error_dir }}"
+  when: mode_of_installation == "localhost"
+  tags: [ install, update ]

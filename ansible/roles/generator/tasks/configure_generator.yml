@@ -2,4 +2,12 @@
   template:
     src: config.ini.j2
     dest: "../microservices/generator-ms/config.ini"
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
+
+- name: copying database config to generator folder
+  template:
+    src: config.ini_local.j2
+    dest: "../microservices/generator-ms/config.ini"
+  when: mode_of_installation == "localhost"
   tags: [ install, update ]
