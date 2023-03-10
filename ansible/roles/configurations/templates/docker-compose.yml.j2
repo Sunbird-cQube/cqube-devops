@@ -45,6 +45,12 @@ services:
       - 4200:80
     networks:
       - cqube_net
+  querybuilder_app:
+    image: querybuilder_ms:1
+    ports:
+      - 4002:3002
+    networks:
+      - cqube_net
   nifi_app:
     image: nifi_ms:1
     ports:
