@@ -1,0 +1,6 @@
+- name: copying compose file to ansible directory
+  template:
+    src: program_selector.yml.j2
+    dest: "program_selector.yml"
+    mode: "0644"
+  tags: [ install, update ]
