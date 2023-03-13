@@ -20,6 +20,8 @@ chmod u+x shell_scripts/install_aws_cli.sh
 chmod u+x shell_scripts/config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/config_file_generator.sh"
+chmod u+x shell_scripts/program_selector.sh
+. "program_selector.sh"
 
 #Running script to clone ingestion, spec repository
 chmod u+x shell_scripts/repository_clone.sh

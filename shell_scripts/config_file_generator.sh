@@ -200,9 +200,20 @@ done
 check_api_endpoint(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: enter domain name ( Example: cqubeprojects.com )${normal}"     
-echo -e "\e[0;38m${bold}please enter the api_endpoint ${normal}"
+	echo -e "\e[0;36m${bold}Hint: enter domain name if storage_type is local the api_end_point should be localhost, if storage_type is aws apli_end_point should be domain name ( Example: cqubeprojects.com )${normal}"     
+echo -e "\e[0;38m${bold}please enter the api_endpoint?${normal}"
 read api_endpoint
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $mode_of_installation == localhost ]]; then
+        if [[ ! $api_endpoint == "localhost" ]]; then
+        echo -e "\e[0;31m${bold}Error - Please provide api_endpoint as localhost for localhost installation${normal}"; fail=1
+                        else
+                        printf "api_endpoint: $api_endpoint\n" >> config.yml
+                        break;
+
+        fi
+fi
+if [[ $mode_of_installation == public ]]; then
 if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
     echo -e "\e[0;31m${bold}Error - Please provide the proper api endpoint${normal}"; fail=1
          else
@@ -216,6 +227,7 @@ if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
                          break;
                  fi
          fi
+fi
 fi
 done
 }
