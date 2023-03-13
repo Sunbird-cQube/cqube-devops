@@ -15,10 +15,16 @@ services:
         paths:
           - /api/spec
 
+  - name: querybuilder-ms
+    url: http://querybuilder_app:3002
+    routes:
+      - name: querybuilder-ms
+        paths:
+          - /api/queryBuilder
+
   - name: generator-ms
     url: http://generator_app:3003/api/generator
     routes:
       - name: generator-ms
         paths:
           - /api/generator
-

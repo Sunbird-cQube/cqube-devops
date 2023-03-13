@@ -1,0 +1,7 @@
+---
+- include_tasks: configure_querybuilder.yml
+  tags: install
+
+- include_tasks: build_querybuilder.yml
+  tags: install
+
