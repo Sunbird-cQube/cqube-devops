@@ -342,7 +342,7 @@ check_length $read_only_dbuser
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - Length of the value read_only_db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
 else
-    printf "read_only_db_user: $read_only_dbuser\n" >> config.yml
+    printf "read_only_user: $read_only_dbuser\n" >> config.yml
     break;
     fi
 fi
@@ -369,7 +369,7 @@ read read_only_dbpass
             if ! [[ $len -ge 8 ]]; then
                 echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
         else
- printf "read_only_db_password: $read_only_dbpass\n" >> config.yml
+ printf "read_only_password: $read_only_dbpass\n" >> config.yml
 break;
     fi
     fi
