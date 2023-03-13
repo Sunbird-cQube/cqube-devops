@@ -1,7 +1,0 @@
-- name: copying compose file to ansible directory
-  template:
-    src: kong.yml.j2
-    dest: "kong.yml"
-    mode: "0644"
-  tags: [ install, update ]
-
