@@ -1,6 +1,6 @@
-- name: copying compose file to ansible directory
+- name: Generating program selection csv file
   template:
-    src: program_selector.yml.j2
-    dest: "program_selector.yml"
+    src: program_selector.csv.j2
+    dest: "program_selector.csv"
     mode: "0644"
   tags: [ install, update ]
