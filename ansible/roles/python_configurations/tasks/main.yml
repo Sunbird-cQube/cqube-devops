@@ -1,3 +1,0 @@
----
-- include_tasks: configure_python_file.yml
-  tags: install
