@@ -8,8 +8,8 @@ services:
       - POSTGRES_DB={{ db_name }}
       - POSTGRES_USER={{ db_user }}
       - POSTGRES_PASSWORD={{ db_password }}
-      - READONLY_USER={{ read_only_user }}
-      - READONLY_PASS={{ read_only_password }}
+      - READONLY_USER={{ read_only_db_user }}
+      - READONLY_PASS={{ read_only_db_password }}
     networks:
       - cqube_net
   python_app:

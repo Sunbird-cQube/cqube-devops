@@ -32,9 +32,9 @@ if [ -e /etc/ansible/ansible.cfg ]; then
 fi
 
 db_name=$(awk ''/^db_name:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-read_only_user=$(awk ''/^read_only_user:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-read_only_password=$(awk ''/^read_only_password:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-sudo sed -i "s|POSTGRES_DB|$db_name|g;s|READONLY_USER|$read_only_user|g;s|READONLY_PASS|$read_only_password|g" microservices/postgres-ms/init.sql
+read_only_db_user=$(awk ''/^read_only_db_user:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+read_only_db_password=$(awk ''/^read_only_db_password:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+sudo sed -i "s|POSTGRES_DB|$db_name|g;s|READONLY_USER|$read_only_db_user|g;s|READONLY_PASS|$read_only_db_password|g" microservices/postgres-ms/init.sql
 
 echo '127.0.0.0' >> /etc/ansible/hosts
 

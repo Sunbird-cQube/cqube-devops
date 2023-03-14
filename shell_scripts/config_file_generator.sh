@@ -554,7 +554,7 @@ printf "db_password: cQube@123\n" >> config.yml
 
 check_config_read_only_db(){
         #while true; do
-echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_name , read_only_db_user and read_only_db_password  Follow Installation process with below config values.${normal}"
+echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_user and read_only_db_password. Follow Installation process with below config values.${normal}"
 echo -e "\e[0;38m${bold} read_only_db_user: cqube_db_user ${normal}"
 echo -e "\e[0;38m${bold} read_only_db_password: cQube@123 ${normal}"
 echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes.${normal}"
@@ -577,9 +577,7 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
 
             if [[ $yn == no ]]; then
 printf "read_only_db_user: cqube_db_user\n" >> config.yml
-printf "read_only_db_name: cqube_db\n" >> config.yml
 printf "read_only_db_password: cQube@123\n" >> config.yml
-
             fi
 
     }
