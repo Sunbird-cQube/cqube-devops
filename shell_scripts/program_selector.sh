@@ -143,7 +143,6 @@ read nish_tha
         fi
 done
 }
-
 rm program_selector.yml
 touch program_selector.yml
 if [[ -e "program_selector.yml" ]]; then
@@ -177,8 +176,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
             done
              if [[ -e "program_selector.yml" ]]; then
                           if [[ $yn == yes ]]; then
-                                 rm program.yml
-                                touch program.yml
+                                 rm program_selector.yml
+                                touch program_selector.yml
 				check_studentAttendance
 				check_teacherAttendance
 				check_reviewMeetings

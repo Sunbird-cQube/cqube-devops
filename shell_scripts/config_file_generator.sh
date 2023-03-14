@@ -321,7 +321,9 @@ fi
 if [[ $storage_type == "local" ]]; then
         printf "mode_of_installation: localhost\n" >> config.yml
     fi
-
+if [[ $storage_type == "azure" ]]; then
+        printf "mode_of_installation: public\n" >> config.yml
+    fi
 }
 
 check_storage_type(){
@@ -332,14 +334,142 @@ echo -e "\e[0;36m${bold}Hint: enter aws or local${normal}"
 echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
 read storage_typ
 
-    if ! [[ $storage_typ == "aws" || $storage_typ == "local" ]]; then
-        echo echo -e "\e[0;31m${bold}Error - Please enter either aws or local${normal}"; fail=1
+    if ! [[ $storage_typ == "aws" || $storage_typ == "local" || $storage_typ == "azure" ]]; then
+        echo "Error - Please enter either aws or local azure"; fail=1
 else
         printf "storage_type: $storage_typ\n" >> config.yml
         break;
         fi
 done
+
 }
+
+check_google_analytics(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Google Analytics Property ID ${normal}"
+echo -e "\e[0;38m${bold}please enter the Google Analytics Property ID or NA (not applicable) ${normal}"
+read google_analytics
+        printf "google_analytics_property_id: $google_analytics\n" >> config.yml
+        break;
+done
+
+}
+
+check_az_storage_connection_string(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure connection string ${normal}"
+echo -e "\e[0;38m${bold}please enter the connection string${normal}"
+read az_connection_string
+
+    az_account_status=0
+    export AZURE_STORAGE_CONNECTION_STRING="$az_connection_string"
+
+    az storage container list  --connection-string "$az_connection_string" > /dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+           echo -e "\e[0;31m${bold}Error echo Error - Invalid az storage connection string${normal}"; fail=1
+        az_account_status=1
+        else
+         printf "azure_connection_string: $az_connection_string\n" >> config.yml
+        break;
+    fi
+done
+}
+
+
+check_az_key(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
+read az_key
+    printf "azure_account_key: $az_key\n" >> config.yml
+        break;
+
+done
+}
+check_az_container_key(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
+read az_con_key
+sed -i "/azure_account_key: /d" config.yml
+printf  "azure_account_key: $az_con_key\n"  >> config.yml
+  break;
+done
+
+}
+
+
+check_az_storage_account_name(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account name ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account name${normal}"
+read az_name
+azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+    az_account_status=0
+
+    az storage container list --account-key $azure_account_key --account-name $az_name > /dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+           echo -e "\e[0;31m${bold}Error - Invalid az account name${normal}"; fail=1
+    check_az_container_key
+    #az_account_status=1
+else
+        printf "azure_container_name: $az_name\n" >> config.yml
+        break;
+
+    fi
+done
+}
+
+check_az_archived_container(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure archived blob container name ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure archived blob container${normal}"
+read az_archived_container
+  az_container_status=0
+  export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+  containerstatus=$(az storage container exists --connection-string "$azure_connection_string" --name $az_archived_container | grep -c false )
+    if [  $containerstatus == 1 ]; then
+            echo -e "\e[0;31m${bold}Error - Container not owned or not found. Please change the container name ${normal}"; fail=1
+
+else
+        printf "azure_archived_container: $az_archived_container\n" >> config.yml
+        break;
+
+    fi
+done
+}
+
+check_az_error_container(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure error blob container name ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure error blob container${normal}"
+read az_error_container
+  az_container_status=0
+  export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+  containerstatus=$(az storage container exists --connection-string "$azure_connection_string" --name $az_error_container | grep -c false )
+    if [  $containerstatus == 1 ]; then
+            echo -e "\e[0;31m${bold}Error - Container not owned or not found. Please change the container name ${normal}"; fail=1
+
+else
+        printf "azure_error_container: $az_error_container\n" >> config.yml
+        break;
+
+    fi
+done
+}
+
 
 check_read_only_db_user(){
 while true
@@ -453,7 +583,6 @@ printf "read_only_db_password: cQube@123\n" >> config.yml
             fi
 
     }
-
 rm config.yml
 touch config.yml
 if [[ -e "config.yml" ]]; then
@@ -474,6 +603,14 @@ check_aws_secret_key
 check_archived_buc
 check_error_buc
 fi
+if [[ $storage_type == azure ]]; then
+check_az_storage_connection_string
+check_az_key
+check_az_storage_account_name
+check_az_error_container
+check_az_archived_container
+fi
+check_google_analytics
 check_config_db
 check_config_read_only_db
 fi
@@ -503,7 +640,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_state
 				check_ip
 				check_storage_type
-				check_mode_of_installatio		n
+				check_mode_of_installation
 				check_api_endpoint
 				if [[ $storage_type == local ]]; then
 				check_error_dir
@@ -515,6 +652,14 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_archived_buc
 				check_error_buc
 				fi
+				if [[ $storage_type == azure ]]; then
+				check_az_storage_connection_string
+				check_az_key
+				check_az_storage_account_name
+				check_az_error_container
+				check_az_archived_container
+				fi
+				check_google_analytics
 				check_config_db
 				check_config_read_only_db
                           	fi
