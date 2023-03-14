@@ -335,7 +335,7 @@ echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
 read storage_typ
 
     if ! [[ $storage_typ == "aws" || $storage_typ == "local" || $storage_typ == "azure" ]]; then
-        echo "Error - Please enter either aws or local azure"; fail=1
+        echo -e "\e[0;31m${bold}Error - Please enter either aws or local azure"; fail=1
 else
         printf "storage_type: $storage_typ\n" >> config.yml
         break;
