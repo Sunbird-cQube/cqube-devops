@@ -6,6 +6,7 @@
   become: true
   vars_files:
     - ../config.yml
+    - ../program_selector.yml
 
   roles:
           - configurations
