@@ -73,7 +73,7 @@ read pm_Poshan
         if ! [[ $pm_Poshan == "true" || $pm_Poshan == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
                         else
-                        printf "pgi: $pm_Poshan\n" >> program_selector.yml
+                        printf "pmPoshan: $pm_Poshan\n" >> program_selector.yml
                         break;
 
         fi
