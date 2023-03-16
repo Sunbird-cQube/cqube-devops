@@ -1,6 +1,6 @@
 ---
 - name: Running docker compose
-- hosts: localhost
+  hosts: localhost
   connection: local
   gather_facts: no
   vars_files:

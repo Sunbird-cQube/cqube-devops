@@ -35,8 +35,7 @@
       PYTHON_PATH = '/usr/bin/python3.7'
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
-      ARCHIVED_BUCKET= "{{ s3_archived_bucket }}"
-      ERROR_BUCKET= "{{ s3_error_bucket }}"
+      S3_BUCKET= "{{ s3_bucket }}"
   when: storage_type == "aws"
   tags: [ install, update ]
 
@@ -55,14 +54,15 @@
       GENERATOR_PORT = 3003
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
-      ARCHIVED_DIRECTORY= "{{ local_archived_dir }}"
-      ERROR_DIRECTORY= "{{ local_error_dir }}"
+      MINIO_USERNAME = "{{ minio_username }}"
+      MINIO_PASSWORD = "{{ minio_password }}"
+      MINIO_BUCKET = "{{ minio_bucket }}"
   when: storage_type == "local"
   tags: [ install, update ]
 
 - name: Loading required data inside .env file (azure storage)
   blockinfile:
-    path: ../microservices/ingestion-ms/.env
+    path: ../microservices/spec-ms/.env
     block: |
       DB_HOST = 'postgres_app'
       DB_PORT = 5432
@@ -76,8 +76,6 @@
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       AZURE_STORAGE_CONN_STR = "{{ azure_storage_connection_string }}"
-      AZURE_OUTPUT_STORAGE = "{{ azure_output_container }}"
-      AZURE_ARCHIVED_STORAGE = "{{ azure_archived_container }}"
-      AZURE_ERROR_STORAGE = "{{ azure_error_container }}"
+      AZURE_CONTAINER = "{{ azure_container }}"
   when: storage_type == "azure"
   tags: [ install, update ]
