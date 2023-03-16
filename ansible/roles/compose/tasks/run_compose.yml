@@ -1,0 +1,5 @@
+- name: docker compose
+  become_user: "{{ system_user_name }}"
+  docker_compose:
+    project_src: .
+  tags: [ install, update ]
