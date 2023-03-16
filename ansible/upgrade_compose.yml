@@ -3,7 +3,7 @@
   connection: local
   gather_facts: no
   vars_files:
-    - ../config.yml
+    - ../upgradation_config.yml
   tasks:
     - name: docker compose
       become_user: "{{ system_user_name }}"
