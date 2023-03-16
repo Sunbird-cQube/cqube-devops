@@ -401,7 +401,7 @@ storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.ym
 
 if [[ $storage_type == azure ]]; then
 export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
-if az storage container create --name azure_cqube_edu --connection-string "DefaultEndpointsProtocol=https;AccountName=tibilunilever;AccountKey=8QZKmwrJXeV235qgRvAtPdcflxp1fofs8ujZRkozamtZUcznX6oGtcq/080I/Lyc8naR9jeY47NU+AStoVXvrw==;EndpointSuffix=core.windows.net" --output table | grep -q "True"; then
+if az storage container create --name azure_cqube_edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
         printf "az_archive_container: azure_cqube_edu\n" >> config.yml
 
