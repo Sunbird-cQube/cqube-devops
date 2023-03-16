@@ -641,10 +641,12 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm upgradation_config.yml
                                 touch config.yml
+				check_data_upgradation_value
 				check_base_dir
 				check_sys_user
 				check_state
 				check_ip
+				check_docker_host
 				check_storage_type
 				check_mode_of_installation
 				check_api_endpoint
