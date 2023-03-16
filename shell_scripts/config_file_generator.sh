@@ -82,39 +82,20 @@ if [[ $storage_type == aws ]]; then
 fi
 }
 
-check_processing_buc(){
-while true
-do
-echo -e "\e[0;36m${bold}Hint: aws s3 processing bucke${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_processing_bucket ${normal}"
-read s3_bucket_1
-	
-#if [[ $aws_key_status == 0 ]]; then
-        bucketstatus=`aws s3api head-bucket --bucket "${s3_bucket_1}" 2>&1`
-        if [ ! $? == 0 ]
-        then
-            echo -e "\e[0;31m${bold}Error - Bucket not owned or not found. Please enter the valid bucket name${normal}"; fail=1
-	    else
-	  printf "s3_processing_bucket: $s3_bucket_1\n" >> config.yml
- 		 break;
-
-        fi
-done
-}
 
 check_archived_buc(){
-aws_acess_key=$(awk ''/^aws_acess_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-aws_secret_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
         if [[ $storage_type == aws ]]; then
+aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
 
-                export AWS_ACCESS_KEY_ID=$aws_acess_key
-                export AWS_SECRET_ACCESS_KEY=$aws_secret_key
-
-s3_bucket=`aws s3api create-bucket --bucket s3_cqube_edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+aws configure set aws_access_key_id $aws_access_key_id
+aws configure set aws_secret_access_key $aws_secret_access_key
+aws configure set region ap-south-1
+aws s3api create-bucket --bucket s3_cqube_edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
         if [ $? == 0 ]
                 then
-        printf "s3_archived_bucket: s3_cqube_edu\n" >> config.yml
+        printf "s3_bucket: s3-cqube-edu\n" >> config.yml
 else
 while true
 do
@@ -122,12 +103,12 @@ echo -e "\e[0;36m${bold}Hint: Default created s3 bucket name is alredy exist so 
 echo -e "\e[0;38m${bold}please enter the s3_archived_bucket ${normal}"
 read s3_bucket_2
 
-create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
 if [ ! $? == 0 ]
         then
 echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
 else
-                printf "s3_archived_bucket: $s3_bucket_2\n" >> config.yml
+                printf "s3_bucket: $s3_bucket_2\n" >> config.yml
 break;
         fi
 
@@ -401,9 +382,9 @@ storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.ym
 
 if [[ $storage_type == azure ]]; then
 export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
-if az storage container create --name azure_cqube_edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
+if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
-        printf "az_archive_container: azure_cqube_edu\n" >> config.yml
+        printf "azure_container: azure-cqube-edu\n" >> config.yml
 
 else
 
@@ -419,7 +400,7 @@ if az storage container create --name $az_archived_container --connection-string
             echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the container name ${normal}"; fail=1
 
         else
-                printf "azure_archived_container: $az_archived_container\n" >> config.yml
+                printf "azure_container: $az_archived_container\n" >> config.yml
                 break;
     fi
 
@@ -432,9 +413,23 @@ check_minio_archive_buc(){
        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
        if [[ $storage_type == local ]]; then
 
-                printf "minio_bucket: minio_cqube_edu\n" >> config.yml
+                printf "minio_bucket: minio-cqube-edu\n" >> config.yml
         fi
 }
+
+check_docker_host(){
+dk_ip=`docker inspect cqube_minio | grep IPAddress | cut -d '"' -f 4`
+
+        echo $dk_ip > .dk_ip
+                ip=$(cut -d " " -f 1 .dk_ip)
+
+        printf "docker_host: $ip\n" >> config.yml
+}
+
+check_base_dir(){
+        printf "base_dir: /opt\n" >> config.yml
+}
+
 
 check_minio_username(){
        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
@@ -570,6 +565,7 @@ check_base_dir
 check_sys_user
 check_state
 check_ip
+check_docker_host
 check_storage_type
 check_mode_of_installation
 check_api_endpoint
@@ -618,6 +614,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_sys_user
 				check_state
 				check_ip
+				check_docker_host
 				check_storage_type
 				check_mode_of_installation
 				check_api_endpoint
