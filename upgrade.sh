@@ -11,7 +11,8 @@ fi
 
 #Running script to install the basic softwares
 chmod u+x shell_scripts/basic_requirements.sh
-. "shell_scripts/basic_requirements.sh"
+. "shell_scripts/upgrade_basic_requirements.sh"
+
 
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 
@@ -33,10 +34,12 @@ chmod u+x shell_scripts/minio/install_mc_client.sh
 
 fi
 
+
 #Running script to validate and genarat config file
-chmod u+x shell_scripts/config_file_generator.sh
+chmod u+x shell_scripts/upgradation_config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
-. "shell_scripts/config_file_generator.sh"
+. "shell_scripts/upgradation_config_file_generator.sh"
+
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
 
