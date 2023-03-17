@@ -100,7 +100,7 @@ else
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Default created s3 bucket name is alredy exist so enter the unique aws s3 bucket name${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_archived_bucket ${normal}"
+echo -e "\e[0;38m${bold}please enter the unique s3_bucket name to create ${normal}"
 read s3_bucket_2
 
 aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
