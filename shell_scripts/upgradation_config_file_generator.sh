@@ -127,15 +127,18 @@ fi
 }
 
 check_archived_buc(){
-aws_acess_key=$(awk ''/^aws_acess_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-aws_secret_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
         if [[ $storage_type == aws ]]; then
 
-                export AWS_ACCESS_KEY_ID=$aws_acess_key
-                export AWS_SECRET_ACCESS_KEY=$aws_secret_key
+aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradationconfig.yml)
+aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradationconfig.yml)
 
-s3_bucket=`aws s3api create-bucket --bucket s3_cqube_edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+aws configure set aws_access_key_id $aws_access_key_id
+aws configure set aws_secret_access_key $aws_secret_access_key
+aws configure set region ap-south-1
+
+aws s3api create-bucket --bucket s3_cqube_edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
+
         if [ $? == 0 ]
                 then
         printf "s3_bucket: s3_cqube_edu\n" >> upgradation_config.yml
@@ -143,10 +146,10 @@ else
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Default created s3 bucket is already exist so Please Enter the aws s3 bucket name${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_archived_bucket ${normal}"
+echo -e "\e[0;38m${bold}please enter the unique s3_bucket ${normal}"
 read s3_bucket_2
 
-create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
 if [ ! $? == 0 ]
         then
 echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
@@ -165,12 +168,12 @@ check_minio_archive_buc(){
        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
-                printf "minio_bucket: minio_cqube_edu\n" >> upgradation_config.yml
+                printf "minio_bucket: minio-cqube-edu\n" >> upgradation_config.yml
         fi
 }
 
 check_minio_username(){
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
                 printf "minio_username: minioadmin\n" >> upgradation_config.yml
@@ -178,7 +181,7 @@ check_minio_username(){
 }
 
 check_minio_password(){
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
                 printf "minio_password: minioadmin\n" >> upgradation_config.yml
@@ -437,7 +440,7 @@ azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}'
     check_az_container_key
     #az_account_status=1
 else
-        printf "azure_container_name: $az_name\n" >> upgradation_config.yml
+        printf "azure_account_name: $az_name\n" >> upgradation_config.yml
         break;
 
     fi
