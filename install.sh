@@ -13,25 +13,11 @@ fi
 chmod u+x shell_scripts/basic_requirements.sh
 . "shell_scripts/basic_requirements.sh"
 
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-
-if [[ $storage_type == "aws" ]]; then
 chmod u+x shell_scripts/install_aws_cli.sh
 . "shell_scripts/install_aws_cli.sh"
-fi
 
-if [[ $storage_type == "azure" ]]; then
 chmod u+x shell_scripts/install_azure_cli.sh
-. "shell_scripts/install_aws_azure.sh"
-fi
-
-if [[ $storage_type == "local" ]]; then
-chmod u+x shell_scripts/minio/install_minio.sh
-. "shell_scripts/minio/install_minio.sh"
-chmod u+x shell_scripts/minio/install_mc_client.sh
-. "shell_scripts/minio/install_mc_client.sh"
-
-fi
+. "shell_scripts/install_azure_cli.sh"
 
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/config_file_generator.sh
@@ -39,6 +25,15 @@ echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a con
 . "shell_scripts/config_file_generator.sh"
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
+
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == "local" ]]; then
+chmod u+x shell_scripts/minio/install_minio.sh
+. "shell_scripts/minio/install_minio.sh"
+chmod u+x shell_scripts/minio/install_mc_client.sh
+. "shell_scripts/minio/install_mc_client.sh"
+
+fi
 
 #Running script to clone ingestion, spec repository
 chmod u+x shell_scripts/repository_clone.sh
