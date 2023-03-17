@@ -9,9 +9,11 @@
   blockinfile:
     path: ../microservices/query-builder/.env
     block: |
+      JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
       DB_PORT = 5432
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+  tags: [ install, update ]

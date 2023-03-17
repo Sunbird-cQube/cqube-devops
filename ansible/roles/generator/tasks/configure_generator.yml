@@ -9,12 +9,12 @@
   template:
     src: config.ini_local.j2
     dest: "../microservices/generator-ms/config.ini"
-  when: mode_of_installation == "localhost"
+  when: storage_type == "local"
   tags: [ install, update ]
 
 - name: copying database config to generator folder (azure storage)
   template:
     src: config.ini_azure.j2
     dest: "../microservices/generator-ms/config.ini"
-  when: mode_of_installation == "localhost"
+  when: storage_type == "azure"
   tags: [ install, update ]

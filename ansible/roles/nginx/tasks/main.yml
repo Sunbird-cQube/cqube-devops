@@ -1,5 +1,6 @@
 ---
 - include_tasks: configure_nginx.yml
-  tags: install
+  tags: [ install, update ]
+
 - include_tasks: build_nginx.yml
-  tags: install
+  tags: [ install, update ]

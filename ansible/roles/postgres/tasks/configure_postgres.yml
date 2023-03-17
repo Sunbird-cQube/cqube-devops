@@ -1,4 +1,4 @@
-- name: copying sql script fron spec app
+- name: copying sql script from spec app
   copy:
     src: "../microservices/spec-ms/src/db/"
     dest: "../microservices/postgres-ms"
