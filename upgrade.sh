@@ -50,7 +50,14 @@ if [ ! $? = 0 ]; then
 tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
+<<<<<<< HEAD
 
+ansible-playbook ansible/remote_sanity.yml --tags "update"
+ansible-playbook ansible/upgrade.yml
+=======
+ansible-playbook ansible/remote_sanity.yml
+>>>>>>> 6d949b114648f18672faeff0bdb25c0a2995dd42
+ansible-playbook ansible/upgrade_compose.yml
 ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"

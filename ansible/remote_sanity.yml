@@ -1,0 +1,11 @@
+---
+- name: Upgradting cQube
+  hosts: localhost
+  gather_facts: true
+  remote_user: root
+  become: true
+  vars_files:
+    - ../upgradation_config.yml
+
+  roles:
+          - remote_sanity
