@@ -2,12 +2,12 @@
   stat:
     path: "{{ base_dir }}/cqube/nifi/nifi"
   register: status
-  tags: install
+  tags: update
 
 - name: stop nifi if its running
   ansible.builtin.shell: "{{ base_dir }}/cqube/nifi/nifi/bin/nifi.sh stop"
   when: status.stat.exists == true
-  tags: install
+  tags: update
 
 - name: remove cQube directory if present
   become: yes
@@ -15,50 +15,50 @@
   ignore_errors: yes
   args:
     warn: false
-  tags: install
+  tags: update
 
 - name: Stop PM2 service
   become: true
   shell: pm2 stop all
-  tags: install
+  tags: update
 
 - name: Stop PM2 service
   become: true
   shell: pm2 delete all           
-  tags: install  
+  tags: update  
 
 - name: Stop postgre.service
   systemd:
     name: postgresql.service
     state: stopped
-  tags: install
+  tags: update
   
 - name: Stop postgre.service
   systemd:
     name: keycloak.service
     state: stopped
-  tags: install 
+  tags: update 
 
 - name: Stop postgre.service
   systemd:
     name: prometheus.service
     state: stopped
-  tags: install 
+  tags: update 
 
 - name: Stop postgre.service
   systemd:
     name: grafana-server.service
     state: stopped
-  tags: install 
+  tags: update 
 
 - name: Stop postgre.service
   systemd:
     name: kong.service
     state: stopped
-  tags: install
+  tags: update
    
 - name: Stop postgre.service
   systemd:
     name: node_exporter.service
     state: stopped
-  tags: install
+  tags: update
