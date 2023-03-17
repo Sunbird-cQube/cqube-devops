@@ -296,10 +296,10 @@ check_google_analytics(){
 
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter Google Analytics Property ID ${normal}"
-echo -e "\e[0;38m${bold}please enter the Google Analytics Property ID or NA (not applicable) ${normal}"
+echo -e "\e[0;36m${bold}Hint: Enter Google Analytics Tracking ID ${normal}"
+echo -e "\e[0;38m${bold}please enter the Google Analytics Tracking ID or NA (not applicable) ${normal}"
 read google_analytics
-        printf "google_analytics_property_id: $google_analytics\n" >> config.yml
+        printf "google_analytics_tracking_id: $google_analytics\n" >> config.yml
         break;
 done
 

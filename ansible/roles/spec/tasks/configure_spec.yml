@@ -75,7 +75,7 @@
       GENERATOR_PORT = 3003
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
-      AZURE_STORAGE_CONN_STR = "{{ azure_storage_connection_string }}"
+      AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
   when: storage_type == "azure"
   tags: [ install, update ]
