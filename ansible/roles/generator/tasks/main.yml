@@ -1,6 +1,6 @@
 ---
 - include_tasks: configure_generator.yml
-  tags: install
+  tags: [ install, update ]
 
 - include_tasks: build_generator.yml
-  tags: install
+  tags: [ install, update ]

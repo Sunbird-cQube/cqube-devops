@@ -1,0 +1,50 @@
+---
+- name: Creating the Base Directory for the installation
+  file:
+    path: "{{ base_dir }}/cqube"
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+    recurse: yes
+    state: directory
+  tags: [ install, update ]
+
+- name: Creating conf directory
+  file:
+    path: "{{ base_dir }}/cqube/conf"
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+    recurse: yes
+    state: directory
+  tags: [install, update]
+
+- name: Copying the config.yml file as base_config.yml
+  copy:
+    src: config.yml
+    dest: "{{ base_dir }}/cqube/conf/base_config.yml"
+    mode: '0644'
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+  tags: install
+
+- name: Copying the config.yml file as base_config.yml
+  copy:
+    src: upgradation_config.yml
+    dest: "{{ base_dir }}/cqube/conf/base_config.yml"
+    mode: '0644'
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+  tags: update
+
+- name: Copying the program_selector.yml file as program_selecor.yml
+  copy:
+    src: program_selector.yml
+    dest: "{{ base_dir }}/cqube/conf/program_selector.yml"
+    mode: '0644'
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+  tags: [ install, update ]
+
+- name: Setting timezone to IST
+  timezone:
+    name: Asia/Kolkata
+  tags: [install, update]

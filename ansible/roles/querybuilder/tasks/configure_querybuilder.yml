@@ -16,3 +16,4 @@
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+  tags: [ install, update ]
