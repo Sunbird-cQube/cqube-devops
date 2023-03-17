@@ -71,3 +71,17 @@ else
         cd ../../
 
 fi
+
+cd "$MY_PATH"
+if ! [[ -d grammer-ms ]]; then
+        git clone https://github.com/Sunbird-cQube/grammar-ms.git
+        cd "grammer-ms"
+        git checkout main
+        cd ../../
+else
+        cd "grammer-ms"
+        git checkout main
+        git pull
+        cd ../../
+
+fi
