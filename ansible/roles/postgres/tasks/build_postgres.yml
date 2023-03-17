@@ -5,3 +5,4 @@
     build:
       path: ../microservices/postgres-ms/
     source: build
+  tags: [ install, update ]
