@@ -73,13 +73,13 @@ else
 fi
 
 cd "$MY_PATH"
-if ! [[ -d grammer-ms ]]; then
-        git clone https://github.com/Sunbird-cQube/grammar-ms.git
-        cd "grammer-ms"
+if ! [[ -d cQube-POCs ]]; then
+        git clone https://github.com/ChakshuGautam/cQube-POCs.git
+        cd "cQube-POCs"
         git checkout main
         cd ../../
 else
-        cd "grammer-ms"
+        cd "cQube-POCs"
         git checkout main
         git pull
         cd ../../

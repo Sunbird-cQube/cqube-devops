@@ -5,3 +5,4 @@
     build:
       path: ../microservices/spec-ms/
     source: build
+  tags: [ install, update ]

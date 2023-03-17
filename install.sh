@@ -50,8 +50,9 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
-ansible-playbook ansible/install.yml
-ansible-playbook ansible/compose.yml
+ansible-playbook ansible/install.yml --tags "install"
+set -e
+ansible-playbook ansible/compose.yml --tags "install"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"

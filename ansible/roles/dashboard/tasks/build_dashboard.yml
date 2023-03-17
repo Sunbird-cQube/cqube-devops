@@ -5,3 +5,4 @@
     build:
       path: ../microservices/dashboard-ms/
     source: build
+  tags: [ install, update ]

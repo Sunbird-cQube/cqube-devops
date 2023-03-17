@@ -5,3 +5,4 @@
     build:
       path: ../microservices/query-builder/
     source: build
+  tags: [ install, update ]

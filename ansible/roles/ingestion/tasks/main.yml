@@ -1,6 +1,6 @@
 ---
 - include_tasks: configure_ingestion.yml
-  tags: install
+  tags: [ install, update ]
 
 - include_tasks: build_ingestion.yml
-  tags: install
+  tags: [ install, update ]
