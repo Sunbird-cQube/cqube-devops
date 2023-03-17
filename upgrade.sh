@@ -54,6 +54,7 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
+ansible-playbook ansible/remote_sanity.yml
 ansible-playbook ansible/upgrade.yml
 ansible-playbook ansible/upgrade_compose.yml
 

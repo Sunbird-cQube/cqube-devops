@@ -1,3 +1,5 @@
+#!/bin/bash
+
 check_input_path(){
 while true
 do
@@ -8,6 +10,26 @@ read input_storage_path
         printf "input_path: $input_storage_path\n" >> upgradation_config.yml
         break;
 done
+}
+
+
+check_input_files(){
+
+input_path=$(awk ''/^input_path:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+if [[ ! -d old_input_files ]]; then
+
+mkdir old_input_files
+if [[ $storage_type == local ]]; then
+
+cp -R $input_path* old_input_files
+
+fi
+if [[ $storage_type == aws ]]; then
+irbucket=$(aws s3 sync s3://$input_path old_input_files)
+fi
+
+fi
 }
 
 check_data_upgradation_value(){
@@ -591,15 +613,16 @@ printf "read_only_db_password: cQube@123\n" >> upgradation_config.yml
             fi
 
     }
+
 rm upgradation_config.yml
 touch upgradation_config.yml
 if [[ -e "upgradation_config.yml" ]]; then
-check_data_upgradation_value	
+check_input_path
+check_input_files
 check_base_dir
 check_sys_user
 check_state
 check_ip
-check_docker_host
 check_storage_type
 check_mode_of_installation
 check_api_endpoint
@@ -615,8 +638,8 @@ check_archived_buc
 fi
 if [[ $storage_type == azure ]]; then
 check_az_storage_connection_string
-check_az_key
-check_az_storage_account_name
+#check_az_key
+#check_az_storage_account_name
 check_az_archived_container
 fi
 check_google_analytics
@@ -644,12 +667,12 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm upgradation_config.yml
                                 touch config.yml
-				check_data_upgradation_value
+				check_input_path
+				check_input_files
 				check_base_dir
 				check_sys_user
 				check_state
 				check_ip
-				check_docker_host
 				check_storage_type
 				check_mode_of_installation
 				check_api_endpoint
@@ -665,8 +688,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				fi
 				if [[ $storage_type == azure ]]; then
 				check_az_storage_connection_string
-				check_az_key
-				check_az_storage_account_name
+				#check_az_key
+				#check_az_storage_account_name
 				check_az_archived_container
 				fi
 				check_google_analytics

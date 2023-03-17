@@ -565,7 +565,6 @@ check_base_dir
 check_sys_user
 check_state
 check_ip
-check_docker_host
 check_storage_type
 check_mode_of_installation
 check_api_endpoint
@@ -581,8 +580,8 @@ check_archived_buc
 fi
 if [[ $storage_type == azure ]]; then
 check_az_storage_connection_string
-check_az_key
-check_az_storage_account_name
+#check_az_key
+#check_az_storage_account_name
 check_az_archived_container
 fi
 check_google_analytics
@@ -614,7 +613,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_sys_user
 				check_state
 				check_ip
-				check_docker_host
 				check_storage_type
 				check_mode_of_installation
 				check_api_endpoint
@@ -630,8 +628,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				fi
 				if [[ $storage_type == azure ]]; then
 				check_az_storage_connection_string
-				check_az_key
-				check_az_storage_account_name
+				#check_az_key
+				#check_az_storage_account_name
 				check_az_archived_container
 				fi
 				check_google_analytics
