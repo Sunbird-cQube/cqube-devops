@@ -8,7 +8,7 @@ chmod +x mc
 
 # Move the mc binary to /usr/local/bin
 mv mc /usr/local/bin
-docker_host=172.17.0.2
+docker_host=localhost
 
 mc alias set myminio http://$docker_host:9000 minioadmin minioadmin
 

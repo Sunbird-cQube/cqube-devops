@@ -1,7 +1,6 @@
 check_sys_user(){
 result=`who | head -1 | awk '{print $1}'`
-  printf "system_user_name: $result\n" >> config.yml
-
+printf "system_user_name: $result\n" >> config.yml
 }
  
 check_ip()
@@ -10,7 +9,6 @@ check_ip()
 	echo $is_local_ip > .ip
                ip=$(cut -d " " -f 2 .ip)
 	printf "local_ipv4_address: $ip\n" >> config.yml
-
 }
 
 
@@ -449,21 +447,12 @@ fi
 }
 
 
-check_minio_archive_buc(){
+check_minio_bucket(){
        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
        if [[ $storage_type == local ]]; then
 
                 printf "minio_bucket: minio-cqube-edu\n" >> config.yml
         fi
-}
-
-check_docker_host(){
-dk_ip=`docker inspect cqube_minio | grep IPAddress | cut -d '"' -f 4`
-
-        echo $dk_ip > .dk_ip
-                ip=$(cut -d " " -f 1 .dk_ip)
-
-        printf "docker_host: $ip\n" >> config.yml
 }
 
 check_base_dir(){
@@ -598,6 +587,7 @@ printf "read_only_db_password: cQube@123\n" >> config.yml
             fi
 
     }
+
 rm config.yml
 touch config.yml
 if [[ -e "config.yml" ]]; then
@@ -659,7 +649,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				if [[ $storage_type == local ]]; then
 				check_minio_username
 				check_minio_password
-				check_minio_archive_buc
+				check_minio_bucket
 				fi
 				if [[ $storage_type == aws ]]; then
 				check_aws_key

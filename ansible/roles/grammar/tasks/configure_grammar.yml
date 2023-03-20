@@ -1,14 +1,20 @@
+- name: copying dockerfile script to grammar repository
+  template:
+    src: Dockerfile.j2
+    dest: "../microservices/cQube-POCs/Dockerfile"
+    mode: "0644"  
+  tags: [ install, update ]
+
 - name: Creating environmental variables
   file:
-    path: ../microservices/query-builder/.env
+    path: ../microservices/cQube-POCs/.env
     state: touch
     mode: u+rw,g+rw,o+rw
   tags: [ install, update ]
 
-    
-- name: Loading required data inside .env file
+- name: Loading required data inside .env file (aws storage)
   blockinfile:
-    path: ../microservices/query-builder/.env
+    path: ../microservices/cQube-POCs/.env
     block: |
       JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
@@ -16,18 +22,21 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      PORT= 3002
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
+      URL = 'http://{{ api_endpoint }}/api'
+      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
+      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
-      AWS_BUCKET_REGION= 'ap-south-1'
-      CONTAINER_FOLDER_NAME= 'process_input'
-  when: storage_type == "aws"    
+  when: storage_type == "aws"
   tags: [ install, update ]
 
-- name: Loading required data inside .env file
+- name: Loading required data inside .env file (local storage)
   blockinfile:
-    path: ../microservices/query-builder/.env
+    path: ../microservices/cQube-POCs/.env
     block: |
       JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
@@ -35,19 +44,23 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      PORT= 3002
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
+      URL = 'http://{{ api_endpoint }}:3000/api'
+      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
+      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       MINIO_END_POINT = 'http://localhost'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
-      CONTAINER_FOLDER_NAME= 'process_input'
   when: storage_type == "local"
   tags: [ install, update ]
 
-- name: Loading required data inside .env file
+- name: Loading required data inside .env file (azure storage)
   blockinfile:
-    path: ../microservices/query-builder/.env
+    path: ../microservices/cQube-POCs/.env
     block: |
       JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
@@ -55,9 +68,13 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      PORT= 3002
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
+      URL = 'http://{{ api_endpoint }}/api'
+      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
+      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      CONTAINER_FOLDER_NAME= 'process_input'
   when: storage_type == "azure"
   tags: [ install, update ]
