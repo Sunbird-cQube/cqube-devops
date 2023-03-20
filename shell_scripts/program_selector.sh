@@ -230,4 +230,3 @@ if [[ $yn == no ]]; then
 }
 
 check_config_file
-check_program_file
