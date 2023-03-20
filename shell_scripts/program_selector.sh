@@ -143,9 +143,29 @@ read nish_tha
         fi
 done
 }
+
+check_config_file(){
+if [[ -e "config.yml" ]]; then
+        while true; do
+echo -e "\e[0;33m${bold}please preview the program_selector.yml file and confirm if everything is correct.${normal}"
+echo -e "\e[0;38m${bold} `cat program_selector.yml` ${normal}"
+echo -e "\e[0;33m${bold}Currently cQube program_selector.yml is entered. Follow Installation process with above config values.${normal}"
+echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
+            while true; do
+
+             read -p "Do you still want to edit the config.yml file (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+if [[ $yn == yes ]]; then
+
+if [[ -e "program_selector.yml" ]]; then
 rm program_selector.yml
 touch program_selector.yml
-if [[ -e "program_selector.yml" ]]; then
 check_studentAttendance
 check_teacherAttendance
 check_reviewMeetings
@@ -157,6 +177,16 @@ check_diksha
 check_nishtha
 
 fi
+fi
+done
+fi
+if [[ $yn == no ]]; then
+             echo -e "\e[0;32m${bold}program_selector file has been generated and validated successfully${normal}"
+
+    fi
+
+}
+
 
 check_program_file(){
 if [[ -e "program_selector.yml" ]]; then
@@ -199,5 +229,5 @@ if [[ $yn == no ]]; then
 
 }
 
-
+check_config_file
 check_program_file
