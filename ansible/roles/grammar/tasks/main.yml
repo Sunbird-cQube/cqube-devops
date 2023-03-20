@@ -1,0 +1,6 @@
+---
+- include_tasks: configure_grammar.yml
+  tags: [ install, update ]
+
+- include_tasks: build_grammar.yml
+  tags: [ install, update ]
