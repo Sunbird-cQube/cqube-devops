@@ -20,9 +20,6 @@ services:
       - cqube_net
   ingest_app:
     image: ingestion_ms:1
-    volumes:
-      - input_volume:/app/input-files
-      - error_volume:/app/error-files
     ports:
       - 3000:3000
     networks:
@@ -42,7 +39,6 @@ services:
   generator_app:
     image: generator_ms:1
     volumes:
-      - generator_volume:/python_flask
     ports:
       - 3003:3003
     networks:
@@ -64,10 +60,7 @@ services:
     ports:
       - 8096:8096
     volumes:
-      - generator_volume:/generator_data
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
-      - input_volume:/input_data
-      - error_volume:/error_data
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
@@ -103,6 +96,3 @@ networks:
   cqube_net:
 volumes:
   python_executable_env:
-  generator_volume:
-  input_volume:
-  error_volume:
