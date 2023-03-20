@@ -141,42 +141,54 @@ done
 
 }
 
-check_aws_default_region(){
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-if [[ $storage_type == aws ]]; then	
-  printf "aws_default_region: ap-south-1\n" >> upgradation_config.yml
-fi
-}
-
 check_archived_buc(){
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
         if [[ $storage_type == aws ]]; then
 
-aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradationconfig.yml)
-aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradationconfig.yml)
+aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 
 aws configure set aws_access_key_id $aws_access_key_id
 aws configure set aws_secret_access_key $aws_secret_access_key
 aws configure set region ap-south-1
 
-aws s3api create-bucket --bucket s3_cqube_edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
-
+s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
         if [ $? == 0 ]
                 then
         printf "s3_bucket: s3_cqube_edu\n" >> upgradation_config.yml
 else
-while true
+        while true
 do
-echo -e "\e[0;36m${bold}Hint: Default created s3 bucket is already exist so Please Enter the aws s3 bucket name${normal}"
-echo -e "\e[0;38m${bold}please enter the unique s3_bucket ${normal}"
+echo -e "\e[0;33m${bold}s3 bucket is already exist with the cq-test-buc if you want to continue with the same bucket enter no or you want to create new bucket enter yes .${normal}"
+while true; do
+
+             read -p "enter yes or no (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+            if [[ $yn == yes ]]; then
+
+echo -e "\e[0;36m${bold}Hint: aws s3  bucket${normal}"
+echo -e "\e[0;38m${bold}please enter the unique  s3 bucket name ${normal}"
 read s3_bucket_2
 
-aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1
+create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+
 if [ ! $? == 0 ]
         then
 echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
 else
                 printf "s3_bucket: $s3_bucket_2\n" >> upgradation_config.yml
+fi
+
+if [[ $yn == no ]]; then
+
+printf "s3_bucket: s3_cqube_edu\n" >> upgradation_config.yml
+fi
 break;
         fi
 
@@ -184,6 +196,7 @@ done
         fi
         fi
 }
+
 
 
 check_minio_archive_buc(){
@@ -480,20 +493,36 @@ if az storage container create --name azure_cqube_edu --connection-string "$azur
         printf "azure_container: azure_cqube_edu\n" >> upgradation_config.yml
 
 else
-
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Default blob container is already exist so Enter unique Azure blob container name ${normal}"
+echo -e "\e[0;33m${bold}azure container is already exist with the cq-test1 if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
+while true; do
+
+             read -p "enter yes or no (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+            if [[ $yn == yes ]]; then
+echo -e "\e[0;36m${bold}Hint: Enter Azure blob container name ${normal}"
 echo -e "\e[0;38m${bold}please enter the azure blob container${normal}"
 read az_archived_container
 az_container_status=0
   export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
 azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 if az storage container create --name $az_archived_container --connection-string "$azure_connection_string" --output table | grep -q "False"; then
-            echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the container name ${normal}"; fail=1
+echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the container name ${normal}"; fail=1
 
         else
-                printf "azure_container: $az_archived_container\n" >> upgradation_config.yml
+                  printf "azure_container: $az_archived_container\n" >> upgradation_config.yml
+fi
+if [[ $yn == no ]]; then
+
+printf "azure_container: azure_cqube_edu\n" >> upgradation_config.yml
+fi
                 break;
     fi
 
