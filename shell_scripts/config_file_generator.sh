@@ -403,9 +403,9 @@ storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.ym
 
 if [[ $storage_type == azure ]]; then
 export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
-if az storage container create --name azure_cqube_edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
+if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
-        printf "azure_container: azure_cqube_edu\n" >> config.yml
+        printf "azure_container: azure-cqube-edu\n" >> config.yml
 
 else
 while true
@@ -440,7 +440,7 @@ fi
 fi
 if [[ $yn == no ]]; then
 
-printf "azure_container: azure_cqube_edu\n" >> config.yml
+printf "azure_container: azure-cqube-edu\n" >> config.yml
 fi
     fi
 

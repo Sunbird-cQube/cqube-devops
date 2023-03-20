@@ -30,15 +30,8 @@ services:
       - 3001:3001
     networks:
       - cqube_net
-  grammar_app:
-    image: grammar_ms:1
-    ports:
-      - 3004:3004
-    networks:
-      - cqube_net
   generator_app:
     image: generator_ms:1
-    volumes:
     ports:
       - 3003:3003
     networks:
