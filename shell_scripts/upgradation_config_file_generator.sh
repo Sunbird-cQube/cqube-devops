@@ -617,8 +617,7 @@ printf "read_only_db_password: cQube@123\n" >> upgradation_config.yml
 rm upgradation_config.yml
 touch upgradation_config.yml
 if [[ -e "upgradation_config.yml" ]]; then
-check_input_path
-check_input_files
+check_data_upgradation_value
 check_base_dir
 check_sys_user
 check_state
@@ -667,8 +666,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm upgradation_config.yml
                                 touch config.yml
-				check_input_path
-				check_input_files
+				check_data_upgradation_value
 				check_base_dir
 				check_sys_user
 				check_state
