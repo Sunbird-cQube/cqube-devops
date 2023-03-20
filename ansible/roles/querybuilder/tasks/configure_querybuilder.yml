@@ -5,6 +5,7 @@
     mode: u+rw,g+rw,o+rw
   tags: [ install, update ]
 
+    
 - name: Loading required data inside .env file
   blockinfile:
     path: ../microservices/query-builder/.env
@@ -16,4 +17,47 @@
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+      AWS_ACCESS_KEY = "{{ aws_access_key }}"
+      AWS_SECRET_KEY = "{{ aws_secret_key }}"
+      S3_BUCKET= "{{ s3_bucket }}"
+      AWS_BUCKET_REGION= 'ap-south-1'
+      CONTAINER_FOLDER_NAME= 'process_input'
+  when: storage_type == "aws"    
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/query-builder/.env
+    block: |
+      JWT_SECRET= 'cqube_secret'
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      PORT= 3002
+      MINIO_END_POINT = 'http://localhost'
+      MINIO_PORT = 9000
+      MINIO_ACCESS_KEY = "{{ minio_username }}"
+      MINIO_SECRET_KEY = "{{ minio_password }}"
+      MINIO_BUCKET = "{{ minio_bucket }}"
+      CONTAINER_FOLDER_NAME= 'process_input'
+  when: storage_type == "local"
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/query-builder/.env
+    block: |
+      JWT_SECRET= 'cqube_secret'
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      PORT= 3002
+      AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
+      AZURE_CONTAINER = "{{ azure_container }}"
+      CONTAINER_FOLDER_NAME= 'process_input'
+  when: storage_type == "azure"
   tags: [ install, update ]
