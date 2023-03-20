@@ -124,17 +124,17 @@ if [ ! $? == 0 ]
 echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
 else
                 printf "s3_bucket: $s3_bucket_2\n" >> config.yml
+		break;
 fi
+fi
+done
+
+        fi
 
 if [[ $yn == no ]]; then
 
 printf "s3_bucket: s3_cqube_edu\n" >> config.yml
 fi
-break;
-        fi
-
-done
-        fi
         fi
 }
 
@@ -433,17 +433,17 @@ echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the containe
 
         else
                   printf "azure_container: $az_archived_container\n" >> config.yml
+		  break;
+fi
+	    fi
+    done
 fi
 if [[ $yn == no ]]; then
 
 printf "azure_container: azure_cqube_edu\n" >> config.yml
 fi
-                break;
     fi
 
-done
-fi
-fi
 }
 
 
