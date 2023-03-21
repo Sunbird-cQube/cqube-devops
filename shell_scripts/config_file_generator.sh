@@ -1,7 +1,6 @@
 check_sys_user(){
 result=`who | head -1 | awk '{print $1}'`
-  printf "system_user_name: $result\n" >> config.yml
-
+printf "system_user_name: $result\n" >> config.yml
 }
  
 check_ip()
@@ -10,7 +9,6 @@ check_ip()
 	echo $is_local_ip > .ip
                ip=$(cut -d " " -f 2 .ip)
 	printf "local_ipv4_address: $ip\n" >> config.yml
-
 }
 
 
@@ -82,91 +80,62 @@ if [[ $storage_type == aws ]]; then
 fi
 }
 
-check_processing_buc(){
-while true
-do
-echo -e "\e[0;36m${bold}Hint: aws s3 processing bucke${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_processing_bucket ${normal}"
-read s3_bucket_1
-	
-#if [[ $aws_key_status == 0 ]]; then
-        bucketstatus=`aws s3api head-bucket --bucket "${s3_bucket_1}" 2>&1`
-        if [ ! $? == 0 ]
-        then
-            echo -e "\e[0;31m${bold}Error - Bucket not owned or not found. Please enter the valid bucket name${normal}"; fail=1
-	    else
-	  printf "s3_processing_bucket: $s3_bucket_1\n" >> config.yml
- 		 break;
-
-        fi
-done
-}
 
 check_archived_buc(){
-while true
-do
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-if [[ $storage_type == aws ]]; then
-echo -e "\e[0;36m${bold}Hint: aws s3 archived bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_archived_bucket ${normal}"
+        if [[ $storage_type == aws ]]; then
+
+aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+
+aws configure set aws_access_key_id $aws_access_key_id
+aws configure set aws_secret_access_key $aws_secret_access_key
+aws configure set region ap-south-1
+
+s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+        if [ $? == 0 ]
+                then
+        printf "s3_bucket: s3_cqube_edu\n" >> config.yml
+else
+        while true
+do
+echo -e "\e[0;33m${bold}s3 bucket is already exist with the cq-test-buc if you want to continue with the same bucket enter no or you want to create new bucket enter yes .${normal}"
+while true; do
+
+             read -p "enter yes or no (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+            if [[ $yn == yes ]]; then
+
+
+echo -e "\e[0;36m${bold}Hint: aws s3  bucket${normal}"
+echo -e "\e[0;38m${bold}please enter the unique  s3 bucket name ${normal}"
 read s3_bucket_2
 
-#if [[ $aws_key_status == 0 ]]; then
-        bucketstatus=`aws s3api head-bucket --bucket "${s3_bucket_2}" 2>&1`
-        if [ ! $? == 0 ]
-        then
-            echo -e "\e[0;31m${bold}Error - Bucket not owned or not found. Please enter the valid bucket name${normal}"; fail=1
-            else
-          printf "s3_archived_bucket: $s3_bucket_2\n" >> config.yml
-                 break;
+create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
 
-        fi
+if [ ! $? == 0 ]
+        then
+echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
+else
+                printf "s3_bucket: $s3_bucket_2\n" >> config.yml
+		break;
+fi
 fi
 done
-}
-
-check_error_buc(){
-while true
-do
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-if [[ $storage_type == aws ]]; then
-echo -e "\e[0;36m${bold}Hint: aws s3 error bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the s3_error_bucket ${normal}"
-read s3_bucket_3
-
-#if [[ $aws_key_status == 0 ]]; then
-        bucketstatus=`aws s3api head-bucket --bucket "${s3_bucket_3}" 2>&1`
-        if [ ! $? == 0 ]
-        then
-            echo -e "\e[0;31m${bold}Error - Bucket not owned or not found. Please enter the valid bucket name${normal}"; fail=1
-            else
-          printf "s3_error_bucket: $s3_bucket_3\n" >> config.yml
-                 break;
 
         fi
+
+if [[ $yn == no ]]; then
+
+printf "s3_bucket: s3_cqube_edu\n" >> config.yml
 fi
-done
-}
-
-check_error_dir(){
-        system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-       if [[ $storage_type == local ]]; then
-                rm -rf /home/$system_user_name/error_directory
-                mkdir /home/$system_user_name/error_directory
-                printf "local_error_dir: /home/$system_user_name/error_directory\n" >> config.yml
-
         fi
-}
-check_archived_dir(){
-        system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-        storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
-        if [[ $storage_type == local ]]; then
-                rm -rf /home/$system_user_name/archived_directory
-                mkdir /home/$system_user_name/archived_directory
-                printf "local_archived_dir: /home/$system_user_name/archived_directory\n" >> config.yml
-        fi
-
 }
 
 
@@ -200,9 +169,20 @@ done
 check_api_endpoint(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: enter domain name ( Example: cqubeprojects.com )${normal}"     
-echo -e "\e[0;38m${bold}please enter the api_endpoint ${normal}"
+	echo -e "\e[0;36m${bold}Hint: enter domain name if storage_type is local the api_end_point should be localhost, if storage_type is aws apli_end_point should be domain name ( Example: cqubeprojects.com )${normal}"     
+echo -e "\e[0;38m${bold}please enter the api_endpoint?${normal}"
 read api_endpoint
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $mode_of_installation == localhost ]]; then
+        if [[ ! $api_endpoint == "localhost" ]]; then
+        echo -e "\e[0;31m${bold}Error - Please provide api_endpoint as localhost for localhost installation${normal}"; fail=1
+                        else
+                        printf "api_endpoint: $api_endpoint\n" >> config.yml
+                        break;
+
+        fi
+fi
+if [[ $mode_of_installation == public ]]; then
 if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
     echo -e "\e[0;31m${bold}Error - Please provide the proper api endpoint${normal}"; fail=1
          else
@@ -216,6 +196,7 @@ if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
                          break;
                  fi
          fi
+fi
 fi
 done
 }
@@ -309,7 +290,9 @@ fi
 if [[ $storage_type == "local" ]]; then
         printf "mode_of_installation: localhost\n" >> config.yml
     fi
-
+if [[ $storage_type == "azure" ]]; then
+        printf "mode_of_installation: public\n" >> config.yml
+    fi
 }
 
 check_storage_type(){
@@ -320,14 +303,179 @@ echo -e "\e[0;36m${bold}Hint: enter aws or local${normal}"
 echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
 read storage_typ
 
-    if ! [[ $storage_typ == "aws" || $storage_typ == "local" ]]; then
-        echo echo -e "\e[0;31m${bold}Error - Please enter either aws or local${normal}"; fail=1
+    if ! [[ $storage_typ == "aws" || $storage_typ == "local" || $storage_typ == "azure" ]]; then
+        echo -e "\e[0;31m${bold}Error - Please enter either aws or local azure"; fail=1
 else
         printf "storage_type: $storage_typ\n" >> config.yml
         break;
         fi
 done
+
 }
+
+check_google_analytics(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Google Analytics Tracking ID ${normal}"
+echo -e "\e[0;38m${bold}please enter the Google Analytics Tracking ID or NA (not applicable) ${normal}"
+read google_analytics
+        printf "google_analytics_tracking_id: $google_analytics\n" >> config.yml
+        break;
+done
+
+}
+
+check_az_storage_connection_string(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure connection string ${normal}"
+echo -e "\e[0;38m${bold}please enter the connection string${normal}"
+read az_connection_string
+
+    az_account_status=0
+    export AZURE_STORAGE_CONNECTION_STRING="$az_connection_string"
+
+    az storage container list  --connection-string "$az_connection_string" > /dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+           echo -e "\e[0;31m${bold}Error echo Error - Invalid az storage connection string${normal}"; fail=1
+        az_account_status=1
+        else
+         printf "azure_connection_string: $az_connection_string\n" >> config.yml
+        break;
+    fi
+done
+}
+
+
+check_az_key(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
+read az_key
+    printf "azure_account_key: $az_key\n" >> config.yml
+        break;
+
+done
+}
+check_az_container_key(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
+read az_con_key
+sed -i "/azure_account_key: /d" config.yml
+printf  "azure_account_key: $az_con_key\n"  >> config.yml
+  break;
+done
+
+}
+
+
+check_az_storage_account_name(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter Azure account name ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account name${normal}"
+read az_name
+azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+    az_account_status=0
+
+    az storage container list --account-key $azure_account_key --account-name $az_name > /dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+           echo -e "\e[0;31m${bold}Error - Invalid az account name${normal}"; fail=1
+    check_az_container_key
+    #az_account_status=1
+else
+        printf "azure_container_name: $az_name\n" >> config.yml
+        break;
+
+    fi
+done
+}
+
+check_az_archived_container(){
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+
+if [[ $storage_type == azure ]]; then
+export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
+if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
+
+        printf "azure_container: azure-cqube-edu\n" >> config.yml
+
+else
+while true
+do
+echo -e "\e[0;33m${bold}azure container is already exist with the cq-test1 if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
+while true; do
+
+             read -p "enter yes or no (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) break 2;;
+                 * ) echo "Please answer yes or no.";;
+            esac
+            done
+
+            if [[ $yn == yes ]]; then
+echo -e "\e[0;36m${bold}Hint: Enter Azure blob container name ${normal}"
+echo -e "\e[0;38m${bold}please enter the azure blob container${normal}"
+read az_archived_container
+az_container_status=0
+  export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if az storage container create --name $az_archived_container --connection-string "$azure_connection_string" --output table | grep -q "False"; then
+echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the container name ${normal}"; fail=1
+
+        else
+                  printf "azure_container: $az_archived_container\n" >> config.yml
+		  break;
+fi
+	    fi
+    done
+fi
+if [[ $yn == no ]]; then
+
+printf "azure_container: azure-cqube-edu\n" >> config.yml
+fi
+    fi
+
+}
+
+
+check_minio_bucket(){
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       if [[ $storage_type == local ]]; then
+
+                printf "minio_bucket: minio-cqube-edu\n" >> config.yml
+        fi
+}
+
+check_base_dir(){
+        printf "base_dir: /opt\n" >> config.yml
+}
+
+
+check_minio_username(){
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       if [[ $storage_type == local ]]; then
+
+                printf "minio_username: minioadmin\n" >> config.yml
+        fi
+}
+
+check_minio_password(){
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+       if [[ $storage_type == local ]]; then
+
+                printf "minio_password: minioadmin\n" >> config.yml
+        fi
+}
+
 
 check_read_only_db_user(){
 while true
@@ -342,7 +490,7 @@ check_length $read_only_dbuser
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - Length of the value read_only_db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
 else
-    printf "read_only_db_user: $read_only_dbuser\n" >> config.yml
+    printf "read_only_user: $read_only_dbuser\n" >> config.yml
     break;
     fi
 fi
@@ -369,7 +517,7 @@ read read_only_dbpass
             if ! [[ $len -ge 8 ]]; then
                 echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
         else
- printf "read_only_db_password: $read_only_dbpass\n" >> config.yml
+ printf "read_only_password: $read_only_dbpass\n" >> config.yml
 break;
     fi
     fi
@@ -412,7 +560,7 @@ printf "db_password: cQube@123\n" >> config.yml
 
 check_config_read_only_db(){
         #while true; do
-echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_name , read_only_db_user and read_only_db_password  Follow Installation process with below config values.${normal}"
+echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_user and read_only_db_password. Follow Installation process with below config values.${normal}"
 echo -e "\e[0;38m${bold} read_only_db_user: cqube_db_user ${normal}"
 echo -e "\e[0;38m${bold} read_only_db_password: cQube@123 ${normal}"
 echo -e "\e[0;33m${bold}If you want to edit database credentials please enter yes.${normal}"
@@ -435,9 +583,7 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
 
             if [[ $yn == no ]]; then
 printf "read_only_db_user: cqube_db_user\n" >> config.yml
-printf "read_only_db_name: cqube_db\n" >> config.yml
 printf "read_only_db_password: cQube@123\n" >> config.yml
-
             fi
 
     }
@@ -453,15 +599,22 @@ check_storage_type
 check_mode_of_installation
 check_api_endpoint
 if [[ $storage_type == local ]]; then
-check_error_dir
-check_archived_dir
+check_minio_username
+check_minio_password
+check_minio_archive_buc
 fi
 if [[ $storage_type == aws ]]; then
 check_aws_key
 check_aws_secret_key
 check_archived_buc
-check_error_buc
 fi
+if [[ $storage_type == azure ]]; then
+check_az_storage_connection_string
+#check_az_key
+#check_az_storage_account_name
+check_az_archived_container
+fi
+check_google_analytics
 check_config_db
 check_config_read_only_db
 fi
@@ -491,18 +644,25 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_state
 				check_ip
 				check_storage_type
-				check_mode_of_installatio		n
+				check_mode_of_installation
 				check_api_endpoint
 				if [[ $storage_type == local ]]; then
-				check_error_dir
-				check_archived_dir
+				check_minio_username
+				check_minio_password
+				check_minio_bucket
 				fi
 				if [[ $storage_type == aws ]]; then
 				check_aws_key
 				check_aws_secret_key
 				check_archived_buc
-				check_error_buc
 				fi
+				if [[ $storage_type == azure ]]; then
+				check_az_storage_connection_string
+				#check_az_key
+				#check_az_storage_account_name
+				check_az_archived_container
+				fi
+				check_google_analytics
 				check_config_db
 				check_config_read_only_db
                           	fi

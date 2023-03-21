@@ -1,5 +1,20 @@
-- name: copying database config to generator folder
+- name: copying database config to generator folder (aws storage)
   template:
-    src: config.ini.j2
-    dest: "../microservices/generator-ms/config.ini"
+    src: config.ini_aws.j2
+    dest: "../microservices/generator-ms/adapter/config.ini"
+  when: storage_type == "aws"
+  tags: [ install, update ]
+
+- name: copying database config to generator folder (local storage)
+  template:
+    src: config.ini_local.j2
+    dest: "../microservices/generator-ms/adapter/config.ini"
+  when: storage_type == "local"
+  tags: [ install, update ]
+
+- name: copying database config to generator folder (azure storage)
+  template:
+    src: config.ini_azure.j2
+    dest: "../microservices/generator-ms/adapter/config.ini"
+  when: storage_type == "azure"
   tags: [ install, update ]

@@ -1,0 +1,21 @@
+---
+- name: Upgradting cQube
+  hosts: localhost
+  gather_facts: true
+  remote_user: root
+  become: true
+  vars_files:
+    - ../upgradation_config.yml
+    - ../program_selector.yml
+
+  roles:
+          - configurations
+          - postgres 
+          - python
+          - ingestion
+          - spec
+          - generator
+          - dashboard
+          - querybuilder
+          - nifi
+          - nginx

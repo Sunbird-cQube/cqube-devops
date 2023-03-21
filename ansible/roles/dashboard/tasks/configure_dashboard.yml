@@ -1,5 +1,27 @@
+- name: Configure the environment.ts
+  template:
+    src: environment.ts.j2
+    dest: "../microservices/dashboard-ms/src/environments/environment.ts"
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
+
 - name: copying environment.prod.ts file into the dashboard-ms 
   template:
     src: environment.prod.ts.j2
     dest: "../microservices/dashboard-ms/src/environments/environment.prod.ts"
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
+
+- name: Configure the environment.ts (localhost)
+  template:
+    src: environment_local.ts.j2
+    dest: "../microservices/dashboard-ms/src/environments/environment.ts.j2"
+  when: mode_of_installation == "localhost"
+  tags: [ install, update ]
+
+- name: Configure the environment.prod.ts (localhost)
+  template:
+    src: environment.prod_local.ts.j2
+    dest: "../microservices/dashboard-ms/src/environments/environment.prod.ts"
+  when: mode_of_installation == "localhost"
   tags: [ install, update ]

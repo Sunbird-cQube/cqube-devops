@@ -1,11 +1,10 @@
 ---
-- hosts: localhost
+- name: Running docker compose
+  hosts: localhost
   connection: local
   gather_facts: no
   vars_files:
     - ../config.yml
-  tasks:
-    - name: docker compose
-      become_user: "{{ system_user_name }}"
-      community.docker.docker_compose:
-        project_src: .
+
+  roles:
+         - compose

@@ -16,10 +16,24 @@ chmod u+x shell_scripts/basic_requirements.sh
 chmod u+x shell_scripts/install_aws_cli.sh
 . "shell_scripts/install_aws_cli.sh"
 
+chmod u+x shell_scripts/install_azure_cli.sh
+. "shell_scripts/install_azure_cli.sh"
+
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/config_file_generator.sh"
+chmod u+x shell_scripts/program_selector.sh
+. "shell_scripts/program_selector.sh"
+
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+if [[ $storage_type == "local" ]]; then
+chmod u+x shell_scripts/minio/install_minio.sh
+. "shell_scripts/minio/install_minio.sh"
+chmod u+x shell_scripts/minio/install_mc_client.sh
+. "shell_scripts/minio/install_mc_client.sh"
+
+fi
 
 #Running script to clone ingestion, spec repository
 chmod u+x shell_scripts/repository_clone.sh
@@ -36,9 +50,9 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
-ansible-playbook ansible/install.yml
-ansible-playbook ansible/compose.yml
-ansible-playbook ansible/configurations.yml
+ansible-playbook ansible/install.yml --tags "install"
+set -e
+ansible-playbook ansible/compose.yml --tags "install"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"

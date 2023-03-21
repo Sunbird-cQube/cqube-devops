@@ -1,3 +1,9 @@
 ---
+- include_tasks: configure_base_dir.yml
+  tags: [install, update ]
+
 - include_tasks: configure_compose.yml
-  tags: install
+  tags: [install, update ]
+
+- include_tasks: configure_program_selector.yml
+  tags: [ install, update ]  
