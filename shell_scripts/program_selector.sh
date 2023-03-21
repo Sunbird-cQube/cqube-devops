@@ -145,7 +145,7 @@ done
 }
 
 check_config_file(){
-if [[ -e "config.yml" ]]; then
+if [[ -e "program_selector.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the program_selector.yml file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat program_selector.yml` ${normal}"
@@ -153,7 +153,7 @@ echo -e "\e[0;33m${bold}Currently cQube program_selector.yml is entered. Follow 
 echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
             while true; do
 
-             read -p "Do you still want to edit the config.yml file (yes/no)? " yn
+             read -p "Do you still want to edit the program_selector.yml file (yes/no)? " yn
              case $yn in
                  yes) break;;
                  no) break 2;;
