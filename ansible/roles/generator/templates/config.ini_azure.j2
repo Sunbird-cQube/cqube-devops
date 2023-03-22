@@ -2,18 +2,6 @@
 
 # Postgres credentials ####################
 
-db_host = postgres_app
-db_port = 5432
-database = {{ db_name }}
-db_user = {{ db_user }}
-db_password = {{ db_password }}
-nifi_host = http://nifi_app
-nifi_port = 8096
-spec_host = http://spec_app
-spec_port = 3001
-ingestion_host = http://ingest_app
-ingestion_port = 3000
-generator_host = http://generator_app
-generator_port = 3003
-azure_storage_conn_str = {{ azure_connection_string }}
+storage_type = {{ storage_type }}
+azure_connection_string = {{ azure_connection_string }}
 azure_container = {{ azure_container }}
