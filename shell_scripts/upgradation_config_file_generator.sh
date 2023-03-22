@@ -17,17 +17,20 @@ check_input_files(){
 
 input_path=$(awk ''/^input_path:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-if [[ ! -d old_input_files ]]; then
+system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+if [[ ! -d /home/$system_user_name/old_input_files ]]; then
 
-mkdir old_input_files
+mkdir /home/$system_user_name/old_input_files
 if [[ $storage_type == local ]]; then
 
 cp -R $input_path* old_input_files
 
 fi
 if [[ $storage_type == aws ]]; then
-irbucket=$(aws s3 sync s3://$input_path old_input_files)
+irbucket=$(aws s3 sync s3://$input_path /home/$system_user_name/old_input_files)
 fi
+
+
 
 fi
 }
@@ -155,7 +158,7 @@ aws configure set region ap-south-1
 s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
         if [ $? == 0 ]
                 then
-        printf "s3_bucket: s3_cqube_edu\n" >> upgradation_config.yml
+        printf "s3_bucket: s3-cqube-edu\n" >> upgradation_config.yml
 else
         while true
 do
@@ -191,7 +194,7 @@ done
 
 if [[ $yn == no ]]; then
 
-printf "s3_bucket: s3_cqube_edu\n" >> upgradation_config.yml
+printf "s3_bucket: s3-cqube-edu\n" >> upgradation_config.yml
 fi
         fi
 
@@ -488,14 +491,14 @@ storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradati
 
 if [[ $storage_type == azure ]]; then
 export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
-if az storage container create --name azure_cqube_edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
+if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
-        printf "azure_container: azure_cqube_edu\n" >> upgradation_config.yml
+        printf "azure_container: azure-cqube-edu\n" >> upgradation_config.yml
 
 else
 while true
 do
-echo -e "\e[0;33m${bold}azure container is already exist with the cq-test1 if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
+echo -e "\e[0;33m${bold}azure container is already exist. if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
 while true; do
 
              read -p "enter yes or no (yes/no)? " yn
@@ -525,7 +528,7 @@ fi
 fi
 if [[ $yn == no ]]; then
 
-printf "azure_container: azure_cqube_edu\n" >> upgradation_config.yml
+printf "azure_container: azure-cqube-edu\n" >> upgradation_config.yml
 fi
     fi
 

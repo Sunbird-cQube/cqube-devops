@@ -95,11 +95,11 @@ aws configure set region ap-south-1
 s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
         if [ $? == 0 ]
                 then
-        printf "s3_bucket: s3_cqube_edu\n" >> config.yml
+        printf "s3_bucket: s3-cqube-edu\n" >> config.yml
 else
         while true
 do
-echo -e "\e[0;33m${bold}s3 bucket is already exist with the cq-test-buc if you want to continue with the same bucket enter no or you want to create new bucket enter yes .${normal}"
+echo -e "\e[0;33m${bold}s3 bucket is already exist with the s3-cqube-edu if you want to continue with the same bucket enter no or you want to create new bucket enter yes .${normal}"
 while true; do
 
              read -p "enter yes or no (yes/no)? " yn
@@ -133,7 +133,7 @@ done
 
 if [[ $yn == no ]]; then
 
-printf "s3_bucket: s3_cqube_edu\n" >> config.yml
+printf "s3_bucket: s3-cqube-edu\n" >> config.yml
 fi
         fi
 }
@@ -410,7 +410,7 @@ if az storage container create --name azure-cqube-edu --connection-string "$azur
 else
 while true
 do
-echo -e "\e[0;33m${bold}azure container is already exist with the cq-test1 if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
+echo -e "\e[0;33m${bold}azure container is already exists. if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
 while true; do
 
              read -p "enter yes or no (yes/no)? " yn
