@@ -548,7 +548,7 @@ check_length $read_only_dbuser
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - Length of the value read_only_db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
 else
-    printf "read_only_user: $read_only_dbuser\n" >> upgradation_config.yml
+    printf "read_only_db_user: $read_only_dbuser\n" >> upgradation_config.yml
     break;
     fi
 fi
@@ -575,7 +575,7 @@ read read_only_dbpass
             if ! [[ $len -ge 8 ]]; then
                 echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
         else
- printf "read_only_password: $read_only_dbpass\n" >> upgradation_config.yml
+ printf "read_only_db_password: $read_only_dbpass\n" >> upgradation_config.yml
 break;
     fi
     fi
@@ -679,7 +679,7 @@ check_config_read_only_db
 fi
 
 check_config_file(){
-if [[ -e "config.yml" ]]; then
+if [[ -e "upgradation_config.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the config file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat upgradation_config.yml` ${normal}"
@@ -696,8 +696,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
             done
              if [[ -e "upgradation_config.yml" ]]; then
                           if [[ $yn == yes ]]; then
-                                 rm upgradation_config.yml
-                                touch config.yml
+                                rm upgradation_config.yml
+                                touch upgradation_config.yml
 				check_data_upgradation_value
 				check_base_dir
 				check_sys_user
@@ -730,7 +730,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
            done
 fi
 if [[ $yn == no ]]; then
-	     echo -e "\e[0;32m${bold}config file has been generated and validated successfully${normal}"
+	     echo -e "\e[0;32m${bold}upgradation config file has been generated and validated successfully${normal}"
 
     fi
 
