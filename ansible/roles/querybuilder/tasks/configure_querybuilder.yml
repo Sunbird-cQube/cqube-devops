@@ -17,6 +17,7 @@
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+      STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
@@ -36,6 +37,7 @@
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+      STORAGE_TYPE= "{{ storage_type }}"
       MINIO_END_POINT = 'http://localhost'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
@@ -56,6 +58,7 @@
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
+      STORAGE_TYPE= "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'

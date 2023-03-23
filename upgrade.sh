@@ -36,6 +36,8 @@ chmod u+x shell_scripts/minio/install_mc_client.sh
 
 fi
 
+# migrating the cQube-4.1 data to cQube-5.O
+chmod u+x data_migration.sh
 . "data_migration.sh"
 
 #Running script to clone ingestion, spec repository
@@ -59,9 +61,6 @@ set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
 . "run_api.sh"
-# migrating the cQube-4.1 data to cQube-5.O
-
-. "data_migration.sh"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
