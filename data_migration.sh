@@ -19,7 +19,7 @@ echo "migrating the cQube-4.1 s3 input bucket data to old_input_files directory 
 aws s3 sync s3://$input_path /home/$system_user_name/old_input_files
 fi
 
-if [[ storage_type == azure ]]; then
+if [[ $storage_type == azure ]]; then
 echo "migrating the cQube-4.1 input container data to old_input_files directory ..."	
 az login
 
@@ -29,3 +29,4 @@ fi
 fi
 }
 
+check_input_files
