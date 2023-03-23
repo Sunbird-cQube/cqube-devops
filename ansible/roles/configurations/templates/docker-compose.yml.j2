@@ -22,6 +22,8 @@ services:
     image: ingestion_ms:1
     ports:
       - 3000:3000
+    volumes:
+      - /home/{{ system_user_name }}/old_input_files:/app
     networks:
       - cqube_net
   spec_app:
