@@ -245,7 +245,7 @@ while read line; do
   fi
 done < state_codes
   if [[ $state_found == 0 ]] ; then
-    echo -e "\e[0;31m${bold}Error - Invalid State code. Please refer the state_list file and enter the correct value.${normal}"; fail=1
+    echo -e "\e[0;31m${bold}Error - Invalid State Code. Please refer to the state_list file and enter the correct value.${normal}"; fail=1
 else
          printf "state_name: $state_name\n" >> upgradation_config.yml
 break;
@@ -257,8 +257,8 @@ done
 check_api_endpoint(){
 while true
 do
-	echo -e "\e[0;36m${bold}Hint: enter domain name if storage_type is local the api_end_point should be localhost, if storage_type is aws apli_end_point should be domain name ( Example: cqubeprojects.com )${normal}"     
-echo -e "\e[0;38m${bold}please enter the api_endpoint?${normal}"
+	echo -e "\e[0;36m${bold}Hint: enter domain name if storage_type is local the api_end_point should be localhost, if storage_type is aws or azure  api_end_point should be the domain name ( Example: cqubeprojects.com )${normal}"     
+echo -e "\e[0;38m${bold}please enter the api_endpoint${normal}"
 read api_endpoint
 mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 if [[ $mode_of_installation == localhost ]]; then
@@ -308,7 +308,7 @@ echo -e "\e[0;36m${bold}Hint: Create your own username for the cQube database, n
 echo -e "\e[0;38m${bold}please enter the db_user ${normal} "
 read dbuser
     if [[ ! $dbuser =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
-        echo -e "\e[0;31m${bold}Error - Naming convention is not correct. Please change the value of db_user.${normal}"; fail=1
+        echo -e "\e[0;31m${bold}Error: db_user should not contain numbers, Please enter alphabets as db_user ${normal}"; fail=1
    else
 check_length $dbuser
 if ! [[ $? == 0 ]]; then
@@ -387,12 +387,12 @@ check_storage_type(){
 
 while true
 do
-echo -e "\e[0;36m${bold}Hint: enter aws or local${normal}"     
+echo -e "\e[0;36m${bold}Hint:  enter aws or local or azure ${normal}"     
 echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
 read storage_typ
 
     if ! [[ $storage_typ == "aws" || $storage_typ == "local" || $storage_typ == "azure" ]]; then
-        echo -e "\e[0;31m${bold}Error - Please enter either aws or local azure"; fail=1
+        echo -e "\e[0;31m${bold}Error - Please enter either aws or local or azure${normal}"; fail=1
 else
         printf "storage_type: $storage_typ\n" >> upgradation_config.yml
         break;
@@ -498,7 +498,7 @@ if az storage container create --name azure-cqube-edu --connection-string "$azur
 else
 while true
 do
-echo -e "\e[0;33m${bold}azure container is already exist. if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
+echo -e "\e[0;33m${bold}azure container azure-cqube-edu is already exist. if you want to continue with the same azure container enter no or you want to create new container enter yes .${normal}"    
 while true; do
 
              read -p "enter yes or no (yes/no)? " yn
@@ -546,7 +546,7 @@ read read_only_dbuser
    else
 check_length $read_only_dbuser
 if ! [[ $? == 0 ]]; then
-    echo -e "\e[0;31m${bold}Error - Length of the value read_only_db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
+    echo -e "\e[0;31m${bold}Error - The length of the value read_only_db_user should be between 3 and 63.${normal}"; fail=1
 else
     printf "read_only_db_user: $read_only_dbuser\n" >> upgradation_config.yml
     break;
