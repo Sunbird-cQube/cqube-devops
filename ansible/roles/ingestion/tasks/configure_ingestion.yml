@@ -31,6 +31,7 @@
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
+      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
   when: storage_type == "aws"
   tags: [ install, update ]
 
@@ -55,6 +56,7 @@
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
+      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
   when: storage_type == "local"
   tags: [ install, update ]
 
@@ -76,5 +78,6 @@
       STORAGE_TYPE= "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
+      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
   when: storage_type == "azure"
   tags: [ install, update ]
