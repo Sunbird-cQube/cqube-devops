@@ -6,8 +6,8 @@ echo "******************************************************* Response from serv
 key='zipball_url'
 value=$(echo $result | jq -r ".$key")
 echo "$value"
-sudo rm -rf cqube-ingest.zip
-sudo rm -rf ChakshuGautam-cQube-POCs*
+rm -rf cqube-ingest.zip
+rm -rf ChakshuGautam-cQube-POCs*
 echo "***************************************************** Downloading the zip file ******************************************************"
 wget -O cqube-ingest.zip $value
 echo "****************************************************** Unzipping the zip file *******************************************************"
@@ -19,12 +19,7 @@ echo "***************************************************** Adding Database_url 
 touch .env
 echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}"> .env
 echo "***************************************************** Installing the yarn ***********************************************************"
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg |sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" |sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update
-sudo apt install yarn -y
-yarn install
 
 npx prisma generate
-npx prisma migrate dev
-yarn cli ingest debug=false
+npx prisma migrate dev -y
+yarn cli ingest debug=false -y
