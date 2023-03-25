@@ -1,0 +1,5 @@
+- name: copying ingest configuration script to nifi ms
+  template:
+    src: cqube-ingest.sh.j2
+    dest: "../microservices/nifi-ms/cqube-ingest.sh"
+  tags: [ install, update ]
