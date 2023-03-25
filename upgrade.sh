@@ -60,7 +60,7 @@ ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
-#Instantiating the processor group in nifi
+#Initialising the processor group in nifi
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 

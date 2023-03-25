@@ -54,7 +54,7 @@ ansible-playbook ansible/install.yml --tags "install"
 set -e
 ansible-playbook ansible/compose.yml --tags "install"
 
-#Intantiating the processor group in nifi
+#Initialising the processor group in nifi
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 
