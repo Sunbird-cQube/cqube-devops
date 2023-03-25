@@ -535,6 +535,47 @@ fi
 }
 
 
+check_cron_plugin_syntax(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter cron syntax  to run the nifi plugins${normal}"
+echo -e "\e[0;38m${bold}please enter the cron syntax eg if you want to run at 12pm this is syntax (0 0 12 * * ?)${normal}"
+read cron
+   crontab -l > test_cron
+   echo "$cron /test" > test_cron
+   crontab test_cron
+   if [ $? = 1 ]; then
+     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+else
+	printf "plugin_time: $cron_syn\n" >> upgradation_config.yml
+        break;
+
+    fi
+done
+}
+
+check_cron_processing_syntax(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter cron syntax  to run the nifi processing files${normal}"
+echo -e "\e[0;38m${bold}please enter the cron syntax eg if you want to run at 12pm this is syntax (0 0 12 * * ?)${normal}"
+read cron
+   crontab -l > test_cron
+   echo "$cron /test" > test_cron
+   crontab test_cron
+   if [ $? = 1 ]; then
+     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+else
+        printf "processing_time: $cron_syn\n" >> upgradation_config.yml
+        break;
+
+    fi
+done
+}
+
+
 check_read_only_db_user(){
 while true
 do
@@ -674,6 +715,8 @@ check_az_storage_account_name
 check_az_archived_container
 fi
 check_google_analytics
+check_cron_plugin_syntax
+check_cron_processing_syntax
 check_config_db
 check_config_read_only_db
 fi
@@ -723,6 +766,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_az_archived_container
 				fi
 				check_google_analytics
+				check_cron_plugin_syntax
+                                check_cron_processing_syntax
 				check_config_db
 				check_config_read_only_db
                           	fi
