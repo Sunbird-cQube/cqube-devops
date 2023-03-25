@@ -2,5 +2,8 @@
 - include_tasks: configure_generator.yml
   tags: [ install, update ]
 
+- include_tasks: configure_processor_group.yml
+  tags: [ install, update ]
+
 - include_tasks: build_generator.yml
   tags: [ install, update ]
