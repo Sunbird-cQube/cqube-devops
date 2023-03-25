@@ -548,7 +548,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-	printf "plugin_time: $cron_syn\n" >> upgradation_config.yml
+	printf "plugin_time: $cron\n" >> upgradation_config.yml
         break;
 
     fi
@@ -568,7 +568,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-        printf "processing_time: $cron_syn\n" >> upgradation_config.yml
+        printf "processing_time: $cron\n" >> upgradation_config.yml
         break;
 
     fi
