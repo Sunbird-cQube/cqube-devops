@@ -1,6 +1,6 @@
 - name: Generating program selection csv file
   template:
     src: program_selector.csv.j2
-    dest: "../microservices/dashboard-ms/program_selector.csv"
+    dest: "../microservices/query-builder/program_selector.csv"
     mode: "0644"
   tags: [ install, update ]
