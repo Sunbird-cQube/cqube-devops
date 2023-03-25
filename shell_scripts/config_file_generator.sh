@@ -390,7 +390,7 @@ azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}'
     check_az_container_key
     #az_account_status=1
 else
-        printf "azure_container_name: $az_name\n" >> config.yml
+        printf "azure_account_name: $az_name\n" >> config.yml
         break;
 
     fi
@@ -610,8 +610,8 @@ check_archived_buc
 fi
 if [[ $storage_type == azure ]]; then
 check_az_storage_connection_string
-#check_az_key
-#check_az_storage_account_name
+check_az_key
+check_az_storage_account_name
 check_az_archived_container
 fi
 check_google_analytics
@@ -658,8 +658,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				fi
 				if [[ $storage_type == azure ]]; then
 				check_az_storage_connection_string
-				#check_az_key
-				#check_az_storage_account_name
+				check_az_key
+				check_az_storage_account_name
 				check_az_archived_container
 				fi
 				check_google_analytics
