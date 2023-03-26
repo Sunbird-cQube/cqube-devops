@@ -5,8 +5,8 @@ echo "******************************************************* Response from serv
 key='zipball_url'
 value=$(echo $result | jq -r ".$key")
 echo "$value"
-sudo rm -rf cqube-ingest.zip
-sudo rm -rf ChakshuGautam-cQube-POCs*
+rm -rf cqube-ingest.zip
+rm -rf ChakshuGautam-cQube-POCs*
 echo "***************************************************** Downloading the zip file ******************************************************"
 wget -O cqube-ingest.zip $value
 echo "****************************************************** Unzipping the zip file *******************************************************"
