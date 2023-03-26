@@ -72,4 +72,4 @@ fi
 
 #Running script to display important links
 chmod u+x shell_scripts/generate_access_links.sh
-. "shell_scripts/generate_access_links.sh"
+. "shell_scripts/upgrade_generate_access_links.sh"
