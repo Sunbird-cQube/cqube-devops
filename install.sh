@@ -63,5 +63,5 @@ echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
 
 #Running script to display important links
-chmod u+x shell_scripts/generate_access_links.sh
+chmod u+x shell_scripts/install_generate_access_links.sh
 . "shell_scripts/install_generate_access_links.sh"

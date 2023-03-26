@@ -542,9 +542,9 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter cron syntax  to run the nifi plugins${normal}"
 echo -e "\e[0;38m${bold}please enter the cron syntax eg if you want to run at 12pm this is syntax (0 0 12 * * ?)${normal}"
 read cron
-   crontab -l > test_cron
-   echo "$cron /test" > test_cron
-   crontab test_cron
+   #crontab -l > test_cron
+   #echo "$cron /test" > test_cron
+   #crontab test_cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
@@ -562,9 +562,9 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter cron syntax  to run the nifi processing files${normal}"
 echo -e "\e[0;38m${bold}please enter the cron syntax eg if you want to run at 12pm this is syntax (0 0 12 * * ?)${normal}"
 read cron
-   crontab -l > test_cron
-   echo "$cron /test" > test_cron
-   crontab test_cron
+   #crontab -l > test_cron
+   #echo "$cron /test" > test_cron
+   #crontab test_cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
