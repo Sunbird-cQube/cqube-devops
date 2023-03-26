@@ -1,3 +1,6 @@
 ---
+- include_tasks: configure_nifi.yml
+  tags: [ install, update ]
+
 - include_tasks: build_nifi.yml
   tags: [ install, update ]

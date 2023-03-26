@@ -71,17 +71,3 @@ else
         cd ../../
 
 fi
-
-cd "$MY_PATH"
-if ! [[ -d cQube-POCs ]]; then
-        git clone https://github.com/ChakshuGautam/cQube-POCs.git
-        cd "cQube-POCs"
-        git checkout main
-        cd ../../
-else
-        cd "cQube-POCs"
-        git checkout main
-        git pull
-        cd ../../
-
-fi

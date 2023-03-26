@@ -60,6 +60,10 @@ ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
+#Initialising the processor group in nifi
+chmod u+x shell_scripts/instantiate_static_processor_groups.sh
+. "shell_scripts/instantiate_static_processor_groups.sh"
+
 . "run_api.sh"
 
 if [ $? = 0 ]; then
@@ -68,4 +72,4 @@ fi
 
 #Running script to display important links
 chmod u+x shell_scripts/generate_access_links.sh
-. "shell_scripts/generate_access_links.sh"
+. "shell_scripts/upgrade_generate_access_links.sh"

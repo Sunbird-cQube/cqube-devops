@@ -54,10 +54,14 @@ ansible-playbook ansible/install.yml --tags "install"
 set -e
 ansible-playbook ansible/compose.yml --tags "install"
 
+#Initialising the processor group in nifi
+chmod u+x shell_scripts/instantiate_static_processor_groups.sh
+. "shell_scripts/instantiate_static_processor_groups.sh"
+
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
 
 #Running script to display important links
 chmod u+x shell_scripts/generate_access_links.sh
-. "shell_scripts/generate_access_links.sh"
+. "shell_scripts/install_generate_access_links.sh"
