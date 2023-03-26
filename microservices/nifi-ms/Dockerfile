@@ -2,6 +2,7 @@ FROM apache/nifi:1.12.1
 USER root
 RUN mkdir /generator_data /processing_data /archived_data
 
+COPY clone-repo.sh .
 COPY cqube-ingest.sh .
 COPY cqube-ingest-install.sh .
 
