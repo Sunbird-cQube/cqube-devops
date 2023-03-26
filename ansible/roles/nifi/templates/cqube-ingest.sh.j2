@@ -1,10 +1,8 @@
 #!/bin/bash
 
+## Executing yarn cli command to ingest data##
+echo "Data ingestion is in progress"
 cd ChakshuGautam-cQube-POCs*
 cd impl/c-qube
-echo "***************************************************** Adding Database_url to the .env file ******************************************"
-touch .env
-echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}"> .env
-echo "***************************************************** Installing the yarn ***********************************************************"
-npx prisma generate
 yarn cli ingest debug=false
+echo "Data ingestion completed"
