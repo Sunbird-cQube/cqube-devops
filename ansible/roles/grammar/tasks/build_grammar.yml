@@ -1,8 +1,0 @@
-- name: docker build ingestion ms
-  docker_image:
-    name: grammar_ms
-    tag: '1'
-    build:
-      path: ../microservices/cQube-POCs/
-    source: build
-  tags: [ install, update ]
