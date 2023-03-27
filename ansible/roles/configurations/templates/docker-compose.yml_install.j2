@@ -34,6 +34,8 @@ services:
     image: generator_ms:1
     ports:
       - 3003:3003
+    volumes:
+      - adapter_volume:/python_app/adapter
     networks:
       - cqube_net
   dashboard_app:
@@ -54,6 +56,7 @@ services:
       - 8096:8096
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
+      - adapter_volume:/adapter
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
@@ -89,3 +92,4 @@ networks:
   cqube_net:
 volumes:
   python_executable_env:
+  adapter_volume:
