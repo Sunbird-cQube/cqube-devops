@@ -477,6 +477,26 @@ check_minio_password(){
 }
 
 
+check_adapter_scheduling_syntax(){
+
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter cron syntax  to run the adapter scheduling${normal}"
+echo -e "\e[0;38m${bold}please enter the cron syntax eg if you want to run at 11am this is syntax (0 0 11 * * ?)${normal}"
+read cron
+   #crontab -l > test_cron
+   #echo "$cron /test" > test_cron
+   #crontab test_cron
+   if [ $? = 1 ]; then
+     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+else
+        printf "adapter_scheduler_time: $cron\n" >> config.yml
+        break;
+
+    fi
+done
+}
+
 check_cron_plugin_syntax(){
 
 while true
@@ -656,6 +676,7 @@ check_az_storage_account_name
 check_az_archived_container
 fi
 check_google_analytics
+check_adapter_scheduling_syntax
 check_cron_plugin_syntax
 check_cron_processing_syntax
 check_config_db
@@ -706,6 +727,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_az_archived_container
 				fi
 				check_google_analytics
+				check_adapter_scheduling_syntax
 				check_cron_plugin_syntax
 				check_cron_processing_syntax
 				check_config_db

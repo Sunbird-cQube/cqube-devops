@@ -32,7 +32,8 @@ chmod u+x shell_scripts/minio/install_minio.sh
 . "shell_scripts/minio/install_minio.sh"
 chmod u+x shell_scripts/minio/install_mc_client.sh
 . "shell_scripts/minio/install_mc_client.sh"
-
+chmod u+x shell_scripts/minio/crop_minio_ip.sh
+. "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 #Running script to clone ingestion, spec repository
