@@ -33,7 +33,8 @@ chmod u+x shell_scripts/minio/install_minio.sh
 . "shell_scripts/minio/install_minio.sh"
 chmod u+x shell_scripts/minio/install_mc_client.sh
 . "shell_scripts/minio/install_mc_client.sh"
-
+chmod u+x shell_scripts/minio/crop_minio_ip.sh
+. "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 # migrating the cQube-4.1 data to cQube-5.O
