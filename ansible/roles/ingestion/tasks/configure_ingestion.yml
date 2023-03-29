@@ -30,7 +30,7 @@
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
-      S3_BUCKET= "{{ s3_bucket }}"
+      AWS_BUCKET= "{{ s3_bucket }}"
       INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
   when: storage_type == "aws"
   tags: [ install, update ]
