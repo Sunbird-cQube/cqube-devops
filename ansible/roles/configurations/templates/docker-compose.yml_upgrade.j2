@@ -58,7 +58,7 @@ services:
       - 8096:8096
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
-      - adapter_volume:/adapter
+      - adapter_volume:/opt/nifi/nifi-current/adapter
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
