@@ -51,7 +51,7 @@
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       STORAGE_TYPE= "{{ storage_type }}"
-      MINIO_END_POINT = 'http://localhost'
+      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
