@@ -6,7 +6,6 @@ input_path=$(awk ''/^input_path:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_c
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-if [[ ! -d /home/$system_user_name/old_input_files ]]; then
 
 mkdir /home/$system_user_name/old_input_files
 if [[ $storage_type == local ]]; then
@@ -25,7 +24,6 @@ az login
 
 az storage blob download-batch -d . --connection-string "$azure_connection_string" --source $input_path --destination /home/$system_user_name/old_input_files
 
-fi
 fi
 }
 
