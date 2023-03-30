@@ -14,4 +14,4 @@ pandas
 requests
 configparser
 azure-storage-blob
-boto3
+minio
