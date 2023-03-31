@@ -547,7 +547,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-        printf "adapter_scheduler_time: $cron\n" >> config.yml
+        printf "adapter_scheduler_time: $cron\n" >> upgradation_config.yml
         break;
 
     fi
