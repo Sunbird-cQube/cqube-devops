@@ -4,12 +4,13 @@
   connection: local
   gather_facts: no
   vars_files:
-    - ../upgradation_config.yml
-    - ../upgradation_azure_container_config.yml
-    - ../upgradation_aws_s3_config.yml
-    - ../upgradation_local_storage_config.yml
+    - ../config_files/upgradation_config.yml
+    - ../config_files/upgradation_azure_container_config.yml
+    - ../config_files/upgradation_aws_s3_config.yml
+    - ../config_files/upgradation_local_storage_config.yml
 
 
   roles:
          - compose
+
 

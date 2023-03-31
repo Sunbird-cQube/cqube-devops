@@ -11,12 +11,12 @@ fi
 
 #Running script to install the basic softwares
 chmod u+x shell_scripts/upgradation_basic_requirements.sh
-. "shell_scripts/basic_requirements.sh"
+. "shell_scripts/upgradation_basic_requirements.sh"
 
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/upgradation_config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
-. "shell_scripts/upgradation_config_file_generator.sh"
+#. "shell_scripts/upgradation_config_file_generator.sh"
 
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 
@@ -64,6 +64,10 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
+# migrating the cQube-4.1 data to cQube-5.O
+chmod u+x shell_scripts/data_migration.sh
+. "shell_scripts/data_migration.sh"
+
 ansible-playbook ansible/remote_sanity.yml --tags "update"
 ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
@@ -73,6 +77,9 @@ ansible-playbook ansible/upgrade_compose.yml --tags "update"
 chmod u+x shell_scripts/upgradation_static_processor_groups.sh
 . "shell_scripts/upgradation_static_processor_groups.sh"
 
+chmod u+x shell_scripts/run_api.sh
+. "shell_scripts/run_api.sh"
+
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
 fi
@@ -80,3 +87,4 @@ fi
 #Running script to display important links
 chmod u+x shell_scripts/install_generate_access_links.sh
 . "shell_scripts/upgrade_generate_access_links.sh"
+

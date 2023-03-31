@@ -1,4 +1,3 @@
-s3_bucket=$(awk ''/^s3_bucket:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
 sudo docker exec ansible_ingest_app_1  apk add curl
 
