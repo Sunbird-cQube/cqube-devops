@@ -10,25 +10,33 @@ else
 fi
 
 #Running script to install the basic softwares
-chmod u+x shell_scripts/basic_requirements.sh
-. "shell_scripts/upgrade_basic_requirements.sh"
-
-chmod u+x shell_scripts/install_aws_cli.sh
-. "shell_scripts/install_aws_cli.sh"
-
-chmod u+x shell_scripts/install_azure_cli.sh
-. "shell_scripts/install_aws_azure.sh"
-
+chmod u+x shell_scripts/upgradation_basic_requirements.sh
+. "shell_scripts/basic_requirements.sh"
 
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/upgradation_config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/upgradation_config_file_generator.sh"
-chmod u+x shell_scripts/program_selector.sh
-. "shell_scripts/program_selector.sh"
 
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+
+if [[ $storage_type == "aws" ]]; then
+chmod u+x shell_scripts/install_aws_cli.sh
+. "shell_scripts/install_aws_cli.sh"
+chmod u+x shell_scripts/upgradation_s3_storage_config_generator.sh
+. "shell_scripts/upgradation_s3_storage_config_generator.sh"
+fi
+
+if [[ $storage_type == "azure" ]]; then
+chmod u+x shell_scripts/install_aws_cli.sh
+. "shell_scripts/install_azure_cli.sh"
+chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
+. "shell_scripts/upgradation_azure_storage_config_generator.sh"
+fi
+
 if [[ $storage_type == "local" ]]; then
+chmod u+x shell_scripts/upgradation_local_storage_config_generator.sh
+. "shell_scripts/upgradation_local_storage_config_generator.sh"
 chmod u+x shell_scripts/minio/install_minio.sh
 . "shell_scripts/minio/install_minio.sh"
 chmod u+x shell_scripts/minio/install_mc_client.sh
@@ -37,11 +45,11 @@ chmod u+x shell_scripts/minio/crop_minio_ip.sh
 . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
-# migrating the cQube-4.1 data to cQube-5.O
-chmod u+x data_migration.sh
-. "data_migration.sh"
+#Running script to generate program selector config file
+chmod u+x shell_scripts/program_selector.sh
+. "shell_scripts/program_selector.sh"
 
-#Running script to clone ingestion, spec repository
+#Running script to clone all the required repositories
 chmod u+x shell_scripts/repository_clone.sh
 . "shell_scripts/repository_clone.sh"
 
@@ -56,21 +64,18 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
-ansible-playbook ansible/remote_sanity.yml --tags "update"
-ansible-playbook ansible/upgrade.yml --tags "update"
+ansible-playbook ansible/upgrade.yml --tags "install"
 set -e
-ansible-playbook ansible/upgrade_compose.yml --tags "update"
+ansible-playbook ansible/upgrade_compose.yml --tags "install"
 
 #Initialising the processor group in nifi
-chmod u+x shell_scripts/instantiate_static_processor_groups.sh
-. "shell_scripts/instantiate_static_processor_groups.sh"
-
-. "run_api.sh"
+chmod u+x shell_scripts/upgradation_static_processor_groups.sh
+. "shell_scripts/upgradation_static_processor_groups.sh"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
 fi
 
 #Running script to display important links
-chmod u+x shell_scripts/upgrade_generate_access_links.sh
+chmod u+x shell_scripts/install_generate_access_links.sh
 . "shell_scripts/upgrade_generate_access_links.sh"
