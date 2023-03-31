@@ -6,6 +6,9 @@
   become: true
   vars_files:
     - ../upgradation_config.yml
+    - ../upgradation_azure_container_config.yml
+    - ../upgradation_aws_s3_config.yml
+    - ../upgradation_local_storage_config.yml
     - ../program_selector.yml
 
   roles:
