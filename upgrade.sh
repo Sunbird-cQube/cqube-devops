@@ -16,7 +16,7 @@ chmod u+x shell_scripts/upgrade_basic_requirements.sh
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/upgradation_config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
-#. "shell_scripts/upgradation_config_file_generator.sh"
+. "shell_scripts/upgradation_config_file_generator.sh"
 
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 
@@ -34,6 +34,10 @@ chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
 . "shell_scripts/upgradation_azure_storage_config_generator.sh"
 fi
 
+#Running script to generate program selector config file
+chmod u+x shell_scripts/program_selector.sh
+. "shell_scripts/program_selector.sh"
+
 if [[ $storage_type == "local" ]]; then
 chmod u+x shell_scripts/upgradation_local_storage_config_generator.sh
 . "shell_scripts/upgradation_local_storage_config_generator.sh"
@@ -44,10 +48,6 @@ chmod u+x shell_scripts/minio/install_mc_client.sh
 chmod u+x shell_scripts/minio/crop_minio_ip.sh
 . "shell_scripts/minio/crop_minio_ip.sh"
 fi
-
-#Running script to generate program selector config file
-chmod u+x shell_scripts/program_selector.sh
-. "shell_scripts/program_selector.sh"
 
 #Running script to clone all the required repositories
 chmod u+x shell_scripts/repository_clone.sh
