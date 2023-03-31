@@ -13,21 +13,30 @@ fi
 chmod u+x shell_scripts/basic_requirements.sh
 . "shell_scripts/basic_requirements.sh"
 
-chmod u+x shell_scripts/install_aws_cli.sh
-. "shell_scripts/install_aws_cli.sh"
-
-chmod u+x shell_scripts/install_azure_cli.sh
-. "shell_scripts/install_azure_cli.sh"
-
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/config_file_generator.sh"
-chmod u+x shell_scripts/program_selector.sh
-. "shell_scripts/program_selector.sh"
 
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+
+if [[ $storage_type == "aws" ]]; then
+chmod u+x shell_scripts/install_aws_cli.sh
+. "shell_scripts/install_aws_cli.sh"
+chmod u+x shell_scripts/s3_storage_config_generator.sh
+. "shell_scripts/s3_storage_config_generator.sh"
+fi
+
+if [[ $storage_type == "azure" ]]; then
+chmod u+x shell_scripts/install_aws_cli.sh
+. "shell_scripts/install_azure_cli.sh"
+chmod u+x shell_scripts/azure_storage_config_generator.sh
+. "shell_scripts/azure_storage_config_generator.sh"
+fi
+
 if [[ $storage_type == "local" ]]; then
+chmod u+x shell_scripts/local_storage_config_generator.sh
+. "shell_scripts/local_storage_config_generator.sh"
 chmod u+x shell_scripts/minio/install_minio.sh
 . "shell_scripts/minio/install_minio.sh"
 chmod u+x shell_scripts/minio/install_mc_client.sh
@@ -36,7 +45,11 @@ chmod u+x shell_scripts/minio/crop_minio_ip.sh
 . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
-#Running script to clone ingestion, spec repository
+#Running script to generate program selector config file
+chmod u+x shell_scripts/program_selector.sh
+. "shell_scripts/program_selector.sh"
+
+#Running script to clone all the required repositories
 chmod u+x shell_scripts/repository_clone.sh
 . "shell_scripts/repository_clone.sh"
 

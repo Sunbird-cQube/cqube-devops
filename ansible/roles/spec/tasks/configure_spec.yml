@@ -27,12 +27,7 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      NIFI_HOST = 'http://nifi_app'
-      NIFI_PORT = 8096
-      GENERATOR_HOST = 'http://generator_app'
-      GENERATOR_PORT = 3003
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
@@ -48,12 +43,7 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      NIFI_HOST = 'http://nifi_app'
-      NIFI_PORT = 8096
-      GENERATOR_HOST = 'http://generator_app'
-      GENERATOR_PORT = 3003
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       MINIO_USERNAME = "{{ minio_username }}"
       MINIO_PASSWORD = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
@@ -69,12 +59,7 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
-      NIFI_HOST = 'http://nifi_app'
-      NIFI_PORT = 8096
-      GENERATOR_HOST = 'http://generator_app'
-      GENERATOR_PORT = 3003
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
+      STORAGE_TYPE= "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
   when: storage_type == "azure"
