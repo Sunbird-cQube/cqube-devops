@@ -6,7 +6,7 @@
   tags: [ install, update ]
 
     
-- name: Loading required data inside .env file
+- name: Loading required data inside .env file (public installation)
   blockinfile:
     path: ../microservices/query-builder/.env
     block: |
@@ -22,32 +22,20 @@
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
       AWS_BUCKET_REGION= 'ap-south-1'
-      CONTAINER_FOLDER_NAME= 'process_input'
-  when: storage_type == "aws"    
-  tags: [ install, update ]
-
-- name: Loading required data inside .env file
-  blockinfile:
-    path: ../microservices/query-builder/.env
-    block: |
-      JWT_SECRET= 'cqube_secret'
-      DB_HOST = 'postgres_app'
-      DB_PORT = 5432
-      DB_USERNAME = "{{ db_user }}"
-      DB_PASSWORD = "{{ db_password }}"
-      DB_NAME = "{{ db_name }}"
-      PORT= 3002
-      STORAGE_TYPE= "{{ storage_type }}"
-      MINIO_END_POINT = 'http://localhost'
+      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
+      AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
+      AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
-  when: storage_type == "local"
+      CONTAINER_FOLDER_NAME= 'process_input'
+  when: mode_of_installation != "localhost"   
   tags: [ install, update ]
 
-- name: Loading required data inside .env file
+
+- name: Loading required data inside .env file (local installation)
   blockinfile:
     path: ../microservices/query-builder/.env
     block: |
@@ -59,8 +47,18 @@
       DB_NAME = "{{ db_name }}"
       PORT= 3002
       STORAGE_TYPE= "{{ storage_type }}"
+      AWS_ACCESS_KEY = "{{ aws_access_key }}"
+      AWS_SECRET_KEY = "{{ aws_secret_key }}"
+      S3_BUCKET= "{{ s3_bucket }}"
+      AWS_BUCKET_REGION= 'ap-south-1'
+      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_PORT = 9000
+      MINIO_ACCESS_KEY = "{{ minio_username }}"
+      MINIO_SECRET_KEY = "{{ minio_password }}"
+      MINIO_BUCKET = "{{ minio_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
-  when: storage_type == "azure"
+      CONTAINER_FOLDER_NAME= 'process_input'
+  when: mode_of_installation == "localhost"
   tags: [ install, update ]
