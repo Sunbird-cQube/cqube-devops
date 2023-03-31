@@ -28,7 +28,7 @@ while read line; do
   if [[ $line == $state_name ]] ; then
    state_found=1
   fi
-done < state_codes
+done < shell_scripts/state_codes
   if [[ $state_found == 0 ]] ; then
     echo -e "\e[0;31m${bold}Error - Invalid State Code. Please refer to the state_list file and enter the correct value.${normal}"; fail=1
 else
