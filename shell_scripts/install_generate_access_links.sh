@@ -8,7 +8,7 @@ mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print
 
 
 schema_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pages/3279290379/cQube+v5.0+Beta+-+Schema+Documentation"
-usage_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pages/3279290379/cQube+v5.0+Beta+-+Schema+Documentation"
+usage_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pages/3280764974/Usage+Documentation"
 
 if [[ $mode_of_installation == public ]]; then
 echo -e "\e[0;36m${bold}cQube dashboard can be accessible using $api_endpoint"
@@ -17,8 +17,9 @@ fi
 
 if [[ $mode_of_installation == localhost ]]; then
 echo -e "\e[0;36m${bold}cQube dashboard can be accessible using http://$api_endpoint:4200"
-echo -e "\e[0;36m${bold}cQube ingestion api's can be accessible using http://$api_endpoint:3000/api"
+echo -e "\e[0;36m${bold}cQube ingestion api's can be accessible using http://$api_endpoint:3000"
 fi
 
 echo -e "\e[0;36m${bold}cQube Schema documentation can be accessible using $schema_documentation"
 echo -e "\e[0;36m${bold}cQube Usage documentation can be accessible using $usage_documentation"
+echo -e "\e[0;36m${bold}All the configuartion files can be found in config_files directory"
