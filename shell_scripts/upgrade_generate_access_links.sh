@@ -1,10 +1,10 @@
 #!/bin/bash
 
-api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-db_user=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-db_name=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-db_password=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+db_user=$(awk ''/^db_user:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+db_name=$(awk ''/^db_name:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+db_password=$(awk ''/^db_password:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 
 
 schema_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pages/3279290379/cQube+v5.0+Beta+-+Schema+Documentation"

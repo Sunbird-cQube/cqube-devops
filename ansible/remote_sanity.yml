@@ -3,9 +3,9 @@
   hosts: localhost
   gather_facts: true
   remote_user: root
-  become: true
+  become_user: true
   vars_files:
-    - ../upgradation_config.yml
+    - ../config_files/upgradation_config.yml
 
   roles:
           - remote_sanity

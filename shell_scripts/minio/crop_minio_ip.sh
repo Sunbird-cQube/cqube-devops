@@ -6,4 +6,4 @@ minio_ip=$(cut -d " " -f 2 shell_scripts/minio/minio_ip)
 touch ansible/roles/generator/vars/main.yml
 echo minio_ip_address: ${minio_ip//,} >  ansible/roles/generator/vars/main.yml
 echo minio_ip_address: ${minio_ip//,} >  ansible/roles/ingestion/vars/main.yml
-
+echo minio_ip_address: ${minio_ip//,} >  ansible/roles/querybuilder/vars/main.yml
