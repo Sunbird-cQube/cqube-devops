@@ -1,11 +1,11 @@
 #!/bin/sh
 
-minio_username=$(awk ''/^minio_username:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
-minio_password=$(awk ''/^minio_password:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
-minio_bucket=$(awk ''/^minio_bucket:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
-minio_username=$(awk ''/^minio_username:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
-minio_password=$(awk ''/^minio_password:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
-minio_bucket=$(awk ''/^minio_bucket:' /{ if ($2 !~ /#.*/) {print $2}}' ../../config_files/local_storage_config.yml)
+minio_username=$(awk ''/^minio_username:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/local_storage_config.yml)
+minio_password=$(awk ''/^minio_password:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/local_storage_config.yml)
+minio_bucket=$(awk ''/^minio_bucket:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/local_storage_config.yml)
+minio_username=$(awk ''/^minio_username:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_local_storage_config.yml)
+minio_password=$(awk ''/^minio_password:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_local_storage_config.yml)
+minio_bucket=$(awk ''/^minio_bucket:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_local_storage_config.yml)
 
 
 # Download the mc binary
