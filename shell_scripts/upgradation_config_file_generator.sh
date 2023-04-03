@@ -7,7 +7,7 @@ echo -e "\e[0;36m${bold}Hint: Enter input folder path or s3 input bucket name or
 echo -e "\e[0;38m${bold}please enter the input path${normal}"
 read input_storage_path
 
-        printf "input_path: $input_storage_path\n" >> upgradation_config.yml
+        printf "input_path: $input_storage_path\n" >>  config_files/upgradation_config.yml
         break;
 done
 }
@@ -15,9 +15,9 @@ done
 
 check_input_files(){
 
-input_path=$(awk ''/^input_path:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+input_path=$(awk ''/^input_path:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
+system_user_name=$(awk ''/^system_user_name:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 if [[ ! -d /home/$system_user_name/old_input_files ]]; then
 
 mkdir /home/$system_user_name/old_input_files
@@ -60,7 +60,7 @@ while true; do
 
 check_sys_user(){
 result=`who | head -1 | awk '{print $1}'`
-  printf "system_user_name: $result\n" >> upgradation_config.yml
+  printf "system_user_name: $result\n" >>  config_files/upgradation_config.yml
 
 }
 
@@ -70,7 +70,7 @@ dk_ip=`docker inspect cqube_minio | grep IPAddress | cut -d '"' -f 4`
         echo $dk_ip > .dk_ip
                 ip=$(cut -d " " -f 1 .dk_ip)
 
-        printf "docker_host: $ip\n" >> upgradation_config.yml
+        printf "docker_host: $ip\n" >>  config_files/upgradation_config.yml
 }
 
 check_ip()
@@ -78,7 +78,7 @@ check_ip()
         is_local_ip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | cut -d ' ' -f 2` > /dev/null 2>&1
 	echo $is_local_ip > .ip
                ip=$(cut -d " " -f 2 .ip)
-	printf "local_ipv4_address: $ip\n" >>  upgradation_config.yml
+	printf "local_ipv4_address: $ip\n" >>  config_files/upgradation_config.yml
 
 }
 
@@ -86,7 +86,7 @@ check_ip()
 check_aws_key(){
 while true
 do
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 if [[ $storage_type == aws ]]; then	
 echo -e "\e[0;36m${bold}Hint: AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ${normal}"
@@ -95,7 +95,7 @@ read aws_access_key
     export AWS_ACCESS_KEY_ID=$aws_access_key
     export AWS_SECRET_ACCESS_KEY=$2
     aws s3api list-buckets > /dev/null 2>&1
-  printf "aws_access_key: $aws_access_key\n" >> upgradation_config.yml
+  printf "aws_access_key: $aws_access_key\n" >>  config_files/upgradation_config.yml
   break;
 fi
 done
@@ -105,13 +105,13 @@ done
 check_aws(){
 while true
 do
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: # AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ?${normal}"
 read aws_access_key_id
-sed -i "/aws_access_key: /d" upgradation_config.yml
-printf  "aws_access_key: $aws_access_key_id\n"  >> upgradation_config.yml
+sed -i "/aws_access_key: /d"  config_files/upgradation_config.yml
+printf  "aws_access_key: $aws_access_key_id\n"  >>  config_files/upgradation_config.yml
   break;
 fi
 done
@@ -121,11 +121,11 @@ done
 check_aws_secret_key(){
 while true
 do
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
-aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 read aws_secret_key
     aws_key_status=0
     export AWS_ACCESS_KEY_ID=$aws_access_key
@@ -136,7 +136,7 @@ read aws_secret_key
          check_aws
         aws_key_status=1
         else
-  printf "aws_secret_key: $aws_secret_key\n" >> upgradation_config.yml
+  printf "aws_secret_key: $aws_secret_key\n" >>  config_files/upgradation_config.yml
   break;
     fi
     fi
@@ -145,11 +145,11 @@ done
 }
 
 check_archived_buc(){
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
         if [[ $storage_type == aws ]]; then
 
-aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
+aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
 
 aws configure set aws_access_key_id $aws_access_key_id
 aws configure set aws_secret_access_key $aws_secret_access_key
@@ -158,7 +158,7 @@ aws configure set region ap-south-1
 s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
         if [ $? == 0 ]
                 then
-        printf "s3_bucket: s3-cqube-edu\n" >> upgradation_config.yml
+        printf "s3_bucket: s3-cqube-edu\n" >>  config_files/upgradation_config.yml
 else
         while true
 do
@@ -185,7 +185,7 @@ if [ ! $? == 0 ]
         then
 echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
 else
-                printf "s3_bucket: $s3_bucket_2\n" >> upgradation_config.yml
+                printf "s3_bucket: $s3_bucket_2\n" >>  config_files/upgradation_config.yml
 		break;
 fi
 fi
@@ -194,7 +194,7 @@ done
 
 if [[ $yn == no ]]; then
 
-printf "s3_bucket: s3-cqube-edu\n" >> upgradation_config.yml
+printf "s3_bucket: s3-cqube-edu\n" >>  config_files/upgradation_config.yml
 fi
         fi
 
@@ -203,32 +203,32 @@ fi
 
 
 check_minio_archive_buc(){
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
-                printf "minio_bucket: minio-cqube-edu\n" >> upgradation_config.yml
+                printf "minio_bucket: minio-cqube-edu\n" >>  config_files/upgradation_config.yml
         fi
 }
 
 check_minio_username(){
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
-                printf "minio_username: minioadmin\n" >> upgradation_config.yml
+                printf "minio_username: minioadmin\n" >>  config_files/upgradation_config.yml
         fi
 }
 
 check_minio_password(){
-       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+       storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}'  config_files/upgradation_config.yml)
        if [[ $storage_type == local ]]; then
 
-                printf "minio_password: minioadmin\n" >> upgradation_config.yml
+                printf "minio_password: minioadmin\n" >>  config_files/upgradation_config.yml
         fi
 }
 
 
 check_base_dir(){
-        printf "base_dir: /opt\n" >> upgradation_config.yml
+        printf "base_dir: /opt\n" >>  config_files/upgradation_config.yml
 }
 
 check_state(){
@@ -243,11 +243,11 @@ while read line; do
   if [[ $line == $state_name ]] ; then
    state_found=1
   fi
-done < state_codes
+done < shell_scripts/state_codes
   if [[ $state_found == 0 ]] ; then
     echo -e "\e[0;31m${bold}Error - Invalid State Code. Please refer to the state_list file and enter the correct value.${normal}"; fail=1
 else
-         printf "state_name: $state_name\n" >> upgradation_config.yml
+         printf "state_name: $state_name\n" >>  config_files/upgradation_config.yml
 break;
   fi
 
@@ -260,12 +260,12 @@ do
 	echo -e "\e[0;36m${bold}Hint: enter domain name if storage_type is local the api_end_point should be localhost, if storage_type is aws or azure  api_end_point should be the domain name ( Example: cqubeprojects.com )${normal}"     
 echo -e "\e[0;38m${bold}please enter the api_endpoint${normal}"
 read api_endpoint
-mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 if [[ $mode_of_installation == localhost ]]; then
         if [[ ! $api_endpoint == "localhost" ]]; then
         echo -e "\e[0;31m${bold}Error - Please provide api_endpoint as localhost for localhost installation${normal}"; fail=1
                         else
-                        printf "api_endpoint: $api_endpoint\n" >> upgradation_config.yml
+                        printf "api_endpoint: $api_endpoint\n" >> config_files/upgradation_config.yml
                         break;
 
         fi
@@ -280,7 +280,7 @@ if [[ (( $api_endpoint =~ \-{2,} ))  ||  (( $api_endpoint =~ \.{2,} )) ]]; then
                 if ! [[ $api_endpoint =~ ^[^-.@_][a-z0-9i.-]{2,}\.[a-z/]{2,}$ ]]; then
                          echo -e "\e[0;31m${bold}Error - Please provide the proper api endpoint${normal}"; fail=1
                 else
-                        printf "api_endpoint: $api_endpoint\n" >> upgradation_config.yml
+                        printf "api_endpoint: $api_endpoint\n" >> config_files/upgradation_config.yml
                          break;
                  fi
          fi
@@ -314,7 +314,7 @@ check_length $dbuser
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - Length of the value db_user is not correct. Provide the length between 3 and 63.${normal}"; fail=1
 else
-    printf "db_user: $dbuser\n" >> upgradation_config.yml
+    printf "db_user: $dbuser\n" >> config_files/upgradation_config.yml
     break;
     fi
 fi
@@ -336,7 +336,7 @@ check_length $dbname
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - Length of the value db_name is not correct. Provide the length between 3 and 63.${normal}"; fail=1
 else
-    printf "db_name: $dbname\n" >> upgradation_config.yml
+    printf "db_name: $dbname\n" >> config_files/upgradation_config.yml
     break;
     fi
 fi
@@ -363,7 +363,7 @@ read dbpass
             if ! [[ $len -ge 8 ]]; then
                 echo -e "\e[0;31m${bold}Error - db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
         else
- printf "db_password: $dbpass\n" >> upgradation_config.yml
+ printf "db_password: $dbpass\n" >> config_files/upgradation_config.yml
 break;
     fi
     fi
@@ -371,15 +371,15 @@ done
 }
 
 check_mode_of_installation(){
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 if [[ $storage_type == aws ]]; then
-        printf "mode_of_installation: public\n" >> upgradation_config.yml
+        printf "mode_of_installation: public\n" >> config_files/upgradation_config.yml
 fi
 if [[ $storage_type == "local" ]]; then
-        printf "mode_of_installation: localhost\n" >> upgradation_config.yml
+        printf "mode_of_installation: localhost\n" >> config_files/upgradation_config.yml
     fi
 if [[ $storage_type == "azure" ]]; then
-        printf "mode_of_installation: public\n" >> upgradation_config.yml
+        printf "mode_of_installation: public\n" >> config_files/upgradation_config.yml
     fi
 }
 
@@ -394,7 +394,7 @@ read storage_typ
     if ! [[ $storage_typ == "aws" || $storage_typ == "local" || $storage_typ == "azure" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either aws or local or azure${normal}"; fail=1
 else
-        printf "storage_type: $storage_typ\n" >> upgradation_config.yml
+        printf "storage_type: $storage_typ\n" >> config_files/upgradation_config.yml
         break;
         fi
 done
@@ -408,7 +408,7 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Google Tracking Property ID ${normal}"
 echo -e "\e[0;38m${bold}please enter the Google Tracking Property ID or NA (not applicable) ${normal}"
 read google_analytics
-        printf "google_analytics_tracking_id: $google_analytics\n" >> upgradation_config.yml
+        printf "google_analytics_tracking_id: $google_analytics\n" >> config_files/upgradation_config.yml
         break;
 done
 
@@ -429,7 +429,7 @@ read az_connection_string
            echo -e "\e[0;31m${bold}Error echo Error - Invalid az storage connection string${normal}"; fail=1
         az_account_status=1
         else
-         printf "azure_connection_string: $az_connection_string\n" >> upgradation_config.yml
+         printf "azure_connection_string: $az_connection_string\n" >> config_files/upgradation_config.yml
         break;
     fi
 done
@@ -443,7 +443,7 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
 echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
 read az_key
-    printf "azure_account_key: $az_key\n" >> upgradation_config.yml
+    printf "azure_account_key: $az_key\n" >> config_files/upgradation_config.yml
         break;
 
 done
@@ -455,8 +455,8 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
 echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
 read az_con_key
-sed -i "/azure_account_key: /d" upgradation_config.yml
-printf  "azure_account_key: $az_con_key\n"  >> upgradation_config.yml
+sed -i "/azure_account_key: /d" config_files/upgradation_config.yml
+printf  "azure_account_key: $az_con_key\n"  >> config_files/upgradation_config.yml
   break;
 done
 
@@ -469,7 +469,7 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Azure account name ${normal}"
 echo -e "\e[0;38m${bold}please enter the azure account name${normal}"
 read az_name
-azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
     az_account_status=0
 
     az storage container list --account-key $azure_account_key --account-name $az_name > /dev/null 2>&1
@@ -478,7 +478,7 @@ azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}'
     check_az_container_key
     #az_account_status=1
 else
-        printf "azure_account_name: $az_name\n" >> upgradation_config.yml
+        printf "azure_account_name: $az_name\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -486,14 +486,14 @@ done
 }
 
 check_az_archived_container(){
-azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 
 if [[ $storage_type == azure ]]; then
 export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
 if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
-        printf "azure_container: azure-cqube-edu\n" >> upgradation_config.yml
+        printf "azure_container: azure-cqube-edu\n" >> config_files/upgradation_config.yml
 
 else
 while true
@@ -515,12 +515,12 @@ echo -e "\e[0;38m${bold}please enter the azure blob container${normal}"
 read az_archived_container
 az_container_status=0
   export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
-azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' upgradation_config.yml)
+azure_connection_string=$(awk ''/^azure_connection_string:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 if az storage container create --name $az_archived_container --connection-string "$azure_connection_string" --output table | grep -q "False"; then
 echo -e "\e[0;31m${bold}Error - Container alredy exit Please change the container name ${normal}"; fail=1
 
         else
-                  printf "azure_container: $az_archived_container\n" >> upgradation_config.yml
+                  printf "azure_container: $az_archived_container\n" >> config_files/upgradation_config.yml
 		   break;
 fi
 	    fi
@@ -528,7 +528,7 @@ fi
 fi
 if [[ $yn == no ]]; then
 
-printf "azure_container: azure-cqube-edu\n" >> upgradation_config.yml
+printf "azure_container: azure-cqube-edu\n" >> config_files/upgradation_config.yml
 fi
     fi
 
@@ -547,7 +547,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-        printf "adapter_scheduler_time: $cron\n" >> upgradation_config.yml
+        printf "adapter_scheduler_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -567,7 +567,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-	printf "plugin_time: $cron\n" >> upgradation_config.yml
+	printf "plugin_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -587,7 +587,7 @@ read cron
    if [ $? = 1 ]; then
      echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
 else
-        printf "processing_time: $cron\n" >> upgradation_config.yml
+        printf "processing_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -608,7 +608,7 @@ check_length $read_only_dbuser
 if ! [[ $? == 0 ]]; then
     echo -e "\e[0;31m${bold}Error - The length of the value read_only_db_user should be between 3 and 63.${normal}"; fail=1
 else
-    printf "read_only_db_user: $read_only_dbuser\n" >> upgradation_config.yml
+    printf "read_only_db_user: $read_only_dbuser\n" >> config_files/upgradation_config.yml
     break;
     fi
 fi
@@ -635,7 +635,7 @@ read read_only_dbpass
             if ! [[ $len -ge 8 ]]; then
                 echo -e "\e[0;31m${bold}Error - read_only_db_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
         else
- printf "read_only_db_password: $read_only_dbpass\n" >> upgradation_config.yml
+ printf "read_only_db_password: $read_only_dbpass\n" >> config_files/upgradation_config.yml
 break;
     fi
     fi
@@ -668,9 +668,9 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
                           fi
 
 	    if [[ $yn == no ]]; then
-printf "db_user: cqube_user\n" >> upgradation_config.yml
-printf "db_name: cqube\n" >> upgradation_config.yml
-printf "db_password: cQube@123\n" >> upgradation_config.yml
+printf "db_user: cqube_user\n" >> config_files/upgradation_config.yml
+printf "db_name: cqube\n" >> config_files/upgradation_config.yml
+printf "db_password: cQube@123\n" >> config_files/upgradation_config.yml
 
 	    fi
 
@@ -700,15 +700,15 @@ echo -e "\e[0;33m${bold}If you want to edit database credentials please enter ye
          #    done
 
             if [[ $yn == no ]]; then
-printf "read_only_db_user: cqube_db_user\n" >> upgradation_config.yml
-printf "read_only_db_password: cQube@123\n" >> upgradation_config.yml
+printf "read_only_db_user: cqube_db_user\n" >> config_files/upgradation_config.yml
+printf "read_only_db_password: cQube@123\n" >> config_files/upgradation_config.yml
             fi
 
     }
 
-rm upgradation_config.yml
-touch upgradation_config.yml
-if [[ -e "upgradation_config.yml" ]]; then
+rm config_files/upgradation_config.yml
+touch config_files/upgradation_config.yml
+if [[ -e "config_files/upgradation_config.yml" ]]; then
 check_data_upgradation_value
 check_base_dir
 check_sys_user
@@ -717,22 +717,6 @@ check_ip
 check_storage_type
 check_mode_of_installation
 check_api_endpoint
-if [[ $storage_type == local ]]; then
-check_minio_username
-check_minio_password
-check_minio_archive_buc
-fi
-if [[ $storage_type == aws ]]; then
-check_aws_key
-check_aws_secret_key
-check_archived_buc
-fi
-if [[ $storage_type == azure ]]; then
-check_az_storage_connection_string
-check_az_key
-check_az_storage_account_name
-check_az_archived_container
-fi
 check_google_analytics
 check_adapter_scheduling_syntax
 check_cron_plugin_syntax
@@ -745,7 +729,7 @@ check_config_file(){
 if [[ -e "upgradation_config.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the config file and confirm if everything is correct.${normal}"
-echo -e "\e[0;38m${bold} `cat upgradation_config.yml` ${normal}"
+echo -e "\e[0;38m${bold} `cat config_files/upgradation_config.yml` ${normal}"
 echo -e "\e[0;33m${bold}Currently cQube config.yml is entered. Follow Installation process with above config values.${normal}"
 echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
             while true; do
@@ -757,10 +741,10 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                  * ) echo "Please answer yes or no.";;
             esac
             done
-             if [[ -e "upgradation_config.yml" ]]; then
+             if [[ -e "config_files/upgradation_config.yml" ]]; then
                           if [[ $yn == yes ]]; then
-                                rm upgradation_config.yml
-                                touch upgradation_config.yml
+                                rm config_files/upgradation_config.yml
+                                touch config_files/upgradation_config.yml
 				check_data_upgradation_value
 				check_base_dir
 				check_sys_user
@@ -769,22 +753,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_storage_type
 				check_mode_of_installation
 				check_api_endpoint
-				if [[ $storage_type == local ]]; then
-				check_minio_username
-				check_minio_password	
-			        check_minio_archive_buc
-				fi
-				if [[ $storage_type == aws ]]; then
-				check_aws_key
-				check_aws_secret_key
-				check_archived_buc
-				fi
-				if [[ $storage_type == azure ]]; then
-				check_az_storage_connection_string
-				check_az_key
-				check_az_storage_account_name
-				check_az_archived_container
-				fi
 				check_google_analytics
 				check_adapter_scheduling_syntax
 				check_cron_plugin_syntax

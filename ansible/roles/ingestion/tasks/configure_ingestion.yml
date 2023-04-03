@@ -12,7 +12,7 @@
     mode: u+rw,g+rw,o+rw
   tags: [ install, update ]
 
-- name: Loading required data inside .env file (aws storage)
+- name: Loading required data inside .env file (public)
   blockinfile:
     path: ../microservices/ingestion-ms/.env
     block: |
@@ -25,42 +25,23 @@
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
       URL = 'http://{{ api_endpoint }}/api'
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       AWS_BUCKET= "{{ s3_bucket }}"
-      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
-  when: storage_type == "aws"
-  tags: [ install, update ]
-
-- name: Loading required data inside .env file (local storage)
-  blockinfile:
-    path: ../microservices/ingestion-ms/.env
-    block: |
-      JWT_SECRET= 'cqube_secret'
-      DB_HOST = 'postgres_app'
-      DB_PORT = 5432
-      DB_USERNAME = "{{ db_user }}"
-      DB_PASSWORD = "{{ db_password }}"
-      DB_NAME = "{{ db_name }}"
-      NIFI_HOST = 'http://nifi_app'
-      NIFI_PORT = 8096
-      URL = 'http://{{ api_endpoint }}:3000/api'
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
-      STORAGE_TYPE= "{{ storage_type }}"
-      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_END_POINT = '{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
+      AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
+      AZURE_CONTAINER = "{{ azure_container }}"
       INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
-  when: storage_type == "local"
+  when: mode_of_installation != "localhost"
   tags: [ install, update ]
 
-- name: Loading required data inside .env file (azure storage)
+
+- name: Loading required data inside .env file (localhost)
   blockinfile:
     path: ../microservices/ingestion-ms/.env
     block: |
@@ -72,12 +53,20 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'http://{{ api_endpoint }}/api'
+      URL = 'http://{{ api_endpoint }}:3000'
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       STORAGE_TYPE= "{{ storage_type }}"
+      MINIO_END_POINT = '{{ minio_ip_address }}'
+      MINIO_PORT = 9000
+      MINIO_ACCESS_KEY = "{{ minio_username }}"
+      MINIO_SECRET_KEY = "{{ minio_password }}"
+      MINIO_BUCKET = "{{ minio_bucket }}"
+      AWS_ACCESS_KEY = "{{ aws_access_key }}"
+      AWS_SECRET_KEY = "{{ aws_secret_key }}"
+      AWS_BUCKET= "{{ s3_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
-  when: storage_type == "azure"
+  when: mode_of_installation == "localhost"
   tags: [ install, update ]
