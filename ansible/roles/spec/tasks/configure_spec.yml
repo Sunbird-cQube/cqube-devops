@@ -27,6 +27,8 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
@@ -43,6 +45,8 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
       STORAGE_TYPE= "{{ storage_type }}"
       MINIO_USERNAME = "{{ minio_username }}"
       MINIO_PASSWORD = "{{ minio_password }}"
@@ -59,6 +63,8 @@
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
       STORAGE_TYPE= "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
