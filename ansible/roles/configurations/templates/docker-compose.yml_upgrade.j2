@@ -18,6 +18,15 @@ services:
       - python_executable_env:/usr/local/lib/python3.7/site-packages
     networks:
       - cqube_net
+  keycloak_app:
+    image: keycloak_ms:1
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_USER={{ keycloak_user }}
+      - KEYCLOAK_PASSWORD={{ keycloak_password }}
+    networks:
+      - cqube_net
   ingest_app:
     image: ingestion_ms:1
     ports:

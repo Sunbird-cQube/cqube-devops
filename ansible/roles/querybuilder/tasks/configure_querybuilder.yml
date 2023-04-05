@@ -22,7 +22,7 @@
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
       AWS_BUCKET_REGION= 'ap-south-1'
-      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_END_POINT = '{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
@@ -31,6 +31,10 @@
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
       CONTAINER_FOLDER_NAME= 'process_input'
+      KEY_CLOCK_URL = 'http://{{ api_endpoint }}/auth'
+      REALM = 'cQube'
+      KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
+      KEY_CLOAK_SECRET = 'd0b8122f-8dfb-46h7-b69a-f5cc4e25d000'
   when: mode_of_installation != "localhost"   
   tags: [ install, update ]
 
@@ -51,7 +55,7 @@
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       S3_BUCKET= "{{ s3_bucket }}"
       AWS_BUCKET_REGION= 'ap-south-1'
-      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_END_POINT = '{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
@@ -60,5 +64,9 @@
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
       CONTAINER_FOLDER_NAME= 'process_input'
+      KEY_CLOCK_URL = 'http://{{ api_endpoint }}/auth'
+      REALM = 'cQube'
+      KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
+      KEY_CLOAK_SECRET = 'd0b8122f-8dfb-46h7-b69a-f5cc4e25d000'
   when: mode_of_installation == "localhost"
   tags: [ install, update ]

@@ -29,7 +29,7 @@
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       AWS_BUCKET= "{{ s3_bucket }}"
-      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_END_POINT = '{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
@@ -57,7 +57,7 @@
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
       STORAGE_TYPE= "{{ storage_type }}"
-      MINIO_END_POINT = 'http://{{ minio_ip_address }}'
+      MINIO_END_POINT = '{{ minio_ip_address }}'
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
