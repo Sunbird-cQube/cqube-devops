@@ -1,5 +1,11 @@
+#keycloak_adm_name=$(awk ''/^keycloak_adm_name:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+#keycloak_adm_password=$(awk ''/^keycloak_adm_password:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
+keycloak_adm_name=$(awk ''/^keycloak_adm_name:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+keycloak_adm_password=$(awk ''/^keycloak_adm_password:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+
+
 sudo docker exec -i  ansible_keycloak_app_1 sh << 'EOF'
-/opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin --password admin
+/opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user $keycloak_adm_name --password $keycloak_adm_password
 
 /opt/jboss/keycloak/bin/kcadm.sh create realms -s realm=cQube -s enabled=true -o
 
