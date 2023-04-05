@@ -13,4 +13,4 @@ docker_host=localhost
 
 mc alias set myminio http://$docker_host:9000 minioadmin minioadmin
 
-mc mb myminio/$minio_bucket
+mc mb myminio/cqube-minio-bucket
