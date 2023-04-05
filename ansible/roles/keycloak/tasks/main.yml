@@ -1,0 +1,5 @@
+---
+
+- include_tasks: build_keycloak.yml
+  tags: [ install, update ]
+

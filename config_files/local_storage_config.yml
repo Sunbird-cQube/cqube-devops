@@ -1,3 +1,3 @@
-minio_username: user-name
+minio_username: username
 minio_password: password
 minio_bucket: minio-bucket-name
