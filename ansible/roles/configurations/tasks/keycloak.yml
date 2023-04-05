@@ -1,0 +1,7 @@
+- name: Generating program selection csv file
+  template:
+    src: keycloak.sh.j2
+    dest: "../shell_scripts/keycloak.sh"
+    mode: "0644"
+  tags: [ install, update ]
+
