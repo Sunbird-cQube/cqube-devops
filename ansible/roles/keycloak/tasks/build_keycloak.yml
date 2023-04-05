@@ -1,0 +1,9 @@
+- name: docker build keycloak
+  docker_image:
+    name: keycloak_ms
+    tag: '1'
+    build:
+      path: ../microservices/keycloak-ms/
+    source: build
+  tags: [ install, update ]
+

@@ -154,6 +154,52 @@ break;
     fi
 done
 }
+check_keycloak_password(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Create your own password to for the cQube keycloak_adm_password , password should contain atleast 1 lower,upper,number,special character (only @!%^*? allowed) and minimum 8 characters${normal}"     
+echo -e "\e[0;38m${bold}please enter the keycloak_password ${normal}"
+read keycloakpass
+
+    len="${#keycloakpass}"
+   # if [[ $len -ge 8 ]]; then
+        echo "$keycloakpass" | grep "[A-Z]" | grep "[a-z]" | grep "[0-9]" | grep "[@%^*!?]" > /dev/null 2>&1
+        if [[ ! $? -eq 0 ]]; then
+            echo -e "\e[0;31m${bold}Error - keycloak_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
+
+    else
+            len="${#keycloakpass}"
+            if ! [[ $len -ge 8 ]]; then
+                echo -e "\e[0;31m${bold}Error - keycloak_password should contain atleast one uppercase, one lowercase, one special character and one number. And should be minimum of 8 characters.${normal}"; fail=1
+        else
+ printf "keycloak_adm_password: $keycloakpass\n" >> config_files/config.yml
+break;
+    fi
+    fi
+done
+}
+
+check_keycloak_name(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Create your own keycloak admin name for the cQube , numbers are not allowed, Provide the length between 3 and 63${normal}"
+echo -e "\e[0;38m${bold}please enter the keycloak_adm_name ${normal}"
+read keycloakname
+    if [[ ! $keycloakname =~ ^[A-Za-z_]*[^_0-9\$\@\#\%\*\-\^\?]$ ]]; then
+        echo -e "\e[0;31m${bold}Error - Naming convention is not correct. Please change the value.${normal}"; fail=1
+   else
+check_length $keycloakname
+if ! [[ $? == 0 ]]; then
+    echo -e "\e[0;31m${bold}Error - Length of the value keycloak_admin_name is not correct. Provide the length between 3 and 63.${normal}"; fail=1
+else
+    printf "keycloak_adm_name: $keycloakname\n" >> config_files/config.yml
+    break;
+    fi
+fi
+
+done
+
+}
 
 check_mode_of_installation(){
 while true
@@ -395,6 +441,8 @@ check_cron_plugin_syntax
 check_cron_processing_syntax
 check_config_db
 check_config_read_only_db
+check_keycloak_name
+check_keycloak_password
 fi
 
 check_config_file(){
@@ -430,6 +478,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_cron_processing_syntax
 				check_config_db
 				check_config_read_only_db
+				check_keycloak_name
+				check_keycloak_password
                           	fi
              fi
            done
