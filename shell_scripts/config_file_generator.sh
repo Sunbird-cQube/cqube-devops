@@ -208,7 +208,7 @@ echo -e "\e[0;36m${bold}Hint: Please enter the mode of installation as public or
 echo -e "\e[0;38m${bold}please enter the mode of installation ${normal}"
 read installation_mode
 if ! [[ $installation_mode == "localhost" || $installation_mode == "public" ]]; then
-    echo "\e[0;31m${bold}Error - Please enter either localhost or public.${normal}"; fail=1
+    echo -e "\e[0;31m${bold}Error - Please enter either localhost or public.${normal}"; fail=1
     else
     printf "mode_of_installation: $installation_mode\n" >> config_files/config.yml
     break;
