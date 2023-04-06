@@ -27,7 +27,7 @@ if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: # AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ?${normal}"
 read aws_access_key_id
-sed -i "/aws_access_key: /d" upgradation_aws_s3_config.yml
+sed -i "/aws_access_key: /d" config_files/upgradation_aws_s3_config.yml
 printf  "aws_access_key: $aws_access_key_id\n"  >> config_files/upgradation_aws_s3_config.yml
   break;
 fi
@@ -159,7 +159,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                              touch config_files/upgradation_aws_s3_config.yml
                              check_aws_key
                              check_aws_secret_key
-                             check_archived_buic
+                             check_archived_buc
 			   fi
 	     fi
      done
