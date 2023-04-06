@@ -3,5 +3,11 @@
     src: keycloak.sh.j2
     dest: "../shell_scripts/keycloak.sh"
     mode: "0644"
-  tags: [ install, update ]
+  tags: install
 
+- name: Generating program selection csv file
+  template:
+    src: upgradation_keycloak.sh.j2
+    dest: "../shell_scripts/upgradation_keycloak.sh"
+    mode: "0644"
+  tags: update
