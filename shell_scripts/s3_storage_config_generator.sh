@@ -159,7 +159,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                              touch config_files/aws_s3_config.yml
                              check_aws_key
                              check_aws_secret_key
-                             check_archived_buic
+                             check_archived_buc
 			   fi
 	     fi
      done
