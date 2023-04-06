@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: true
   remote_user: root
-  become_user: true
+  become: true
   vars_files:
     - ../config_files/upgradation_config.yml
 

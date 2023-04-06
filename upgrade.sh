@@ -73,7 +73,7 @@ ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
-chmod u+x shell_scripts/keycloak.sh
+chmod u+x shell_scripts/upgradation_keycloak.sh
 . "shell_scripts/upgradation_keycloak.sh"
 #Initialising the processor group in nifi
 chmod u+x shell_scripts/upgradation_static_processor_groups.sh
