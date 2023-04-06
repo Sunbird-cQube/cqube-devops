@@ -7,3 +7,7 @@
 
 - include_tasks: configure_program_selector.yml
   tags: [ install, update ]  
+
+- include_tasks: keycloak.yml
+  tags: [ install, update ]
+
