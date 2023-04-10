@@ -1,7 +1,7 @@
 #!/bin/bash
 
 check_minio_bucket(){
- printf "minio_bucket: minio-cqube-edu\n" >> config_files/upgradation_local_storage_config.yml
+ printf "minio_bucket: cqube-minio-bucket\n" >> config_files/upgradation_local_storage_config.yml
 }
 
 check_minio_username(){
