@@ -11,7 +11,7 @@ fi
 
 #Running script to install the basic softwares
 chmod u+x shell_scripts/upgrade_basic_requirements.sh
-. "shell_scripts/upgrade_basic_requirements.sh"
+#. "shell_scripts/upgrade_basic_requirements.sh"
 
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/upgradation_config_file_generator.sh
