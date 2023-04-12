@@ -9,7 +9,7 @@ echo -e "\e[0;36m${bold}Hint: AWS Access key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_access_key ${normal}"
 read aws_access_key
 if [[ -z $aws_access_key ]]; then
-echo -e "\e[0;31m${bold}Error - Invalid aws access or secret keys.${normal}"; fail=1
+echo -e "\e[0;31m${bold}Error - Invalid aws access ${normal}"; fail=1
 
     aws_key_status=0
     export AWS_ACCESS_KEY_ID=$aws_access_key
@@ -48,7 +48,6 @@ if [[ $storage_type == aws ]]; then
 echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
 aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_aws_s3_config.yml)
-read aws_secret_key
 read aws_secret_key
 if [[ -z $aws_secret_key ]]; then
         echo -e "\e[0;31m${bold}Error - Invalid aws access or secret keys.${normal}"; fail=1
