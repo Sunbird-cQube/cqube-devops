@@ -223,8 +223,8 @@ if  [[ $installation_mode == "public" ]]; then
     echo -e "\e[0;36m${bold}Hint: enter aws or azure or local if mode of installation is public${normal}"     
     echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
     read storage_typ
-      if ! [[ $storage_typ == "aws" || $storage_typ == "azure" || $storage_typ == "local" ]]; then
-         echo -e "\e[0;31m${bold}Error - Please enter either aws or local or azure"; fail=1
+      if ! [[ $storage_typ == "aws" || $storage_typ == "azure" || $storage_typ == "local" || $storage_typ == "oracle" ]]; then
+         echo -e "\e[0;31m${bold}Error - Please enter either aws or local or azure or oracle"; fail=1
       else
         printf "storage_type: $storage_typ\n" >> config_files/config.yml
         break;

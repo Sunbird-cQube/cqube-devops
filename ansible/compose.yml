@@ -9,6 +9,7 @@
     - ../config_files/aws_s3_config.yml
     - ../config_files/azure_container_config.yml
     - ../config_files/local_storage_config.yml
+    - ../config_files/oracle_storage_config.yml
 
   roles:
          - compose
