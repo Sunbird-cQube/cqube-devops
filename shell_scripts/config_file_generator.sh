@@ -249,8 +249,13 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Google Analytics Tracking ID ${normal}"
 echo -e "\e[0;38m${bold}please enter the Google Analytics Tracking ID or NA (not applicable) ${normal}"
 read google_analytics
+if [[ -z $google_analytics ]]; then
+echo -e "\e[0;31m${bold}Error - Entered value is empty. please enter the Google Analytics Tracking ID${normal}"; fail=1
+else
+
         printf "google_analytics_tracking_id: $google_analytics\n" >> config_files/config.yml
         break;
+fi
 done
 
 }
@@ -265,8 +270,8 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+   if [[ -z $cron ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
         printf "adapter_scheduler_time: $cron\n" >> config_files/config.yml
         break;
@@ -284,8 +289,8 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+   if [[ -z $cron  ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
 	printf "plugin_time: $cron\n" >> config_files/config.yml
         break;
@@ -304,8 +309,8 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+   if [[ -z $cron ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
         printf "processing_time: $cron\n" >> config_files/config.yml
         break;

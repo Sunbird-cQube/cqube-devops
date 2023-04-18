@@ -6,9 +6,12 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter input folder path or s3 input bucket name or azure input container name ${normal}"
 echo -e "\e[0;38m${bold}please enter the input path${normal}"
 read input_storage_path
-
+if [[ -z $input_storage_path ]]; then
+        echo -e "\e[0;31m${bold}Error - Entered value is null please enter the input storage path.${normal}"; fail=1
+else
         printf "input_path: $input_storage_path\n" >>  config_files/upgradation_config.yml
         break;
+fi
 done
 }
 
@@ -409,8 +412,13 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter Google Tracking Property ID ${normal}"
 echo -e "\e[0;38m${bold}please enter the Google Tracking Property ID or NA (not applicable) ${normal}"
 read google_analytics
+ if [[ -z $google_analytics ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the Google Analytics Tracking ID${normal}"; fail=1
+else
+
         printf "google_analytics_tracking_id: $google_analytics\n" >> config_files/upgradation_config.yml
         break;
+ fi
 done
 
 }
@@ -545,9 +553,10 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+ if [[ -z $cron  ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
+
         printf "adapter_scheduler_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
@@ -565,10 +574,11 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+ if [[ -z $cron  ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
-	printf "plugin_time: $cron\n" >> config_files/upgradation_config.yml
+	
+   printf "plugin_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -585,10 +595,11 @@ read cron
    #crontab -l > test_cron
    #echo "$cron /test" > test_cron
    #crontab test_cron
-   if [ $? = 1 ]; then
-     echo -e "\e[0;31m${bold}Error- echo please check cron syntax${normal}"; fail=1
+    if [[ -z $cron  ]]; then
+     echo -e "\e[0;31m${bold}Error- Entered value is empty. please enter the  cron syntax${normal}"; fail=1
 else
-        printf "processing_time: $cron\n" >> config_files/upgradation_config.yml
+     
+   printf "processing_time: $cron\n" >> config_files/upgradation_config.yml
         break;
 
     fi
@@ -776,7 +787,7 @@ check_keycloak_password
 fi
 
 check_config_file(){
-if [[ -e "upgradation_config.yml" ]]; then
+if [[ -e "config_files/upgradation_config.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the config file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat config_files/upgradation_config.yml` ${normal}"
