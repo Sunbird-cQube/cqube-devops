@@ -37,6 +37,9 @@
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
+      ORACLE_NAMESPACE = "{{ oracle_namespace }}" 
+      ORACLE_BUCKET = "{{ oracle_bucket }}"
+
   when: mode_of_installation != "localhost"
   tags: [ install, update ]
 
@@ -68,5 +71,7 @@
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
+      ORACLE_NAMESPACE = "{{ oracle_namespace }}"
+      ORACLE_BUCKET = "{{ oracle_bucket }}"
   when: mode_of_installation == "localhost"
   tags: [ install, update ]
