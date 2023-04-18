@@ -83,9 +83,12 @@ chmod u+x shell_scripts/keycloak.sh
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 
+if [[ $storage_type == "oracle" ]]; then
+
 chmod u+x shell_scripts/oracle.sh
 . "shell_scripts/oracle.sh"
 
+fi
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
