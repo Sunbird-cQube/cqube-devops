@@ -220,7 +220,7 @@ check_storage_type(){
 while true
 do
 if  [[ $installation_mode == "public" ]]; then
-    echo -e "\e[0;36m${bold}Hint: enter aws or azure or local if mode of installation is public${normal}"     
+    echo -e "\e[0;36m${bold}Hint: enter aws or azure or oracle or local if mode of installation is public${normal}"     
     echo -e "\e[0;38m${bold}please enter the storage_type${normal}"
     read storage_typ
       if ! [[ $storage_typ == "aws" || $storage_typ == "azure" || $storage_typ == "local" || $storage_typ == "oracle" ]]; then
