@@ -1,7 +1,9 @@
 version: '2.2'
 services:
   postgres_app:
+    container_name: postgres_app
     image: postgres_ms:1
+    restart: always
     ports:
       - 5432:5432
     environment:
@@ -13,13 +15,16 @@ services:
     networks:
       - cqube_net
   python_app:
+    container_name: python_app
     image: python_ms:1
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/site-packages
     networks:
       - cqube_net
   keycloak_app:
+    container_name: keycloak_app
     image: keycloak_ms:1
+    restart: always
     ports:
       - 8080:8080
     environment:
@@ -28,7 +33,9 @@ services:
     networks:
       - cqube_net
   ingest_app:
+    container_name: ingest_app
     image: ingestion_ms:1
+    restart: always
     ports:
       - 3000:3000
     volumes:
@@ -36,13 +43,17 @@ services:
     networks:
       - cqube_net
   spec_app:
+    container_name: spec_app
     image: spec_ms:1
+    restart: always
     ports:
       - 3001:3001
     networks:
       - cqube_net
   generator_app:
+    container_name: generator_app
     image: generator_ms:1
+    restart: always
     ports:
       - 3003:3003
     volumes:
@@ -50,19 +61,25 @@ services:
     networks:
       - cqube_net
   dashboard_app:
+    container_name: dashboard_app
     image: dashboard_ms:1
+    restart: always
     ports:
       - 4200:80
     networks:
       - cqube_net
   querybuilder_app:
+    container_name: querybuilder_app
     image: querybuilder_ms:1
+    restart: always
     ports:
       - 3002:3002
     networks:
       - cqube_net
   nifi_app:
+    container_name: nifi_app
     image: nifi_ms:1
+    restart: always
     ports:
       - 8096:8096
     volumes:
@@ -74,7 +91,9 @@ services:
     networks:
       - cqube_net
   kong_app:
+    container_name: kong_app
     image: kong:latest
+    restart: always
     volumes:
       - ./kong.yml:/usr/local/kong/declarative/kong.yml
     environment:
@@ -93,7 +112,9 @@ services:
     networks:
       - cqube_net
   nginx_app:
+    container_name: nginx_app
     image: nginx_ms:1
+    restart: always
     ports:
       - 80:80
       - 443:443
