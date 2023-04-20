@@ -29,10 +29,10 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      STORAGE_TYPE= "{{ storage_type }}"
+      STORAGE_TYPE = "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
-      S3_BUCKET= "{{ s3_bucket }}"
+      S3_BUCKET = "{{ s3_bucket }}"
   when: storage_type == "aws"
   tags: [ install, update ]
 
@@ -47,7 +47,24 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      STORAGE_TYPE= "{{ storage_type }}"
+      STORAGE_TYPE = "{{ storage_type }}"
+      ORACLE_NAMESPACE = "{{ oracle_namespace }}"
+      ORACLE_BUCKET = "{{ oracle_bucket }}"
+  when: storage_type == "oracle"
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file
+  blockinfile:
+    path: ../microservices/spec-ms/.env
+    block: |
+      DB_HOST = 'postgres_app'
+      DB_PORT = 5432
+      DB_USERNAME = "{{ db_user }}"
+      DB_PASSWORD = "{{ db_password }}"
+      DB_NAME = "{{ db_name }}"
+      NIFI_HOST = 'http://nifi_app'
+      NIFI_PORT = 8096
+      STORAGE_TYPE = "{{ storage_type }}"
       MINIO_USERNAME = "{{ minio_username }}"
       MINIO_PASSWORD = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"
@@ -65,7 +82,7 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      STORAGE_TYPE= "{{ storage_type }}"
+      STORAGE_TYPE = "{{ storage_type }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
   when: storage_type == "azure"

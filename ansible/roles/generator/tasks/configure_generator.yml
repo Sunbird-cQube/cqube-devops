@@ -18,3 +18,11 @@
     dest: "../microservices/generator-ms/adapter/config.ini"
   when: storage_type == "azure"
   tags: [ install, update ]
+
+
+- name: copying database config to generator folder (oracle storage)
+  template:
+    src: config.ini_oracle.j2
+    dest: "../microservices/generator-ms/adapter/config.ini"
+  when: storage_type == "oracle"
+  tags: [ install, update ]

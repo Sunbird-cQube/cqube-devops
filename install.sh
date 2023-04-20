@@ -45,6 +45,13 @@ chmod u+x shell_scripts/minio/crop_minio_ip.sh
 . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
+if [[ $storage_type == "oracle" ]]; then
+chmod u+x shell_scripts/install_oracle.sh
+. "shell_scripts/install_oracle.sh"
+chmod u+x shell_scripts/oracle_storage_config_generator.sh
+. "shell_scripts/oracle_storage_config_generator.sh"
+fi
+
 #Running script to generate program selector config file
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
@@ -76,6 +83,12 @@ chmod u+x shell_scripts/keycloak.sh
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 
+if [[ $storage_type == "oracle" ]]; then
+
+chmod u+x shell_scripts/oracle.sh
+. "shell_scripts/oracle.sh"
+
+fi
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
