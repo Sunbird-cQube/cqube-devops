@@ -246,11 +246,11 @@ done
 check_access_type(){
 while true
 do
-    echo -e "\e[0;36m${bold}Hint: enter nvsk or vsk${normal}"
+    echo -e "\e[0;36m${bold}Hint: enter NVSK or VSK${normal}"
     echo -e "\e[0;38m${bold}please enter the access_type${normal}"
     read access_typ
-      if ! [[ $access_typ == "aws" || $access_typ == "vsk" ]]; then
-         echo -e "\e[0;31m${bold}Error - Please enter either nvsk or vsk"; fail=1
+      if ! [[ $access_typ == "NVSK" || $access_typ == "VSK" ]]; then
+         echo -e "\e[0;31m${bold}Error - Please enter either NVSK or VSK"; fail=1
       else
         printf "access_type: $access_typ\n" >> config_files/config.yml
         break;
