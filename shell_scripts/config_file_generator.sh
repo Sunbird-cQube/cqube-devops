@@ -243,6 +243,21 @@ fi
 done
 }
 
+check_access_type(){
+while true
+do
+    echo -e "\e[0;36m${bold}Hint: enter nvsk or vsk${normal}"
+    echo -e "\e[0;38m${bold}please enter the access_type${normal}"
+    read access_typ
+      if ! [[ $access_typ == "aws" || $access_typ == "vsk" ]]; then
+         echo -e "\e[0;31m${bold}Error - Please enter either nvsk or vsk"; fail=1
+      else
+        printf "access_type: $access_typ\n" >> config_files/config.yml
+        break;
+      fi
+done
+}
+
 check_google_analytics(){
 while true
 do
@@ -436,6 +451,7 @@ if [[ -e "config_files/config.yml" ]]; then
 check_base_dir
 check_sys_user
 check_state
+check_access_type
 check_ip
 check_mode_of_installation
 check_storage_type
@@ -473,6 +489,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_base_dir
 				check_sys_user
 				check_state
+				check_access_type
 				check_ip
 				check_mode_of_installation
 				check_storage_type
