@@ -450,8 +450,8 @@ touch config_files/config.yml
 if [[ -e "config_files/config.yml" ]]; then
 check_base_dir
 check_sys_user
-check_state
 check_access_type
+check_state
 check_ip
 check_mode_of_installation
 check_storage_type
@@ -488,8 +488,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                                 touch config_files/config.yml
 				check_base_dir
 				check_sys_user
-				check_state
 				check_access_type
+				check_state
 				check_ip
 				check_mode_of_installation
 				check_storage_type
