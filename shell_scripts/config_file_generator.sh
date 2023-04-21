@@ -15,6 +15,24 @@ check_ip()
 check_base_dir(){
         printf "base_dir: /opt\n" >> config_files/config.yml
 }
+base_dir=$(awk ''/^base_dir:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+
+check_version(){
+   if [[ -e "$base_dir/cqube/.cqube_config" ]]; then
+        installed_ver=$(cat $base_dir/cqube/.cqube_config | grep CQUBE_VERSION )
+     #   installed_version=`cut -d "=" -f2 <<< "$installed_ver"`
+         echo "Currently cQube $installed_ver version is installed in this machine. Follow Upgradtion process if you want to upgrade."
+         echo "If you re-run the installation, all data will be lost"
+	 while true; do
+             read -p "Do you still want to re-run the installation (yes/no)? " yn
+             case $yn in
+                 yes) break;;
+                 no) exit;;
+                 * ) echo "Please answer yes or no.";;
+             esac
+         done
+   fi
+}
 
 check_state(){
 while true
@@ -444,7 +462,7 @@ printf "read_only_db_password: cQube@123\n" >> config_files/config.yml
             fi
 
     }
-
+check_version
 rm config_files/config.yml
 touch config_files/config.yml
 if [[ -e "config_files/config.yml" ]]; then
