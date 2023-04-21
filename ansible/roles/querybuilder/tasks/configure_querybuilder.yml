@@ -29,8 +29,7 @@
       MINIO_BUCKET = "{{ minio_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      CONTAINER_FOLDER_NAME= 'process_input'
-      CONTAINER_FOLDER_NAME= 'process_input'
+      CONTAINER_FOLDER_NAME = 'process_input'
       KEY_CLOCK_URL = 'http://{{ api_endpoint }}/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
