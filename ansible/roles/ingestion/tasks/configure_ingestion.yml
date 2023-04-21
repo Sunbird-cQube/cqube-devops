@@ -28,7 +28,7 @@
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
-      AWS_BUCKET= "{{ s3_bucket }}"
+      AWS_BUCKET = "{{ s3_bucket }}"
       MINIO_END_POINT = "{{ minio_ip_address }}"
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
@@ -36,7 +36,7 @@
       MINIO_BUCKET = "{{ minio_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
+      INPUT_LOCATION = '/home/{{ system_user_name }}/old_input_files'
       ORACLE_NAMESPACE = "{{ oracle_namespace }}" 
       ORACLE_BUCKET = "{{ oracle_bucket }}"
 
@@ -59,7 +59,7 @@
       URL = 'http://{{ api_endpoint }}:3000'
       WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
       PYTHON_PATH = '/usr/bin/python3.7'
-      STORAGE_TYPE= "{{ storage_type }}"
+      STORAGE_TYPE = "{{ storage_type }}"
       MINIO_END_POINT = "{{ minio_ip_address }}"
       MINIO_PORT = 9000
       MINIO_ACCESS_KEY = "{{ minio_username }}"
@@ -67,10 +67,10 @@
       MINIO_BUCKET = "{{ minio_bucket }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
-      AWS_BUCKET= "{{ s3_bucket }}"
+      AWS_BUCKET = "{{ s3_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      INPUT_LOCATION= '/home/{{ system_user_name }}/old_input_files'
+      INPUT_LOCATION = '/home/{{ system_user_name }}/old_input_files'
       ORACLE_NAMESPACE = "{{ oracle_namespace }}"
       ORACLE_BUCKET = "{{ oracle_bucket }}"
   when: mode_of_installation == "localhost"
