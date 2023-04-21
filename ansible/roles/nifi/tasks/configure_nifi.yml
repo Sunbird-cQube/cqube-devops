@@ -9,3 +9,24 @@
     src: cqube-ingest-install.sh.j2
     dest: "../microservices/nifi-ms/cqube-ingest-install.sh"
   tags: [ install, update ]
+
+- name: Creating oracle directory
+  file:
+    path: "../microservices/nifi-ms/oracle"
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+    recurse: yes
+    state: directory
+  tags: [install, update]
+
+- name: copying oracle.sh configuration script to nifi ms
+  template:
+    src: oracle-connect.sh.j2
+    dest: "../microservices/nifi-ms/oracle/oracle-connect.sh"
+  tags: [ install, update ]
+
+- name: copying file-moving.py configuration script to nifi ms
+  template:
+    src: file_moving.py.j2
+    dest: "../microservices/nifi-ms/oracle/file_moving.py"
+  tags: [ install, update ]
