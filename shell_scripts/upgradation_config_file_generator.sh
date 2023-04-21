@@ -33,8 +33,58 @@ if [[ $storage_type == aws ]]; then
 irbucket=$(aws s3 sync s3://$input_path /home/$system_user_name/old_input_files)
 fi
 
+fi
+}
 
+check_version(){
 
+# getting the installed version
+if [[ ! "$base_dir" = /* ]] || [[ ! -d $base_dir ]]; then
+    echo "Error - Please enter the absolute path or make sure the directory is present.";
+    exit 1
+else
+   if [[ -e "$base_dir/cqube/.cqube_config" ]]; then
+        installed_ver=$(cat $base_dir/cqube/.cqube_config | grep CQUBE_VERSION )
+        installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
+    else
+       echo "Error - Invalid base_dir or Unable to find the cQube in given base_dir";
+       exit 1
+    fi
+fi
+
+# getting this release version
+if [[ -e ".version" ]]; then
+    this_version=$(awk ''/^cqube_version:' /{ if ($2 !~ /#.*/) {print $2}}' .version)
+    this_version=$(sed -e 's/^"//' -e 's/"$//' <<<"$this_version")
+    if [[ $this_version == "" ]] || [[ ! `echo $this_version | grep -E '^[0-9]{1,2}\.[0-9]{1,2}\.?[0-9]{1,2}?$'` ]]; then
+       echo "Error - cQube's constant settings are affected. Re-clone the repository again";
+       exit 1
+    fi
+else
+   echo "Error - cQube's constant settings are affected. Re-clone the repository again";
+   exit 1
+fi
+
+reupgrade=0
+if [[ $installed_version == $this_version ]]; then
+   echo "cQube is already upgraded to $this_version version.";
+   while true; do
+    read -p "Do you wish to rerun the upgrade (yes/no)? " yn
+    case $yn in
+        yes)
+	        reupgrade=1
+		      break;;
+        no) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+fi
+
+if [[ $reupgrade == 0 ]]; then
+   if [[ ! $installed_version == $version_upgradable_from ]]; then
+        echo "Version $this_version is only upgradeable from $version_upgradable_from version";
+        exit 1
+   fi
 fi
 }
 
@@ -764,6 +814,9 @@ printf "read_only_db_password: cQube@123\n" >> config_files/upgradation_config.y
             fi
 
     }
+
+version_upgradable_from=5.0
+check_version
 
 rm config_files/upgradation_config.yml
 touch config_files/upgradation_config.yml
