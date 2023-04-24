@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-result=$(curl -X GET --header "Accept: */*" "https://api.github.com/repos/Sunbird-cQube/grammar-ms/releases/latest")
+result=$(curl -X GET --header "Accept: /" "https://api.github.com/repos/Sunbird-cQube/processing-ms/releases/latest")
 echo "******************************************************* Response from server ********************************************************"
 key='zipball_url'
 value=$(echo $result | jq -r ".$key")
