@@ -39,18 +39,10 @@ fi
 check_version(){
 
 # getting the installed version
-if [[ ! "$base_dir" = /* ]] || [[ ! -d $base_dir ]]; then
-    echo "Error - Please enter the absolute path or make sure the directory is present.";
-    exit 1
-else
    if [[ -e "$base_dir/cqube/.cqube_config" ]]; then
         installed_ver=$(cat $base_dir/cqube/.cqube_config | grep CQUBE_VERSION )
         installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
-    else
-       echo "Error - Invalid base_dir or Unable to find the cQube in given base_dir";
-       exit 1
     fi
-fi
 
 # getting this release version
 if [[ -e ".version" ]]; then
@@ -83,16 +75,15 @@ fi
 if [[ $reupgrade == 0 ]]; then
    if [[ ! $installed_version == $version_upgradable_from ]]; then
         echo "Version $this_version is only upgradeable from $version_upgradable_from version";
-        exit 1
    fi
 fi
 }
 
 check_data_upgradation_value(){
-echo -e "\e[0;33m${bold}IF you want cQube data upgradation from cQube-4.1-beta to cqube-5.0 please enter yes or no${normal}"
+echo -e "\e[0;33m${bold}IF you want cQube data upgradation from cQube-5.0-beta to cqube-5.0.1 please enter yes or no${normal}"
 while true; do
 
-             read -p "Do you still want to upgrade the data from cqube-4.1 to cqube-5.0 (yes/no)? " yn
+             read -p "Do you still want to upgrade the data from cqube-5.0 to cqube-5.0.1 (yes/no)? " yn
              case $yn in
                  yes) break;;
                  no) break 2;;
