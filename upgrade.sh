@@ -82,6 +82,13 @@ chmod u+x shell_scripts/upgradation_static_processor_groups.sh
 chmod u+x shell_scripts/run_api.sh
 . "shell_scripts/run_api.sh"
 
+if [[ $storage_type == "oracle" ]]; then
+
+chmod u+x shell_scripts/oracle.sh
+. "shell_scripts/oracle.sh"
+
+fi
+
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
 fi
