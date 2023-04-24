@@ -1,7 +1,7 @@
 - name: copying database config to generator folder (aws storage)
   template:
     src: config.ini_aws.j2
-    dest: "../microservices/generator-ms/adapter/VSk/config.ini"
+    dest: "../microservices/generator-ms/adapter/VSK/config.ini"
   when: (storage_type == "aws") or (access_type == "VSK")
   tags: [ install, update ]
 
