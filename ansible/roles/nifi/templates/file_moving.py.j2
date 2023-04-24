@@ -13,8 +13,8 @@ class FileMover:
     def move_files(self):
         for paths in self.path:
             program_name = paths.split('/')[-3]
-            file_destination = '/opt/nifi/nifi-current/Sunbird-cQube-grammar-ms-178386a/c-qube/ingest/programs' + program_name + '/'
-            dimension_file_location = '/opt/nifi/nifi-current/Sunbird-cQube-grammar-ms-178386a/c-qube/ingest/dimensions/'
+            file_destination = '/opt/nifi/nifi-current/Sunbird-cQube-processing-ms-97fc3d0/impl/c-qube/ingest/programs' + program_name + '/'
+            dimension_file_location = '/opt/nifi/nifi-current/Sunbird-cQube-processing-ms-97fc3d0/impl/c-qube/ingest/dimensions/'
             if not os.path.exists(file_destination):
                 os.makedirs(file_destination)
             if paths.__contains__(self.formatted_date):
