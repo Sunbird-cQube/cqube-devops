@@ -2,7 +2,7 @@
   template:
     src: config.ini_aws.j2
     dest: "../microservices/generator-ms/adapter/VSK/config.ini"
-  when: (storage_type == "aws") or (access_type == "VSK")
+  when: (storage_type == "aws") and (access_type == "VSK")
   tags: [ install, update ]
 
 
@@ -10,7 +10,7 @@
   template:
     src: config.ini_aws.j2
     dest: "../microservices/generator-ms/adapter/NVSK/config.ini"
-  when: (storage_type == "aws") or (access_type == "NVSK")
+  when: (storage_type == "aws") and (access_type == "NVSK")
   tags: [ install, update ]
 
 
@@ -18,40 +18,40 @@
   template:
     src: config.ini_local.j2
     dest: "../microservices/generator-ms/adapter/VSK/config.ini"
-  when: (storage_type == "local") or (access_type == "VSK")
+  when: (storage_type == "local") and (access_type == "VSK")
   tags: [ install, update ]
 
 - name: copying database config to generator folder (local storage)
   template:
     src: config.ini_local.j2
     dest: "../microservices/generator-ms/adapter/NVSK/config.ini"
-  when: (storage_type == "local") or (access_type == "NVSK")
+  when: (storage_type == "local") and (access_type == "NVSK")
   tags: [ install, update ]
 
 - name: copying database config to generator folder (azure storage)
   template:
     src: config.ini_azure.j2
     dest: "../microservices/generator-ms/adapter/VSK/config.ini"
-  when: (storage_type == "azure") or (access_type == "VSK")
+  when: (storage_type == "azure") and (access_type == "VSK")
   tags: [ install, update ]
 
 - name: copying database config to generator folder (azure storage)
   template:
     src: config.ini_azure.j2
     dest: "../microservices/generator-ms/adapter/NVSK/config.ini"
-  when: (storage_type == "azure") or (access_type == "NVSK")
+  when: (storage_type == "azure") and (access_type == "NVSK")
   tags: [ install, update ]
 
 - name: copying database config to generator folder (oracle storage)
   template:
     src: config.ini_oracle.j2
     dest: "../microservices/generator-ms/adapter/VSK/config.ini"
-  when: (storage_type == "oracle") or (access_type == "VSK")
+  when: (storage_type == "oracle") and (access_type == "VSK")
   tags: [ install, update ]
 
 - name: copying database config to generator folder (oracle storage)
   template:
     src: config.ini_oracle.j2
     dest: "../microservices/generator-ms/adapter/NVSK/config.ini"
-  when: (storage_type == "oracle") or (access_type == "NVSK")
+  when: (storage_type == "oracle") and (access_type == "NVSK")
   tags: [ install, update ]
