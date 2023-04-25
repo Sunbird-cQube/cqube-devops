@@ -12,7 +12,8 @@ echo "***************************************************** Downloading the zip 
 wget -O cqube-ingest.zip $value
 echo "****************************************************** Unzipping the zip file *******************************************************"
 unzip cqube-ingest.zip
-cd Sunbird-cQube-processing-ms-97fc3d0/impl/c-qube
+mv Sunbird-cQube* Sunbird-cQube-processing-ms
+cd Sunbird-cQube-processing-ms/impl/c-qube
 mkdir debug
 echo "***************************************************** Adding Database_url to the .env file ******************************************"
 touch .env

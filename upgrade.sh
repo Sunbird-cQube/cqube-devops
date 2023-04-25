@@ -73,8 +73,6 @@ ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
-chmod u+x shell_scripts/upgradation_keycloak.sh
-. "shell_scripts/upgradation_keycloak.sh"
 #Initialising the processor group in nifi
 chmod u+x shell_scripts/upgradation_static_processor_groups.sh
 . "shell_scripts/upgradation_static_processor_groups.sh"
@@ -88,6 +86,9 @@ chmod u+x shell_scripts/oracle.sh
 . "shell_scripts/oracle.sh"
 
 fi
+
+chmod u+x shell_scripts/upgradation_keycloak.sh
+. "shell_scripts/upgradation_keycloak.sh"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
