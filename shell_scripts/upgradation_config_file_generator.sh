@@ -821,7 +821,7 @@ printf "read_only_db_password: cQube@123\n" >> config_files/upgradation_config.y
 
     }
 
-version_upgradable_from=5.0.1
+version_upgradable_from=5.0.2
 check_version
 
 rm config_files/upgradation_config.yml

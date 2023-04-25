@@ -27,6 +27,6 @@
 
 - name: copying file-moving.py configuration script to nifi ms
   template:
-    src: file_moving.py.j2
+    src: file_moving.py
     dest: "../microservices/nifi-ms/oracle/file_moving.py"
   tags: [ install, update ]
