@@ -75,10 +75,6 @@ ansible-playbook ansible/install.yml --tags "install"
 set -e
 ansible-playbook ansible/compose.yml --tags "install"
 
-#Creating realm,client and secret in keycloak
-chmod u+x shell_scripts/keycloak.sh
-. "shell_scripts/keycloak.sh"
-
 #Initialising the processor group in nifi
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
@@ -89,6 +85,11 @@ chmod u+x shell_scripts/oracle.sh
 . "shell_scripts/oracle.sh"
 
 fi
+
+#Creating realm,client and secret in keycloak
+chmod u+x shell_scripts/keycloak.sh
+. "shell_scripts/keycloak.sh"
+
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
