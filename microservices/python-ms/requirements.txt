@@ -15,5 +15,3 @@ requests
 configparser
 azure-storage-blob
 minio
-oci
-oci-cli
