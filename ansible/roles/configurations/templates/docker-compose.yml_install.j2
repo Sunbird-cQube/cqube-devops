@@ -114,6 +114,8 @@ services:
     container_name: nginx_app
     image: nginx_ms:1
     restart: always
+    volumes:
+      - {{ base_dir }}/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
       - 443:443
