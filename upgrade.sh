@@ -20,6 +20,9 @@ echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a con
 
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
 
+chmod u+x shell_scripts/remote_sanity.sh
+. "shell_scripts/remote_sanity.sh"
+
 if [[ $storage_type == "aws" ]]; then
 chmod u+x shell_scripts/install_aws_cli.sh
 . "shell_scripts/install_aws_cli.sh"
@@ -86,6 +89,9 @@ chmod u+x shell_scripts/oracle.sh
 . "shell_scripts/oracle.sh"
 
 fi
+
+chmod u+x shell_scripts/restore_pgdata.sh
+. "shell_scripts/restore_pgdata.sh"
 
 chmod u+x shell_scripts/upgradation_keycloak.sh
 . "shell_scripts/upgradation_keycloak.sh"
