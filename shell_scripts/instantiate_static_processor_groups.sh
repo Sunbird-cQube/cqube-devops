@@ -3,8 +3,8 @@
 db_user=$(awk ''/^db_user:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 db_name=$(awk ''/^db_name:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 
-echo "Instantiating the processor group in nifi"
-sleep 60
+echo "Instantiating the processor group in nifi. It will take atleast 120 seconds to instantiate. Please do not cancel the process"
+sleep 90
 sudo docker exec -i generator_app bash << 'EOF'
 cd /python_app/static_processor_group/
 python3 add_nifi_template.py
