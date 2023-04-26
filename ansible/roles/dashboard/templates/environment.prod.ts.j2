@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   apiURL: 'http://{{ api_endpoint }}/api/queryBuilder',
+  config: "{{ access_type }}",
   stateCode: "{{ state_name }}",
   numberFormat: {
     reports: {
@@ -14,5 +15,4 @@ export const environment = {
   keycloakUrl: "http://{{ api_endpoint }}/auth",
   keycloakClient: "cqube-5.0",
   keycloakSecret: "d0b8122f-8dfb-46h7-b69a-f5cc4e25d000"
-
 };
