@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   apiURL: 'https://{{ api_endpoint }}/api/queryBuilder',
+  config: "{{ access_type }}",
   stateCode: "{{ state_name }}",
   numberFormat: {
     reports: {
@@ -9,7 +10,6 @@ export const environment = {
     }
   },
   google_analytics_tracking_id: "{{ google_analytics_tracking_id }}",
-  config: "state",
   keycloakRealm: "cQube",
   keycloakUrl: "https://{{ api_endpoint }}/auth",
   keycloakClient: "cqube-5.0",
