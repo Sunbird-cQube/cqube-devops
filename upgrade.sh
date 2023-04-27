@@ -90,8 +90,8 @@ chmod u+x shell_scripts/oracle.sh
 
 fi
 
-chmod u+x shell_scripts/restore_pgdata.sh
-. "shell_scripts/restore_pgdata.sh"
+#chmod u+x shell_scripts/restore_pgdata.sh
+#. "shell_scripts/restore_pgdata.sh"
 
 chmod u+x shell_scripts/upgradation_keycloak.sh
 . "shell_scripts/upgradation_keycloak.sh"

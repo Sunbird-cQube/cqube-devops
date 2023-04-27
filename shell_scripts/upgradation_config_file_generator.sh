@@ -80,10 +80,10 @@ fi
 }
 
 check_data_upgradation_value(){
-echo -e "\e[0;33m${bold}IF you want cQube data upgradation from cQube-5.0-beta to cqube-5.0.1 please enter yes or no${normal}"
+echo -e "\e[0;33m${bold}IF you want cQube data upgradation to 5.0.2 please enter yes or no${normal}"
 while true; do
 
-             read -p "Do you still want to upgrade the data from cqube-5.0 to cqube-5.0.1 (yes/no)? " yn
+             read -p "Do you still want to upgrade the data cqube-5.0.2 (yes/no)? " yn
              case $yn in
                  yes) break;;
                  no) break 2;;
