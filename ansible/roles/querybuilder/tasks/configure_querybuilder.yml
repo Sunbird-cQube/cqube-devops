@@ -30,7 +30,7 @@
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME = 'process_input'
-      KEY_CLOCK_URL = 'http://{{ api_endpoint }}/auth'
+      KEY_CLOCK_URL = 'https://{{ api_endpoint }}/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
       KEY_CLOAK_SECRET = 'd0b8122f-8dfb-46h7-b69a-f5cc4e25d000'
