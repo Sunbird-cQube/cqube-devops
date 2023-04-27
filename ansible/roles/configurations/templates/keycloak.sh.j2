@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "Creating realm in keycloak. It will take 30 seconds to initialize keycloak."
 sleep 30
+
 sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user {{ keycloak_adm_name }} --password {{ keycloak_adm_password }}
 
