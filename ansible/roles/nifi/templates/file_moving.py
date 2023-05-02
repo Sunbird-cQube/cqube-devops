@@ -13,7 +13,7 @@ class FileMover:
     def move_files(self):
         for paths in self.path:
             program_name = paths.split('/')[-3]
-            file_destination = '/opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/programs' + program_name + '/'
+            file_destination = '/opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/programs/' + program_name + '/'
             dimension_file_location = '/opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/dimensions/'
             if not os.path.exists(file_destination):
                 os.makedirs(file_destination)
