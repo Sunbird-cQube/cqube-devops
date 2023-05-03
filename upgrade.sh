@@ -83,8 +83,8 @@ fi
 #chmod u+x shell_scripts/restore_pgdata.sh
 #. "shell_scripts/restore_pgdata.sh"
 
-#chmod u+x shell_scripts/upgradation_keycloak.sh
-#. "shell_scripts/upgradation_keycloak.sh"
+chmod u+x shell_scripts/upgradation_keycloak.sh
+. "shell_scripts/upgradation_keycloak.sh"
 
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"

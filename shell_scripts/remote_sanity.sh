@@ -13,6 +13,7 @@ sudo docker stop dashboard_app
 sudo docker stop python_app
 sudo docker stop querybuilder_app
 sudo docker stop nifi_app
+sudo docker stop keycloak_app
 
 sudo docker rm ingest_app
 sudo docker rm generator_app
@@ -23,6 +24,7 @@ sudo docker rm dashboard_app
 sudo docker rm python_app
 sudo docker rm querybuilder_app
 sudo docker rm nifi_app
+sudo docker rm keycloak_app
 
 
 sudo docker rmi $(sudo docker images)
