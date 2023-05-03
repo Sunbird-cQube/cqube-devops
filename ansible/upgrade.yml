@@ -16,9 +16,9 @@
 
   roles:
           - configurations
-          - postgres 
+            #- postgres 
           - python
-          - keycloak
+            #- keycloak
           - ingestion
           - spec
           - generator
