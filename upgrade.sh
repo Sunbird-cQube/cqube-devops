@@ -31,7 +31,7 @@ chmod u+x shell_scripts/upgradation_s3_storage_config_generator.sh
 fi
 
 if [[ $storage_type == "azure" ]]; then
-chmod u+x shell_scripts/install_aws_cli.sh
+chmod u+x shell_scripts/install_azure_cli.sh
 . "shell_scripts/install_azure_cli.sh"
 chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
 . "shell_scripts/upgradation_azure_storage_config_generator.sh"
@@ -41,16 +41,6 @@ fi
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
 
-if [[ $storage_type == "local" ]]; then
-chmod u+x shell_scripts/upgradation_local_storage_config_generator.sh
-. "shell_scripts/upgradation_local_storage_config_generator.sh"
-chmod u+x shell_scripts/minio/install_minio.sh
-. "shell_scripts/minio/install_minio.sh"
-chmod u+x shell_scripts/minio/install_mc_client.sh
-. "shell_scripts/minio/install_mc_client.sh"
-chmod u+x shell_scripts/minio/crop_minio_ip.sh
-. "shell_scripts/minio/crop_minio_ip.sh"
-fi
 
 #Running script to clone all the required repositories
 chmod u+x shell_scripts/repository_clone.sh
