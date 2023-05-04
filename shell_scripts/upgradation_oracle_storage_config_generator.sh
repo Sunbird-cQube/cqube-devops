@@ -25,20 +25,12 @@ done
 
 }
 
-rm config_files/upgradation_oracle_storage_config.yml
-touch config_files/upgradation_oracle_storage_config.yml
-if [[ -e "config_files/oracle_storage_config.yml" ]]; then
-check_name_space
-check_bucket_name
-fi
-
-
 check_oracle_storage_config_file(){
 if [[ -e "config_files/upgradation_oracle_storage_config.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the oracle storage storage config file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat config_files/upgradation_oracle_storage_config.yml` ${normal}"
-echo -e "\e[0;33m${bold}Currently cQube upgradation_oracle_storage_config.yml is entered. Follow Installation process with above config values.${normal}"
+echo -e "\e[0;33m${bold}If you edit the oracle bucket name, all data will be lost. Currently cQube upgradation_oracle_storage_config.yml is entered. Follow upgradation process with above config values.${normal}"
 echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
             while true; do
 

@@ -1,5 +1,6 @@
 
 #!/bin/bash
 
-oci os object bulk-download --bucket-name {{ oracle_bucket }} --prefix processed_input/ --download-dir .
+rm -rf process_input/
+oci os object bulk-download --bucket-name {{ oracle_bucket }} --prefix process_input/ --download-dir .
 
