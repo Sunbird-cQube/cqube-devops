@@ -135,14 +135,13 @@ fi
         fi
 }
 
-
-rm config_files/upgradation_aws_s3_config.yml
-touch config_files/upgradation_aws_s3_config.yml
-if [[ -e "config_files/upgradation_aws_s3_config.yml" ]]; then
-check_aws_key
-check_aws_secret_key
-check_archived_buc
-fi
+#rm config_files/upgradation_aws_s3_config.yml
+#touch config_files/upgradation_aws_s3_config.yml
+#if [[ -e "config_files/upgradation_aws_s3_config.yml" ]]; then
+#check_aws_key
+#check_aws_secret_key
+#check_archived_buc
+#fi
 
 
 check_aws_config_file(){
@@ -150,8 +149,8 @@ if [[ -e "config_files/upgradation_aws_s3_config.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the aws s3 storage config file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat config_files/upgradation_aws_s3_config.yml` ${normal}"
-echo -e "\e[0;33m${bold}Currently cQube upgradation_aws_s3_config.yml is entered. Follow Installation process with above config values.${normal}"
-echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
+echo -e "\e[0;33m${bold}Currently cQube upgradation_aws_s3_config.yml is entered. Follow Upgradation process with above config values.${normal}"
+echo -e "\e[0;33m${bold}If you edit the s3 bucket name, all data will be lost. If you want to edit config value please enter yes.${normal}"
             while true; do
 
              read -p "Do you still want to edit the upgradation_aws_s3_config.yml file (yes/no)? " yn
@@ -180,3 +179,4 @@ if [[ $yn == no ]]; then
 }
 
 check_aws_config_file
+

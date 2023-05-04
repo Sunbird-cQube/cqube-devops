@@ -12,6 +12,7 @@ if ! [[ -d spec-ms ]]; then
 	cd ../../
 else
 	cd "spec-ms"
+	git stash
 	git checkout $REPOSITORY
 	git pull
         cd ../../
@@ -25,6 +26,7 @@ if ! [[ -d ingestion-ms ]]; then
 	cd ../../
 else
 	cd "ingestion-ms"
+	git stash
 	git checkout $REPOSITORY
 	git pull
 	cd ../../
@@ -38,6 +40,7 @@ if ! [[ -d generator-ms ]]; then
 	cd ../../
 else 
 	cd "generator-ms"
+	git stash
 	git checkout $REPOSITORY
 	git pull
 	cd ../../
@@ -52,6 +55,7 @@ if ! [[ -d dashboard-ms ]]; then
         cd ../../
 else
         cd "dashboard-ms"
+	git stash
         git checkout $REPOSITORY
         git pull
         cd ../../
@@ -66,6 +70,7 @@ if ! [[ -d query-builder ]]; then
         cd ../../
 else
         cd "query-builder"
+	git stash
         git checkout $REPOSITORY
         git pull
         cd ../../
