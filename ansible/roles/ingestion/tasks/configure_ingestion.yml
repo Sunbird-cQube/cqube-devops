@@ -30,7 +30,7 @@
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
       AWS_BUCKET = "{{ s3_bucket }}"
       MINIO_END_POINT = "{{ minio_ip_address }}"
-      MINIO_PORT = 9002
+      MINIO_PORT = 9001
       MINIO_ACCESS_KEY = "{{ minio_username }}"
       MINIO_SECRET_KEY = "{{ minio_password }}"
       MINIO_BUCKET = "{{ minio_bucket }}"

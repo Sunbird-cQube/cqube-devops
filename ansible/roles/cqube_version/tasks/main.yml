@@ -1,7 +1,7 @@
 ---
 - name: Creating config file
   file:
-    path: "{{ base_dir }}/cqube/.cqube_config"
+    path: "{{ base_dir }}/cqube_new/.cqube_config"
     state: touch
     mode: u+rw,g+rw,o+rw
   tags: install
@@ -9,7 +9,7 @@
      
 - name: Loading required data inside config file
   blockinfile:
-        path: "{{ base_dir }}/cqube/.cqube_config"
+        path: "{{ base_dir }}/cqube_new/.cqube_config"
         block: |
                CQUBE_VERSION={{ cqube_version }}
   tags: install
@@ -18,5 +18,5 @@
   lineinfile: 
     regex: '^CQUBE_VERSION='
     line: CQUBE_VERSION={{ cqube_version }}
-    path: "{{ base_dir }}/cqube/.cqube_config"
+    path: "{{ base_dir }}/cqube_new/.cqube_config"
   tags: update
