@@ -5,7 +5,7 @@ services:
     image: postgres_ms:1
     restart: always
     ports:
-      - 5432:5432
+      - 5434:5434
     environment:
       - POSTGRES_DB={{ db_name }}
       - POSTGRES_USER={{ db_user }}
@@ -27,7 +27,7 @@ services:
     image: keycloak_ms:1
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8080
     environment:
       - KEYCLOAK_USER={{ keycloak_adm_name }}
       - KEYCLOAK_PASSWORD={{ keycloak_adm_password }}
@@ -65,7 +65,7 @@ services:
     image: dashboard_ms:1
     restart: always
     ports:
-      - 4200:80
+      - 4202:80
     networks:
       - cqube_net
   querybuilder_app:
@@ -81,13 +81,13 @@ services:
     image: nifi_ms:1
     restart: always
     ports:
-      - 8096:8096
+      - 8098:8098
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/dist-packages
       - adapter_volume:/opt/nifi/nifi-current/adapter
     environment:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
-      - NIFI_WEB_HTTP_PORT=8096
+      - NIFI_WEB_HTTP_PORT=8098
     networks:
       - cqube_net
   kong_app:
