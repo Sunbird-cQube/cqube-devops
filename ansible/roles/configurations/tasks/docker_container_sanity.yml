@@ -5,6 +5,7 @@
     containers: yes
     volumes: yes
   register: docker_objects
+  tags: install
 
 - name: Removing containers if present
   community.docker.docker_container:
@@ -13,6 +14,7 @@
   loop: "{{ docker_objects.containers }}"
   loop_control:
     label: "{{ item.Id }}"
+  tags: install
 
 - name: Removing images if present
   community.docker.docker_image:
@@ -21,6 +23,7 @@
   loop: "{{ docker_objects.images }}"
   loop_control:
     label: "{{ item.RepoTags | first }}"
+  tags: install
 
 - name: Removing volumes if present
   community.docker.docker_volume:
@@ -29,3 +32,4 @@
   loop: "{{ docker_objects.volumes }}"
   loop_control:
     label: "{{ item.Name }}"
+  tags: install

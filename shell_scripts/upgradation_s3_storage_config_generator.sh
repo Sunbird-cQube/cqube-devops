@@ -79,69 +79,36 @@ fi
 
 
 check_archived_buc(){
-storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_config.yml)
-        if [[ $storage_type == aws ]]; then
 
-aws_access_key_id=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_aws_s3_config.yml)
-aws_secret_access_key=$(awk ''/^aws_secret_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/upgradation_aws_s3_config.yml)
-
-aws configure set aws_access_key_id $aws_access_key_id
-aws configure set aws_secret_access_key $aws_secret_access_key
-aws configure set region ap-south-1
-
-s3_bucket=`aws s3api create-bucket --bucket s3-cqube-edu --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
-        if [ $? == 0 ]
-                then
-        printf "s3_bucket: s3-cqube-edu\n" >> config_files/upgradation_aws_s3_config.yml
-else
-        while true
+while true
 do
-echo -e "\e[0;33m${bold}s3 bucket is already exist with the s3-cqube-edu if you want to continue with the same bucket enter no or you want to create new bucket enter yes .${normal}"
-while true; do
-
-             read -p "enter yes or no (yes/no)? " yn
-             case $yn in
-                 yes) break;;
-                 no) break 2;;
-                 * ) echo "Please answer yes or no.";;
-            esac
-            done
-
-            if [[ $yn == yes ]]; then
-
 
 echo -e "\e[0;36m${bold}Hint: aws s3  bucket${normal}"
 echo -e "\e[0;38m${bold}please enter the unique  s3 bucket name ${normal}"
-read s3_bucket_2
+read bucket_name
 
-create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
+s3_bucket=$(cat /opt/cqube/conf/base_aws_s3_config.yml | grep s3_bucket )
+old_s3_bucket=$(cut -d ":" -f2 <<< "$s3_bucket")
+t=`echo $old_s3_bucket`
 
-if [ ! $? == 0 ]
-        then
-echo -e "\e[0;31m${bold}Error - Bucket already exist. Please enter the unique bucket name${normal}"; fail=1
+if [[ ! "$t" == "$bucket_name" ]]; then
+    echo -e "\e[0;31m${bold}Error -  must be same as previously used bucket.${normal}"; fail=1
 else
-                printf "s3_bucket: $s3_bucket_2\n" >> config_files/upgradation_aws_s3_config.yml
+                printf "s3_bucket: $bucket_name\n" >> config_files/upgradation_aws_s3_config.yml
                 break;
-fi
-fi
+        fi
 done
 
-        fi
-
-if [[ $yn == no ]]; then
-
-printf "s3_bucket: s3-cqube-edu\n" >> config_files/upgradation_aws_s3_config.yml
-fi
-        fi
 }
 
-#rm config_files/upgradation_aws_s3_config.yml
-#touch config_files/upgradation_aws_s3_config.yml
-#if [[ -e "config_files/upgradation_aws_s3_config.yml" ]]; then
-#check_aws_key
-#check_aws_secret_key
-#check_archived_buc
-#fi
+
+rm config_files/upgradation_aws_s3_config.yml
+touch config_files/upgradation_aws_s3_config.yml
+if [[ -e "config_files/upgradation_aws_s3_config.yml" ]]; then
+check_aws_key
+check_aws_secret_key
+check_archived_buc
+fi
 
 
 check_aws_config_file(){

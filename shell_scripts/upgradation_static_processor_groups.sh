@@ -11,6 +11,7 @@ python3 add_nifi_template.py
 EOF
 
 sudo docker exec -i nifi_app bash << 'EOF'
+pip3 install oci-cli
 bash cqube-ingest-install.sh
 EOF
 
