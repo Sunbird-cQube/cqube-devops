@@ -58,12 +58,12 @@
     path: ../microservices/spec-ms/.env
     block: |
       DB_HOST = 'postgres_app'
-      DB_PORT = 5432
+      DB_PORT = 5434
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
-      NIFI_PORT = 8096
+      NIFI_PORT = 8098
       STORAGE_TYPE = "{{ storage_type }}"
       MINIO_USERNAME = "{{ minio_username }}"
       MINIO_PASSWORD = "{{ minio_password }}"

@@ -8,7 +8,7 @@ server {
         server_name {{ api_endpoint }};
 
         location / {
-                proxy_pass http://{{ local_ipv4_address }}:4200;
+                proxy_pass http://{{ local_ipv4_address }}:4202;
                 #client_max_body_size 2G;
                 #try_files $uri $uri/ =404;
         }
@@ -21,7 +21,7 @@ server {
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header Host $host;
-                proxy_pass http://{{ local_ipv4_address }}:8080$request_uri;
+                proxy_pass http://{{ local_ipv4_address }}:8081request_uri;
                 proxy_set_header X-Forwarded-Proto https;
                 proxy_set_header Accept-Encoding "";
         }

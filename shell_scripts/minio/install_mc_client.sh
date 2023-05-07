@@ -11,6 +11,6 @@ chmod +x mc
 mv mc /usr/local/bin
 docker_host=localhost
 
-mc alias set myminio http://$docker_host:9000 minioadmin minioadmin
+mc alias set myminio http://$docker_host:9002 minioadmin minioadmin
 
 mc mb myminio/cqube-minio-bucket
