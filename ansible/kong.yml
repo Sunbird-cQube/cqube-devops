@@ -2,28 +2,28 @@ _format_version: "2.1"
    
 services:
   - name: ingestion-ms
-    url: http://ingest_app:3000
+    url: http://ingest_app:3005
     routes:
       - name: ingestion-ms
         paths:
           - /api/ingestion
 
   - name: spec-ms
-    url: http://spec_app:3001
+    url: http://spec_app:3006
     routes:
       - name: spec-ms
         paths:
           - /api/spec
 
   - name: querybuilder-ms
-    url: http://querybuilder_app:3002
+    url: http://querybuilder_app:3007
     routes:
       - name: querybuilder-ms
         paths:
           - /api/queryBuilder
 
   - name: generator-ms
-    url: http://generator_app:3003/api/generator
+    url: http://generator_app:3008/api/generator
     routes:
       - name: generator-ms
         paths:

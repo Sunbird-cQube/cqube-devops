@@ -5,10 +5,10 @@
     mode: "0644"  
   tags: [ install, update ]
 
-- name: copying dockerfile script to spec repository
+- name: copying main.ts file to spec repository
   template:
     src: config.ini.j2
-    dest: "../microservices/spec-ms/python/config.ini"
+    dest: "../microservices/spec-ms/src/main.ts"
   tags: [ install, update ]
 
 - name: Creating environmental variables

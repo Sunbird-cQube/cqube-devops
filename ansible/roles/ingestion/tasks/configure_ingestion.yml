@@ -5,6 +5,13 @@
     mode: "0644"  
   tags: [ install, update ]
 
+- name: copying dockerfile script to ingestion repository
+  template:
+    src: main.ts.j2
+    dest: "../microservices/ingestion-ms/src/main.ts"
+    mode: "0644"
+  tags: [ install, update ]
+
 - name: Creating environmental variables
   file:
     path: ../microservices/ingestion-ms/.env

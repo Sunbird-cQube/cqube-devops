@@ -1,6 +1,6 @@
 - name: copying configuration file to nginx repository
   template:
     src: default.conf.j2
-    dest: "{{ base_dir }}/cqube_v5/nginx/default.conf"
+    dest: "{{ base_dir }}/cqube_new/nginx/default.conf"
     mode: "0644"  
   tags: [ install, update ]

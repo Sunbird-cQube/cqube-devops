@@ -39,7 +39,7 @@ services:
     image: ingestion_ms:1
     restart: always
     ports:
-      - 3000:3000
+      - 3005:3005
     networks:
       - cqube_net
   spec_app:
@@ -47,7 +47,7 @@ services:
     image: spec_ms:1
     restart: always
     ports:
-      - 3001:3001
+      - 3006:3006
     networks:
       - cqube_net
   generator_app:
@@ -55,7 +55,7 @@ services:
     image: generator_ms:1
     restart: always
     ports:
-      - 3003:3003
+      - 3008:3008
     volumes:
       - adapter_volume:/python_app/adapter
     networks:
@@ -73,7 +73,7 @@ services:
     image: querybuilder_ms:1
     restart: always
     ports:
-      - 3002:3002
+      - 3007:3007
     networks:
       - cqube_net
   nifi_app:
@@ -103,12 +103,9 @@ services:
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
       - KONG_PROXY_ERROR_LOG=/dev/stderr
       - KONG_ADMIN_ERROR_LOG=/dev/stderr
-      - KONG_ADMIN_LISTEN=0.0.0.0:8001
+      - KONG_ADMIN_LISTEN=0.0.0.0:8002
     ports:
-      - "8000:8000"
-      - "8433:8433"
-      - "127.0.0.1:8001:8001"
-      - "127.0.0.1:8444:8444"
+      - "8002:8000"
     networks:
       - cqube_net
   nginx_app:
