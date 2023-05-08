@@ -7,7 +7,7 @@
 
 - name: copying main.ts file to spec repository
   template:
-    src: config.ini.j2
+    src: main.ts.j2
     dest: "../microservices/spec-ms/src/main.ts"
   tags: [ install, update ]
 
@@ -58,7 +58,7 @@
     path: ../microservices/spec-ms/.env
     block: |
       DB_HOST = 'postgres_app'
-      DB_PORT = 5434
+      DB_PORT = 5432
       DB_USERNAME = "{{ db_user }}"
       DB_PASSWORD = "{{ db_password }}"
       DB_NAME = "{{ db_name }}"
