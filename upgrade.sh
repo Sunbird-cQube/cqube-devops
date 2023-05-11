@@ -57,6 +57,11 @@ tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
 exit
 fi
 
+if ! [ $( docker ps -a | grep postgres_app | wc -l ) -gt 0 ]; then
+sudo sed -i 's/^#/ /g' ansible/upgrade.yml
+fi
+
+
 # migrating the cQube-4.1 data to cQube-5.O
 chmod u+x shell_scripts/data_migration.sh
 . "shell_scripts/data_migration.sh"
