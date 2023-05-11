@@ -17,6 +17,15 @@
     state: directory
   tags: [install, update]
 
+- name: Creating conf directory
+  file:
+    path: "{{ base_dir }}/cqube/nginx"
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+    recurse: yes
+    state: directory
+  tags: [install, update]
+
 - name: Copying the config.yml file as base_config.yml
   copy:
     src: ../config_files/config.yml

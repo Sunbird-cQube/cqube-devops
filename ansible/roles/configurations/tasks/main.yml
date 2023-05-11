@@ -1,4 +1,7 @@
 ---
+#- include_tasks: docker_container_sanity.yml
+#  tags: install
+
 - include_tasks: configure_base_dir.yml
   tags: [install, update ]
 

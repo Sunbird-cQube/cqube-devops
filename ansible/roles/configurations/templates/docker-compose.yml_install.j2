@@ -17,6 +17,7 @@ services:
   python_app:
     container_name: python_app
     image: python_ms:1
+    restart: always
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/site-packages
     networks:
@@ -114,6 +115,8 @@ services:
     container_name: nginx_app
     image: nginx_ms:1
     restart: always
+    volumes:
+      - {{ base_dir }}/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
       - 443:443
@@ -121,6 +124,12 @@ services:
       - cqube_net
 networks:
   cqube_net:
+    driver: bridge
+    name: cqube_net
 volumes:
   python_executable_env:
+    driver: local
+    name: python_executable_env
   adapter_volume:
+    driver: local
+    name: adapter_volume
