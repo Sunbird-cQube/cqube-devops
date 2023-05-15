@@ -1,0 +1,35 @@
+---
+- name: getting docker host information
+  docker_host_info:
+    images: yes
+    containers: yes
+    volumes: yes
+  register: docker_objects
+  tags: install
+
+- name: Removing containers if present
+  community.docker.docker_container:
+    name: "{{ item.Id }}"
+    state: absent
+  loop: "{{ docker_objects.containers }}"
+  loop_control:
+    label: "{{ item.Id }}"
+  tags: install
+
+- name: Removing images if present
+  community.docker.docker_image:
+    name: "{{ item.RepoTags | first }}"
+    state: absent
+  loop: "{{ docker_objects.images }}"
+  loop_control:
+    label: "{{ item.RepoTags | first }}"
+  tags: install
+
+- name: Removing volumes if present
+  community.docker.docker_volume:
+    name: "{{ item.Name }}"
+    state: absent
+  loop: "{{ docker_objects.volumes }}"
+  loop_control:
+    label: "{{ item.Name }}"
+  tags: install

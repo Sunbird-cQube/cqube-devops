@@ -28,5 +28,4 @@ sudo docker rm keycloak_app
 
 
 sudo docker rmi $(sudo docker images)
-sudo docker volume rm ansible_adapter_volume
-
+sudo docker volume rm adapter_volume
