@@ -25,4 +25,4 @@
           - dashboard
           - querybuilder
           - nifi
-#         - nginx
+          - nginx
