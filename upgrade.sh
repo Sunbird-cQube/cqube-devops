@@ -37,6 +37,24 @@ chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
 . "shell_scripts/upgradation_azure_storage_config_generator.sh"
 fi
 
+if [[ $storage_type == "local" ]]; then
+chmod u+x shell_scripts/local_storage_config_generator.sh
+. "shell_scripts/local_storage_config_generator.sh"
+chmod u+x shell_scripts/minio/install_minio.sh
+. "shell_scripts/minio/install_minio.sh"
+chmod u+x shell_scripts/minio/install_mc_client.sh
+. "shell_scripts/minio/install_mc_client.sh"
+chmod u+x shell_scripts/minio/crop_minio_ip.sh
+. "shell_scripts/minio/crop_minio_ip.sh"
+fi
+
+if [[ $storage_type == "oracle" ]]; then
+chmod u+x shell_scripts/install_oracle.sh
+. "shell_scripts/install_oracle.sh"
+chmod u+x shell_scripts/oracle_storage_config_generator.sh
+. "shell_scripts/oracle_storage_config_generator.sh"
+fi
+
 #Running script to generate program selector config file
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
