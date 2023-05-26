@@ -59,7 +59,6 @@ fi
 chmod u+x shell_scripts/program_selector.sh
 . "shell_scripts/program_selector.sh"
 
-
 #Running script to clone all the required repositories
 chmod u+x shell_scripts/repository_clone.sh
 . "shell_scripts/repository_clone.sh"

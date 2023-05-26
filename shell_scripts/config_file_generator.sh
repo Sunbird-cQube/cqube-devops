@@ -478,9 +478,6 @@ check_mode_of_installation
 check_storage_type
 check_api_endpoint
 check_google_analytics
-check_adapter_scheduling_syntax
-check_cron_plugin_syntax
-check_cron_processing_syntax
 check_config_db
 check_config_read_only_db
 check_keycloak_name
@@ -516,9 +513,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_storage_type
 				check_api_endpoint
 				check_google_analytics
-				check_adapter_scheduling_syntax
-				check_cron_plugin_syntax
-				check_cron_processing_syntax
 				check_config_db
 				check_config_read_only_db
 				check_keycloak_name

@@ -17,7 +17,8 @@ cd Sunbird-cQube-processing-ms/impl/c-qube
 mkdir debug
 echo "***************************************************** Adding Database_url to the .env file ******************************************"
 touch .env
-echo "DATABASE_URL=postgres://cqube_user:cQube@123@postgres_app:5432/cqube"> .env
+echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}" >> .env
+echo "STATE_NAME={{ state_name }}" >> .env
 echo "***************************************************** Installing the yarn ***********************************************************"
 yarn install
 
