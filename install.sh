@@ -35,21 +35,21 @@ chmod u+x shell_scripts/azure_storage_config_generator.sh
 fi
 
 if [[ $storage_type == "local" ]]; then
-chmod u+x shell_scripts/local_storage_config_generator.sh
-. "shell_scripts/local_storage_config_generator.sh"
-chmod u+x shell_scripts/minio/install_minio.sh
-. "shell_scripts/minio/install_minio.sh"
-chmod u+x shell_scripts/minio/install_mc_client.sh
-. "shell_scripts/minio/install_mc_client.sh"
-chmod u+x shell_scripts/minio/crop_minio_ip.sh
-. "shell_scripts/minio/crop_minio_ip.sh"
+   chmod u+x shell_scripts/local_storage_config_generator.sh
+   . "shell_scripts/local_storage_config_generator.sh"
+   chmod u+x shell_scripts/minio/install_minio.sh
+   . "shell_scripts/minio/install_minio.sh"
+ #  chmod u+x shell_scripts/minio/install_mc_client.sh
+ #  . "shell_scripts/minio/install_mc_client.sh"
+   chmod u+x shell_scripts/minio/crop_minio_ip.sh
+   . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 if [[ $storage_type == "oracle" ]]; then
-chmod u+x shell_scripts/install_oracle.sh
-. "shell_scripts/install_oracle.sh"
-chmod u+x shell_scripts/oracle_storage_config_generator.sh
-. "shell_scripts/oracle_storage_config_generator.sh"
+   chmod u+x shell_scripts/install_oracle.sh
+   . "shell_scripts/install_oracle.sh"
+   chmod u+x shell_scripts/oracle_storage_config_generator.sh
+   . "shell_scripts/oracle_storage_config_generator.sh"
 fi
 
 #Running script to generate program selector config file
@@ -61,14 +61,14 @@ chmod u+x shell_scripts/repository_clone.sh
 . "shell_scripts/repository_clone.sh"
 
 if [ -e /etc/ansible/ansible.cfg ]; then
-    sudo sed -i 's/^#log_path/log_path/g' /etc/ansible/ansible.cfg
+   sudo sed -i 's/^#log_path/log_path/g' /etc/ansible/ansible.cfg
 fi
 
 echo '127.0.0.0' >> /etc/ansible/hosts
 
 if [ ! $? = 0 ]; then
-tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
-exit
+   tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
+   exit
 fi
 
 ansible-playbook ansible/install.yml --tags "install"
@@ -80,10 +80,8 @@ chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 
 if [[ $storage_type == "oracle" ]]; then
-
-chmod u+x shell_scripts/oracle.sh
-. "shell_scripts/oracle.sh"
-
+   chmod u+x shell_scripts/oracle.sh
+   . "shell_scripts/oracle.sh"
 fi
 
 #Creating realm,client and secret in keycloak
