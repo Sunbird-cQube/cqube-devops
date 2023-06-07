@@ -12,7 +12,17 @@
         path: "{{ base_dir }}/cqube/.cqube_config"
         block: |
                CQUBE_VERSION={{ cqube_version }}
-  tags: install
+               CQUBE_HOME={{ base_dir }}/cqube
+               CQUBE_BASE_DIR={{ base_dir }}
+               CQUBE_DB_USER={{ db_user }}
+               CQUBE_DB_NAME={{ db_name }}
+               CQUBE_STORAGE_TYPE={{ storage_type }}
+               CQUBE_API_ENDPOINT={{ api_endpoint }}
+               CQUBE_MINIO_BUCKET={{ minio_bucket }}
+               CQUBE_AZURE_CONTAINER={{ azure_container }}
+               CQUBE_AWS_BUCKET={{ s3_bucket }}
+               CQUBE_ORACLE_BUCKET={{ oracle_bucket }}
+  tags: [ install, update ]
   
 - name: Updating the CQUBE_VERSION
   lineinfile: 

@@ -24,35 +24,35 @@ chmod u+x shell_scripts/remote_sanity.sh
 . "shell_scripts/remote_sanity.sh"
 
 if [[ $storage_type == "aws" ]]; then
-chmod u+x shell_scripts/install_aws_cli.sh
-. "shell_scripts/install_aws_cli.sh"
-chmod u+x shell_scripts/upgradation_s3_storage_config_generator.sh
-. "shell_scripts/upgradation_s3_storage_config_generator.sh"
+   chmod u+x shell_scripts/install_aws_cli.sh
+   . "shell_scripts/install_aws_cli.sh"
+   chmod u+x shell_scripts/upgradation_s3_storage_config_generator.sh
+   . "shell_scripts/upgradation_s3_storage_config_generator.sh"
 fi
 
 if [[ $storage_type == "azure" ]]; then
-chmod u+x shell_scripts/install_azure_cli.sh
-. "shell_scripts/install_azure_cli.sh"
-chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
-. "shell_scripts/upgradation_azure_storage_config_generator.sh"
+   chmod u+x shell_scripts/install_azure_cli.sh
+   . "shell_scripts/install_azure_cli.sh"
+   chmod u+x shell_scripts/upgradation_azure_storage_config_generator.sh
+   . "shell_scripts/upgradation_azure_storage_config_generator.sh"
 fi
 
 if [[ $storage_type == "local" ]]; then
-chmod u+x shell_scripts/local_storage_config_generator.sh
-. "shell_scripts/local_storage_config_generator.sh"
-chmod u+x shell_scripts/minio/install_minio.sh
-. "shell_scripts/minio/install_minio.sh"
-chmod u+x shell_scripts/minio/install_mc_client.sh
-. "shell_scripts/minio/install_mc_client.sh"
-chmod u+x shell_scripts/minio/crop_minio_ip.sh
-. "shell_scripts/minio/crop_minio_ip.sh"
+   chmod u+x shell_scripts/local_storage_config_generator.sh
+   . "shell_scripts/local_storage_config_generator.sh"
+   chmod u+x shell_scripts/minio/install_minio.sh
+   . "shell_scripts/minio/install_minio.sh"
+   #chmod u+x shell_scripts/minio/install_mc_client.sh
+   #. "shell_scripts/minio/install_mc_client.sh"
+   chmod u+x shell_scripts/minio/crop_minio_ip.sh
+   . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 if [[ $storage_type == "oracle" ]]; then
-chmod u+x shell_scripts/install_oracle.sh
-. "shell_scripts/install_oracle.sh"
-chmod u+x shell_scripts/oracle_storage_config_generator.sh
-. "shell_scripts/oracle_storage_config_generator.sh"
+   chmod u+x shell_scripts/install_oracle.sh
+   . "shell_scripts/install_oracle.sh"
+   chmod u+x shell_scripts/oracle_storage_config_generator.sh
+   . "shell_scripts/oracle_storage_config_generator.sh"
 fi
 
 #Running script to generate program selector config file
@@ -70,24 +70,32 @@ fi
 echo '127.0.0.0' >> /etc/ansible/hosts
 
 if [ ! $? = 0 ]; then
-tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
-exit
+  tput setaf 1; echo "Error there is a problem installing Ansible"; tput sgr0
+  exit
 fi
 
-if ! [ $( docker ps -a | grep postgres_app | wc -l ) -gt 0 ]; then
-	
-sed -i 's/^#/ /g' ansible/upgrade.yml
-else
-	echo "postgre container already exist"
-fi
+#if ! [ $( docker ps -a | grep postgres_app | wc -l ) -gt 0 ]; then
+#     sed -i 's/^#/ /g' ansible/upgrade.yml
+#else
+#     echo "postgre container already exist"
+#fi
 
 
 # migrating the cQube-4.1 data to cQube-5.O
-chmod u+x shell_scripts/data_migration.sh
-. "shell_scripts/data_migration.sh"
+#chmod u+x shell_scripts/data_migration.sh
+#. "shell_scripts/data_migration.sh"
 
-ansible-playbook ansible/remote_sanity.yml --tags "update"
-ansible-playbook ansible/upgrade.yml --tags "update"
+
+#Trigger the ansible script according to the previous version.
+installed_ver=$(cat /opt/cqube/.cqube_config | grep CQUBE_VERSION )
+installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
+if [[ $installed_version == 4.1 ]]; then
+   ansible-playbook ansible/remote_sanity.yml --tags "update"
+   ansible-playbook ansible/upgrade_v4.1.yml --tags "update"
+else
+   ansible-playbook ansible/upgrade.yml --tags "update"
+fi
+
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
@@ -95,14 +103,13 @@ ansible-playbook ansible/upgrade_compose.yml --tags "update"
 chmod u+x shell_scripts/upgradation_static_processor_groups.sh
 . "shell_scripts/upgradation_static_processor_groups.sh"
 
-chmod u+x shell_scripts/run_api.sh
-. "shell_scripts/run_api.sh"
+#To convert old data into new datasets
+#chmod u+x shell_scripts/run_api.sh
+#. "shell_scripts/run_api.sh"
 
 if [[ $storage_type == "oracle" ]]; then
-
-chmod u+x shell_scripts/oracle.sh
-. "shell_scripts/oracle.sh"
-
+  chmod u+x shell_scripts/oracle.sh
+  . "shell_scripts/oracle.sh"
 fi
 
 #chmod u+x shell_scripts/restore_pgdata.sh
@@ -112,10 +119,9 @@ chmod u+x shell_scripts/upgradation_keycloak.sh
 . "shell_scripts/upgradation_keycloak.sh"
 
 if [ $? = 0 ]; then
-echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
+   echo -e "\e[0;32m${bold}cQube Upgraded successfully!!${normal}"
 fi
 
 #Running script to display important links
 chmod u+x shell_scripts/install_generate_access_links.sh
 . "shell_scripts/upgrade_generate_access_links.sh"
-
