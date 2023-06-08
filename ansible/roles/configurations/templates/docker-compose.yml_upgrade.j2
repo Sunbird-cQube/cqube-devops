@@ -40,8 +40,6 @@ services:
     restart: always
     ports:
       - 3000:3000
-    volumes:
-      - /home/{{ system_user_name }}/old_input_files
     networks:
       - cqube_net
   spec_app:

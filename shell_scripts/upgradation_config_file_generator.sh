@@ -826,21 +826,26 @@ check_version
 
 rm config_files/upgradation_config.yml
 touch config_files/upgradation_config.yml
+
+installed_ver=$(cat /opt/cqube/.cqube_config | grep CQUBE_VERSION )
+installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
 if [[ -e "config_files/upgradation_config.yml" ]]; then
-check_data_upgradation_value
-check_base_dir
-check_sys_user
-check_access_type
-check_state
-check_ip
-check_storage_type
-check_mode_of_installation
-check_api_endpoint
-check_google_analytics
-check_config_db
-check_config_read_only_db
-check_keycloak_name
-check_keycloak_password
+#check_data_upgradation_value
+   check_base_dir
+   check_sys_user
+   check_access_type
+   check_state
+   check_ip
+   check_storage_type
+   check_mode_of_installation
+   check_api_endpoint
+   check_google_analytics
+ if [[ $installed_version == 4.1 ]]; then
+    check_config_db
+    check_config_read_only_db
+ fi
+  check_keycloak_name
+  check_keycloak_password
 fi
 
 check_config_file(){
@@ -861,9 +866,11 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
             done
              if [[ -e "config_files/upgradation_config.yml" ]]; then
                           if [[ $yn == yes ]]; then
+				installed_ver=$(cat /opt/cqube/.cqube_config | grep CQUBE_VERSION )
+				installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
                                 rm config_files/upgradation_config.yml
                                 touch config_files/upgradation_config.yml
-				check_data_upgradation_value
+				#check_data_upgradation_value
 				check_base_dir
 				check_sys_user
 				check_access_type
@@ -873,8 +880,10 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_mode_of_installation
 				check_api_endpoint
 				check_google_analytics
+				if [[ $installed_version == 4.1 ]]; then
 				check_config_db
 				check_config_read_only_db
+				fi
 				check_keycloak_name
 				check_keycloak_password
                           	fi

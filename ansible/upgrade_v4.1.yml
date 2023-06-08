@@ -16,6 +16,7 @@
 
   roles:
           - configurations
+          - postgres
           - python
           - keycloak
           - ingestion
@@ -24,3 +25,4 @@
           - dashboard
           - querybuilder
           - nifi
+          - nginx

@@ -6,7 +6,7 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/data
 fi
 sudo docker stop ingest_app
 sudo docker stop generator_app
-sudo docker stop nginx_app
+#sudo docker stop nginx_app
 sudo docker stop kong_app
 sudo docker stop spec_app
 sudo docker stop dashboard_app
@@ -17,7 +17,7 @@ sudo docker stop keycloak_app
 
 sudo docker rm ingest_app
 sudo docker rm generator_app
-sudo docker rm nginx_app
+#sudo docker rm nginx_app
 sudo docker rm kong_app
 sudo docker rm spec_app
 sudo docker rm dashboard_app
