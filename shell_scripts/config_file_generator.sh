@@ -479,7 +479,7 @@ check_storage_type
 check_api_endpoint
 check_google_analytics
 check_config_db
-check_config_read_only_db
+#check_config_read_only_db
 check_keycloak_name
 check_keycloak_password
 fi
@@ -514,7 +514,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_api_endpoint
 				check_google_analytics
 				check_config_db
-				check_config_read_only_db
+				#check_config_read_only_db
 				check_keycloak_name
 				check_keycloak_password
                           	fi
