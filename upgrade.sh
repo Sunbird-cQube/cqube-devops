@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ `whoami` != root ]; then
-    tput setaf 1; echo "Please run this script using sudo"; tput sgr0
-  exit
+   tput setaf 1; echo "Please run this script using sudo"; tput sgr0
+   exit
 else
     if [[ "$HOME" != "/root" ]]; then
         tput setaf 1; echo "Please run this script using normal user with 'sudo' privilege,  not as 'root'"; tput sgr0
@@ -74,28 +74,8 @@ if [ ! $? = 0 ]; then
   exit
 fi
 
-#if ! [ $( docker ps -a | grep postgres_app | wc -l ) -gt 0 ]; then
-#     sed -i 's/^#/ /g' ansible/upgrade.yml
-#else
-#     echo "postgre container already exist"
-#fi
 
-
-# migrating the cQube-4.1 data to cQube-5.O
-#chmod u+x shell_scripts/data_migration.sh
-#. "shell_scripts/data_migration.sh"
-
-
-#Trigger the ansible script according to the previous version.
-installed_ver=$(cat /opt/cqube/.cqube_config | grep CQUBE_VERSION )
-installed_version=$(cut -d "=" -f2 <<< "$installed_ver")
-if [[ $installed_version == 4.1 ]]; then
-   ansible-playbook ansible/remote_sanity.yml --tags "update"
-   ansible-playbook ansible/upgrade_v4.1.yml --tags "update"
-else
-   ansible-playbook ansible/upgrade.yml --tags "update"
-fi
-
+ansible-playbook ansible/upgrade.yml --tags "update"
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 
@@ -103,17 +83,12 @@ ansible-playbook ansible/upgrade_compose.yml --tags "update"
 chmod u+x shell_scripts/upgradation_static_processor_groups.sh
 . "shell_scripts/upgradation_static_processor_groups.sh"
 
-#To convert old data into new datasets
-#chmod u+x shell_scripts/run_api.sh
-#. "shell_scripts/run_api.sh"
 
 if [[ $storage_type == "oracle" ]]; then
   chmod u+x shell_scripts/oracle.sh
   . "shell_scripts/oracle.sh"
 fi
 
-#chmod u+x shell_scripts/restore_pgdata.sh
-#. "shell_scripts/restore_pgdata.sh"
 
 chmod u+x shell_scripts/upgradation_keycloak.sh
 . "shell_scripts/upgradation_keycloak.sh"
