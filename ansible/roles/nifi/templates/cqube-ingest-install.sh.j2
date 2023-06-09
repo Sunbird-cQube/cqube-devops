@@ -19,6 +19,11 @@ echo "***************************************************** Adding Database_url 
 touch .env
 echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}" >> .env
 echo "STATE_NAME={{ state_name }}" >> .env
+echo "DB_USERNAME={{ db_user }}" >> .env
+echo "DB_HOST=postgres_app" >> .env
+echo "DB_NAME={{ db_name }}" >> .env
+echo "DB_PASSWORD={{ db_password }}" >> .env
+echo "DB_PORT=5432" >> .env
 echo "***************************************************** Installing the yarn ***********************************************************"
 yarn install
 
