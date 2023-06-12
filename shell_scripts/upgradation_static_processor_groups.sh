@@ -15,6 +15,8 @@ pip3 install oci-cli
 #bash cqube-ingest-install.sh
 EOF
 
+sudo docker cp /opt/cqube/Sunbird-cQube-processing-ms nifi_app:/opt/nifi/nifi-current /opt/cqube
+
 #sudo docker exec -i postgres_app psql -U $db_user -d $db_name << 'EOF'
 #ALTER TABLE spec."EventGrammar" ALTER  "instrumentField" DROP NOT NULL;
 #ALTER TABLE spec."EventGrammar" ALTER  "instrumentType" DROP NOT NULL;
