@@ -20,4 +20,6 @@ sudo docker exec -i postgres_app psql -U $db_user -d $db_name << 'EOF'
 ALTER TABLE spec."EventGrammar" ALTER  "instrumentField" DROP NOT NULL;
 ALTER TABLE spec."EventGrammar" ALTER  "instrumentType" DROP NOT NULL;
 ALTER TABLE spec."EventGrammar" ALTER  "dimensionMapping" DROP NOT NULL;
+ALTER TABLE spec."DimensionGrammar" ALTER "type" DROP NOT NULL;
+ALTER TABLE spec."DimensionGrammar" ALTER "storage" DROP NOT NULL;
 EOF
