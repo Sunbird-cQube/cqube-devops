@@ -166,9 +166,9 @@ if [[ $yn == yes ]]; then
 if [[ -e "config_files/program_selector.yml" ]]; then
 rm config_files/program_selector.yml
 touch config_files/program_selector.yml
-check_studentAttendance
+#check_studentAttendance
 check_teacherAttendance
-check_reviewMeetings
+#check_reviewMeetings
 check_pgi
 check_pmPoshan
 check_udise
@@ -208,9 +208,9 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm config_files/program_selector.yml
                                 touch config_files/program_selector.yml
-				check_studentAttendance
+				#check_studentAttendance
 				check_teacherAttendance
-				check_reviewMeetings
+				#check_reviewMeetings
 				check_pgi
 				check_pmPoshan
 				check_udise
