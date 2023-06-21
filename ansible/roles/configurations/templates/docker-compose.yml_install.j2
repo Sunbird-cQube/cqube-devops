@@ -11,7 +11,8 @@ services:
       - POSTGRES_USER={{ db_user }}
       - POSTGRES_PASSWORD={{ db_password }}
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.3"
   python_app:
     container_name: python_app
     image: python_ms:1
@@ -19,7 +20,8 @@ services:
     volumes:
       - python_executable_env:/usr/local/lib/python3.7/site-packages
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.4"
   keycloak_app:
     container_name: keycloak_app
     image: keycloak_ms:1
@@ -28,10 +30,11 @@ services:
       - 8080:8080
     environment:
       - KEYCLOAK_USER={{ keycloak_adm_name }}
-      - KEYCLOAK_PASSWORD={{ keycloak_adm_password }}
+      - KEYCLOAK_PASSWORD={{ keycloak_adm_name }}
       - PROXY_ADDRESS_FORWARDING=true
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.5"
   ingest_app:
     container_name: ingest_app
     image: ingestion_ms:1
@@ -39,7 +42,8 @@ services:
     ports:
       - 3000:3000
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.6"
   spec_app:
     container_name: spec_app
     image: spec_ms:1
@@ -47,7 +51,8 @@ services:
     ports:
       - 3001:3001
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.7"
   generator_app:
     container_name: generator_app
     image: generator_ms:1
@@ -57,7 +62,8 @@ services:
     volumes:
       - adapter_volume:/python_app/adapter
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.8"
   dashboard_app:
     container_name: dashboard_app
     image: dashboard_ms:1
@@ -65,7 +71,8 @@ services:
     ports:
       - 4200:80
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.9"
   querybuilder_app:
     container_name: querybuilder_app
     image: querybuilder_ms:1
@@ -73,7 +80,8 @@ services:
     ports:
       - 3002:3002
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.10"
   nifi_app:
     container_name: nifi_app
     image: nifi_ms:1
@@ -87,7 +95,8 @@ services:
       - NIFI_WEB_HTTP_HOST=0.0.0.0
       - NIFI_WEB_HTTP_PORT=8096
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.11"
   kong_app:
     container_name: kong_app
     image: kong:latest
@@ -108,21 +117,28 @@ services:
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8444:8444"
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.12"
   nginx_app:
     container_name: nginx_app
     image: nginx_ms:1
     restart: always
     volumes:
-      - {{ base_dir }}/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /opt/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
       - 443:443
     networks:
-      - cqube_net
+      cqube_net:
+        ipv4_address: "10.0.0.13"
 networks:
   cqube_net:
     driver: bridge
+    ipam:
+        driver: default
+        config:
+            - subnet: "10.0.0.0/24"
+              gateway: "10.0.0.1"
     name: cqube_net
 volumes:
   python_executable_env:

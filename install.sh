@@ -18,6 +18,9 @@ chmod u+x shell_scripts/config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/config_file_generator.sh"
 
+# create a docker network using a defined subnet
+docker network create --driver=bridge --subnet=10.0.0.0/16 --gateway=10.0.0.1 cqube_net
+
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 
 if [[ $storage_type == "aws" ]]; then
@@ -41,8 +44,8 @@ if [[ $storage_type == "local" ]]; then
    . "shell_scripts/minio/install_minio.sh"
  #  chmod u+x shell_scripts/minio/install_mc_client.sh
  #  . "shell_scripts/minio/install_mc_client.sh"
-   chmod u+x shell_scripts/minio/crop_minio_ip.sh
-   . "shell_scripts/minio/crop_minio_ip.sh"
+ #  chmod u+x shell_scripts/minio/crop_minio_ip.sh
+ #  . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 if [[ $storage_type == "oracle" ]]; then

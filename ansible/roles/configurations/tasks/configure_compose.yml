@@ -5,9 +5,9 @@
     mode: "0644"
   tags: install
 
-- name: copying compose file to ansible directory
-  template:
-    src: docker-compose.yml_upgrade.j2
-    dest: "docker-compose.yml"
-    mode: "0644"
-  tags: update
+    #- name: copying compose file to ansible directory
+    # template:
+    # src: docker-compose.yml_upgrade.j2
+    # dest: "docker-compose.yml"
+    #mode: "0644"
+    #tags: update
