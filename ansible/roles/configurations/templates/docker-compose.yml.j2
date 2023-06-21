@@ -30,7 +30,7 @@ services:
       - 8080:8080
     environment:
       - KEYCLOAK_USER={{ keycloak_adm_name }}
-      - KEYCLOAK_PASSWORD={{ keycloak_adm_name }}
+      - KEYCLOAK_PASSWORD={{ keycloak_adm_password }}
       - PROXY_ADDRESS_FORWARDING=true
     networks:
       cqube_net:
