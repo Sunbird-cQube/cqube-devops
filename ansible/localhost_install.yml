@@ -1,0 +1,27 @@
+---
+- name: Installing cQube
+  hosts: localhost
+  gather_facts: true
+  remote_user: root
+  become: true
+  vars_files:
+    - ../config_files/config.yml
+    - ../config_files/program_selector.yml
+    - ../config_files/aws_s3_config.yml
+    - ../config_files/azure_container_config.yml
+    - ../config_files/local_storage_config.yml
+    - ../config_files/oracle_storage_config.yml
+    - ../.version
+
+  roles:
+          - configurations
+          - postgres 
+          - python
+          - keycloak  
+          - ingestion
+          - spec
+          - generator
+          - dashboard
+          - querybuilder
+          - nifi
+          - cqube_version
