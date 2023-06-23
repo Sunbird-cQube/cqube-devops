@@ -74,7 +74,14 @@ if [ ! $? = 0 ]; then
    exit
 fi
 
-ansible-playbook ansible/install.yml --tags "install"
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+
+if [[ $mode_of_installation == "public" ]]; then
+   ansible-playbook ansible/public_install.yml --tags "install"
+else
+   ansible-playbook ansible/localhost_install.yml --tags "install"
+fi
+
 set -e
 ansible-playbook ansible/compose.yml --tags "install"
 
