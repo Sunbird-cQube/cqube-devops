@@ -18,6 +18,7 @@ mkdir debug
 echo "***************************************************** Adding Database_url to the .env file ******************************************"
 touch .env
 echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}" >> .env
+echo "PROGRAM_TYPE={{ access_type }}" >> .env
 echo "STATE_NAME={{ state_name }}" >> .env
 echo "DB_USERNAME={{ db_user }}" >> .env
 echo "DB_HOST=postgres_app" >> .env

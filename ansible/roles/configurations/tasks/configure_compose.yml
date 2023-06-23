@@ -1,13 +1,15 @@
 - name: copying compose file to ansible directory
   template:
-    src: docker-compose.yml_install.j2
+    src: docker-compose_public.yml.j2
     dest: "docker-compose.yml"
     mode: "0644"
-  tags: install
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
 
 - name: copying compose file to ansible directory
   template:
-    src: docker-compose.yml_upgrade.j2
+    src: docker-compose_localhost.yml.j2
     dest: "docker-compose.yml"
     mode: "0644"
-  tags: update
+  when: mode_of_installation == "localhost"
+  tags: [ install, update ]

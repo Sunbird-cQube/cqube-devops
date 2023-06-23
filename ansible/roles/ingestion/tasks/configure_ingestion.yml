@@ -24,7 +24,7 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'https://{{ api_endpoint }}/api'
+      URL = 'https://{{ api_endpoint }}/api/ingestion'
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
@@ -36,7 +36,6 @@
       MINIO_BUCKET = "{{ minio_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      INPUT_LOCATION = '/home/{{ system_user_name }}/old_input_files'
       ORACLE_NAMESPACE = "{{ oracle_namespace }}" 
       ORACLE_BUCKET = "{{ oracle_bucket }}"
 
@@ -57,8 +56,6 @@
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
       URL = 'http://{{ api_endpoint }}:3000'
-      WRK_DIR_PYTHON = '/generator_data/generators/transformers/python_files'
-      PYTHON_PATH = '/usr/bin/python3.7'
       STORAGE_TYPE = "{{ storage_type }}"
       MINIO_END_POINT = "{{ minio_ip_address }}"
       MINIO_PORT = 9000
@@ -70,7 +67,6 @@
       AWS_BUCKET = "{{ s3_bucket }}"
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
-      INPUT_LOCATION = '/home/{{ system_user_name }}/old_input_files'
       ORACLE_NAMESPACE = "{{ oracle_namespace }}"
       ORACLE_BUCKET = "{{ oracle_bucket }}"
   when: mode_of_installation == "localhost"
