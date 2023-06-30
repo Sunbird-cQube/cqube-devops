@@ -7,6 +7,7 @@
   vars_files:
     - ../config_files/config.yml
     - ../config_files/program_selector.yml
+    - ../config_files/national_program_selector.yml
     - ../config_files/aws_s3_config.yml
     - ../config_files/azure_container_config.yml
     - ../config_files/local_storage_config.yml
