@@ -11,6 +11,7 @@
     - ../config_files/upgradation_local_storage_config.yml
     - ../config_files/upgradation_oracle_storage_config.yml
     - ../config_files/program_selector.yml
+    - ../config_files/national_program_selector.yml
     - ../config_files/upgradation_oracle_storage_config.yml
     - ../.version
 
