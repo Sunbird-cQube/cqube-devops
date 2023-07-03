@@ -1,15 +1,15 @@
 #!/bin/bash
 
-check_microImprovements(){
+check_microImprovement(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable microImprovements program ${normal}"
+echo -e "\e[0;36m${bold}Hint: Enter true or false to enable microImprovement program ${normal}"
 echo -e "\e[0;38m${bold}please enter true or false.${normal}"
-read micro_Improvements
-        if ! [[ $micro_Improvements == "true" || $micro_Improvements == "false" ]]; then
+read micro_Improvement
+        if ! [[ $micro_Improvement == "true" || $micro_Improvement == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
                         else
-                        printf "microImprovements: $micro_Improvements\n" >> config_files/national_program_selector.yml
+                        printf "microImprovement: $micro_Improvement\n" >> config_files/national_program_selector.yml
                         break;
 
         fi
@@ -32,16 +32,16 @@ read n_cf
 done
 }
 
-check_ncertQuiz(){
+check_quiz(){
 while true
 do
 echo -e "\e[0;36m${bold}Hint: Enter true or false to enable ncertQuiz program ${normal}"
 echo -e "\e[0;38m${bold}please enter true or false.${normal}"
-read ncert_Quiz
-        if ! [[ $ncert_Quiz == "true" || $ncert_Quiz == "false" ]]; then
+read Quiz
+        if ! [[ $Quiz == "true" || $Quiz == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
                         else
-                        printf "ncertQuiz: $ncert_Quiz\n" >> config_files/national_program_selector.yml
+                        printf "quiz: $Quiz\n" >> config_files/national_program_selector.yml
                         break;
 
         fi
@@ -64,16 +64,16 @@ read nipun_Bharat
 done
 }
 
-check_udise_plus(){
+check_udise(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable udise+ program ${normal}"
+echo -e "\e[0;36m${bold}Hint: Enter true or false to enable udise program ${normal}"
 echo -e "\e[0;38m${bold}please enter true or false.${normal}"
-read udise_plus
-        if ! [[ $udise_plus == "true" || $udise_plus == "false" ]]; then
+read u_dise
+        if ! [[ $u_dise == "true" || $u_dise == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
                         else
-                        printf "udise+: $udise_plus\n" >> config_files/national_program_selector.yml
+                        printf "udise: $u_dise\n" >> config_files/national_program_selector.yml
                         break;
 
         fi
@@ -182,11 +182,11 @@ if [[ $yn == yes ]]; then
 if [[ -e "config_files/national_program_selector.yml" ]]; then
 rm config_files/national_program_selector.yml
 touch config_files/national_program_selector.yml
-check_microImprovements
+check_microImprovement
 check_ncf
-check_ncertQuiz
+check_quiz
 check_nipunBharat
-check_udise_plus
+check_udise
 check_pgi
 check_pmPoshan
 check_nas
@@ -224,11 +224,11 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                           if [[ $yn == yes ]]; then
                                  rm config_files/program_selector.yml
                                 touch config_files/program_selector.yml
-				check_microImprovements
+				check_microImprovement
                                 check_ncf
-                                check_ncertQuiz
+                                check_quiz
                                 check_nipunBharat
-                                check_udise_plus
+                                check_udise
 				check_pgi
 				check_pmPoshan
 				check_nas
