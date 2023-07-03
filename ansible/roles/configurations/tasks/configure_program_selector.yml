@@ -1,6 +1,15 @@
-- name: Generating program selection csv file
+- name: Generating state program selection csv file
   template:
     src: program_selector.csv.j2
     dest: "../microservices/query-builder/program_selector.csv"
     mode: "0644"
+  when: access_type == "VSK"
+  tags: [ install, update ]
+
+- name: Generating national program selection csv file
+  template:
+    src: national_program_selector.csv.j2
+    dest: "../microservices/query-builder/program_selector.csv"
+    mode: "0644"
+  when: access_type == "NVSK"
   tags: [ install, update ]
