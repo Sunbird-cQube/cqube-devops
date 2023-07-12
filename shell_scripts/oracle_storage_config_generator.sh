@@ -6,8 +6,12 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter the oracle Name space ${normal}"
 echo -e "\e[0;38m${bold}please enter the oracle name space ${normal}"
 read name_space
-        printf "oracle_namespace: $name_space\n" >> config_files/oracle_storage_config.yml
-        break;
+if [[ -z $name_space ]]; then
+   echo -e "\e[0;31m${bold}Error - Entered value is empty. please enter the Oracle name space${normal}"; fail=1
+else
+   printf "oracle_namespace: $name_space\n" >> config_files/oracle_storage_config.yml
+   break;
+fi
 done
 
 }
@@ -19,8 +23,12 @@ do
 echo -e "\e[0;36m${bold}Hint: Enter oracle bucket_name ${normal}"
 echo -e "\e[0;38m${bold}please enter the oracle storage bucket name ${normal}"
 read bucket_name
-        printf "oracle_bucket: $bucket_name\n" >> config_files/oracle_storage_config.yml
-        break;
+if [[ -z $bucket_name ]]; then
+   echo -e "\e[0;31m${bold}Error - Entered value is empty. please enter the Oracle bucket name${normal}"; fail=1
+else
+   printf "oracle_bucket: $bucket_name\n" >> config_files/oracle_storage_config.yml
+   break;
+fi
 done
 
 }
