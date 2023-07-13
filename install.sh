@@ -95,6 +95,12 @@ ansible-playbook ansible/compose.yml --tags "install"
 chmod u+x shell_scripts/instantiate_static_processor_groups.sh
 . "shell_scripts/instantiate_static_processor_groups.sh"
 
+#Grant readonly access to the schemas
+chmod u+x shell_scripts/pg_read_only_access.sh
+. "shell_scripts/pg_read_only_access.sh"
+pg_read_only_access.sh
+
+
 if [[ $storage_type == "oracle" ]]; then
    chmod u+x shell_scripts/oracle.sh
    . "shell_scripts/oracle.sh"
