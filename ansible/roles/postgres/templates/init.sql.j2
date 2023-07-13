@@ -1,4 +1,6 @@
 CREATE ROLE {{ read_only_db_user }} WITH LOGIN ENCRYPTED PASSWORD '{{ read_only_db_password }}';
 GRANT CONNECT ON DATABASE {{ db_name }} TO {{ read_only_db_user }};
 GRANT SELECT ON {{ db_name }} TO {{ read_only_db_user }};
+GRANT USAGE ON SCHEMA public TO {{ read_only_db_user }};
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO {{ read_only_db_user }};
