@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MY_PATH=microservices
-REPOSITORY=boot-camp-21-july
+REPOSITORY=staging
 
 cd "$MY_PATH"
 
