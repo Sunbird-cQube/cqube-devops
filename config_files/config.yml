@@ -10,5 +10,7 @@ google_analytics_tracking_id: NA
 db_user: cqube_user
 db_name: cqube
 db_password: cQube@123
+read_only_db_user: cqube_db_user
+read_only_db_password: cQube@123
 keycloak_adm_name: admin
 keycloak_adm_password: Admin@123
