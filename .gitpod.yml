@@ -1,0 +1,29 @@
+tasks:
+  - name: Setup
+    openMode: tab-after
+    init: |
+      sed -i "s#mode_of_installation: localhost#mode_of_installation: public#" config_files/config.yml
+      export trimmed_gitpod_url=${GITPOD_WORKSPACE_URL:8}
+      sed -i "s#api_endpoint: localhost#api_endpoint: 80-$trimmed_gitpod_url#" config_files/config.yml
+      sudo chmod u+x install.sh
+      sudo ./install.sh
+ports:
+  - port: 4200
+    onOpen: ignore
+    visibility: public
+    description: Cqube Dashboard
+
+  - port: 8080
+    onOpen: ignore
+    visibility: public
+    description: Keycloak
+
+  - port: 80
+    onOpen: ignore
+    visibility: public
+    description: Nginx HTTP
+
+  - port: 443
+    onOpen: ignore
+    visibility: public
+    description: Nginx HTTPS
