@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MY_PATH=microservices
-REPOSITORY=dev
+REPOSITORY=staging
 
 cd "$MY_PATH"
 
