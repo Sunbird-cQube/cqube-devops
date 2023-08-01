@@ -18,6 +18,31 @@ ports:
     visibility: public
     description: Keycloak
 
+  - port: 9001
+    onOpen: ignore
+    visibility: public
+    description: minio
+
+  - port: 3000
+    onOpen: ignore
+    visibility: public
+    description: ingestion
+
+  - port: 3001
+    onOpen: ignore
+    visibility: public
+    description: spec
+
+  - port: 3002
+    onOpen: ignore
+    visibility: public
+    description: queryBuilder
+
+  - port: 3003
+    onOpen: ignore
+    visibility: public
+    description: generator
+
   - port: 80
     onOpen: ignore
     visibility: public

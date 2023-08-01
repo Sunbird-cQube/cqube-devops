@@ -1,7 +1,7 @@
 base_dir: /opt
 system_user_name: gitpod
 access_type: VSK
-state_name: HP
+state_name: JH
 local_ipv4_address: 10.0.0.1
 mode_of_installation: localhost
 storage_type: local
