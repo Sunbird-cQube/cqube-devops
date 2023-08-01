@@ -1,7 +1,3 @@
-### Gitpod 
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/cqube-devops/tree/dev)
-
 # cQube_devops Installation
 ###  Prerequisites to install cQube_devops:
 
