@@ -1,6 +1,31 @@
 ### Gitpod 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/<git_username>/cqube-devops/tree/gitpod-branch)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/asifbasha61/cqube-devops/tree/gitpod-branch)
+
+Important links when using Gitpod
+
+1. Dahboard can be accessible using
+   url: https://80-<gitpod_genertaed_url>
+   username: <keycloak_username>
+   password: <keycloak_passowrd>
+   
+2. Ingestion and spec api's can be accessible using following links
+   Ingestion: https://80-<gitpod_genertaed_url>/api/ingestion
+   Spec: https://80-<gitpod_genertaed_url>/api/spec
+   
+4. Minio buckets can be accessed using
+   url: https://9001-<gitpod_genertaed_url>
+   username: minioadmin
+   password: minioadmin
+   
+6. Nifi can be accessible using
+   url: https://8096-<gitpod_genertaed_url>
+   
+7. Keycloak can be accessible using
+   url: https://80-<gitpod_genertaed_url>/auth
+   username: <keycloak_username>
+   password: <keycloak_passowrd>
+
 
 # cQube_devops Installation
 ###  Prerequisites to install cQube_devops:
