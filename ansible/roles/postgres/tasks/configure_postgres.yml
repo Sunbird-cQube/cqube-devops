@@ -6,9 +6,16 @@
     group: "{{ system_user_name }}"  
   tags: [ install, update ]
 
-    #- name: copying init.sql script to postgres ms
-    # template:
-    #   src: init.sql.j2
-    # dest: "../microservices/postgres-ms/init.sql"
-    # mode: "0644"  
-    # tags: [ install, update ] 
+- name: copying init.sql script to postgres ms
+  template:
+    src: init.sql.j2
+    dest: "../microservices/postgres-ms/init.sql"
+    mode: "0644"  
+  tags: [ install, update ]
+
+- name: copying read access script to shell scripts
+  template:
+    src: pg_read_only_access.sh.j2
+    dest: "../shell_scripts/pg_read_only_access.sh"
+    mode: "0644"
+  tags: [ install, update ] 

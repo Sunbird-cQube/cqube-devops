@@ -465,7 +465,7 @@ printf "read_only_db_password: cQube@123\n" >> config_files/config.yml
             fi
 
     }
-check_version
+
 rm config_files/config.yml
 touch config_files/config.yml
 if [[ -e "config_files/config.yml" ]]; then
@@ -479,10 +479,11 @@ check_storage_type
 check_api_endpoint
 check_google_analytics
 check_config_db
-#check_config_read_only_db
+check_config_read_only_db
 check_keycloak_name
 check_keycloak_password
 fi
+
 
 check_config_file(){
 if [[ -e "config_files/config.yml" ]]; then
@@ -501,7 +502,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
             esac
             done
              if [[ -e "config_files/config.yml" ]]; then
-                          if [[ $yn == yes ]]; then
+		if [[ $yn == yes ]]; then
                                 rm config_files/config.yml
                                 touch config_files/config.yml
 				check_base_dir
@@ -514,7 +515,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_api_endpoint
 				check_google_analytics
 				check_config_db
-				#check_config_read_only_db
+				check_config_read_only_db
 				check_keycloak_name
 				check_keycloak_password
                           	fi

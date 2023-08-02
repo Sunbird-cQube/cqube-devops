@@ -80,8 +80,13 @@ if [ ! $? = 0 ]; then
   exit
 fi
 
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 
-ansible-playbook ansible/upgrade.yml --tags "update"
+if [[ $mode_of_installation == "public" ]]; then
+   ansible-playbook ansible/public_upgrade.yml --tags "install"
+else
+   ansible-playbook ansible/localhost_upgrade.yml --tags "install"
+fi
 set -e
 ansible-playbook ansible/upgrade_compose.yml --tags "update"
 

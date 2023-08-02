@@ -66,7 +66,6 @@ export AZURE_STORAGE_CONNECTION_STRING="$azure_connection_string"
 if az storage container create --name azure-cqube-edu --connection-string "$azure_connection_string" --output table | grep -q "True"; then
 
         printf "azure_container: azure-cqube-edu\n" >> config_files/azure_container_config.yml
-
 else
 while true
 do
