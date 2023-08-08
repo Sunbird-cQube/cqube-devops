@@ -73,14 +73,14 @@ def get_cron_string_from_current_time(delta=2):
     next_minute = next_time.minute
     next_hour = next_time.hour
 
-    cron_expression = f"{next_minute} {next_hour} * * * ?"
+    cron_expression = f"0 {next_minute} {next_hour} * * ?"
 
     print(f"Cron expression for the next '{delta}' minute from current time: {cron_expression}")
     return cron_expression
 
 payload = json.dumps({
   "processor_group_name": "Run_adapters",
-  "scheduled_at": get_cron_string_from_current_time()
+  "scheduled_at": get_cron_string_from_current_time(2)
 })
 headers = {
   'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ print(response.text)
 
 payload = json.dumps({
   "processor_group_name": "Run Latest Code local",
-  "scheduled_at": get_cron_string_from_current_time(3)
+  "scheduled_at": get_cron_string_from_current_time(4)
 })
 headers = {
   'Content-Type': 'application/json',
