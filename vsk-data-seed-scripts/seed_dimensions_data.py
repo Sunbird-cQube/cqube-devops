@@ -3,7 +3,7 @@ import os
 import json
 from datetime import datetime, timedelta
 
-base_url = f"https://80-{os.environ.get('GITPOD_WORKSPACE_URL')[8:]}"
+base_url = os.environ.get('BASE_CQUBE_URL') or f"https://80-{os.environ.get('GITPOD_WORKSPACE_URL')[8:]}"
 
 jwt_url = f"{base_url}/api/ingestion/generatejwt"
 jwt_token = requests.request("GET", jwt_url).text
