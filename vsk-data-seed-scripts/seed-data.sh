@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "Do you want to run this script? (y/n): " choice
+read -p "Do you want to ingest data? (y/n): " choice
 
 if [ "$choice" == "n" ] || [ "$choice" == "N" ] || [ "$choice" == "No" ] || [ "$choice" == "NO" ] || [ "$choice" == "no" ]; then
     exit 0
