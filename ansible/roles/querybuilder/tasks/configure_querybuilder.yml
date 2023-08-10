@@ -13,8 +13,8 @@
       JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
       DB_PORT = 5432
-      DB_USERNAME = "{{ db_user }}"
-      DB_PASSWORD = "{{ db_password }}"
+      DB_USERNAME = "{{ read_only_db_user }}"
+      DB_PASSWORD = "{{ read_only_db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
       STORAGE_TYPE= "{{ storage_type }}"
@@ -46,8 +46,8 @@
       JWT_SECRET= 'cqube_secret'
       DB_HOST = 'postgres_app'
       DB_PORT = 5432
-      DB_USERNAME = "{{ db_user }}"
-      DB_PASSWORD = "{{ db_password }}"
+      DB_USERNAME = "{{ read_only_db_user }}"
+      DB_PASSWORD = "{{ read_only_db_password }}"
       DB_NAME = "{{ db_name }}"
       PORT= 3002
       STORAGE_TYPE= "{{ storage_type }}"
