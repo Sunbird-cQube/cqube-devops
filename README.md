@@ -1,6 +1,6 @@
 ### Gitpod 
 
-[![Open in Gitpod](gitpod.io/#https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/tushar5526/cqube-devops/tree/gitpod-vsk-data-seed)
+[![Open in Gitpod](https://gitpod.io/#https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/tushar5526/cqube-devops/tree/gitpod-vsk-data-seed)
 
 Important links when using Gitpod
 
