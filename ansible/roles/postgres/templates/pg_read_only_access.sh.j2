@@ -1,0 +1,41 @@
+#!/bin/bash
+
+sudo docker exec -i postgres_app psql -U {{ db_user }} -d {{ db_name }} << 'EOF'
+
+GRANT USAGE ON SCHEMA public TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+GRANT USAGE ON SCHEMA spec TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA spec TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA spec GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA spec TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA spec GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+GRANT USAGE ON SCHEMA ingestion TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA ingestion TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA ingestion GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA ingestion TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA ingestion GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+GRANT USAGE ON SCHEMA transformers TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA transformers TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA transformers GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA transformers TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA transformers GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+GRANT USAGE ON SCHEMA dimensions TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA dimensions TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA dimensions GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA dimensions TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA dimensions GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+GRANT USAGE ON SCHEMA datasets TO {{ read_only_db_user }};
+GRANT SELECT ON ALL TABLES IN SCHEMA datasets TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA datasets GRANT SELECT ON TABLES TO {{ read_only_db_user }};
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA datasets TO {{ read_only_db_user }};
+ALTER DEFAULT PRIVILEGES IN SCHEMA datasets GRANT SELECT ON SEQUENCES TO {{ read_only_db_user }};
+
+EOF
