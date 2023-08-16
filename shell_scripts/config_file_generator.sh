@@ -1,5 +1,5 @@
 check_sys_user(){
-result=`who | head -1 | awk '{print $1}'`
+result=`whoami | head -1 | awk '{print $1}'`
 printf "system_user_name: $result\n" >> config_files/config.yml
 }
  
