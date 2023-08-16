@@ -1,11 +1,11 @@
 base_dir: /opt
-system_user_name: gitpod
+system_user_name: root
 access_type: VSK
-state_name: JH
+state_name: HR
 local_ipv4_address: 10.0.0.1
-mode_of_installation: localhost
+mode_of_installation: public
 storage_type: local
-api_endpoint: localhost
+api_endpoint: hr-cqube-demo.samagra.io
 google_analytics_tracking_id: NA
 db_user: cqube_user
 db_name: cqube
