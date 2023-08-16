@@ -1,15 +1,15 @@
 #!/bin/bash
 
-result=$(curl -X GET --header "Accept: /" "https://api.github.com/repos/Sunbird-cQube/processing-ms/releases/latest")
+#result=$(curl -X GET --header "Accept: /" "https://api.github.com/repos/Sunbird-cQube/processing-ms/releases/latest")
 echo "******************************************************* Response from server ********************************************************"
-key='zipball_url'
-value=$(echo $result | jq -r ".$key")
-echo "$result"
-echo "$value"
+#key='zipball_url'
+#value=$(echo $result | jq -r ".$key")
+#echo "$result"
+#echo "$value"
 rm -rf cqube-ingest.zip
 rm -rf Sunbird-cQube*
 echo "***************************************************** Downloading the zip file ******************************************************"
-wget -O cqube-ingest.zip $value
+wget -O cqube-ingest.zip 'https://api.github.com/repos/Sunbird-cQube/processing-ms/zipball/releasev5.0.3_nvsk-Aug_14'
 echo "****************************************************** Unzipping the zip file *******************************************************"
 unzip cqube-ingest.zip
 mv Sunbird-cQube* Sunbird-cQube-processing-ms
@@ -17,16 +17,23 @@ cd Sunbird-cQube-processing-ms/impl/c-qube
 mkdir debug
 echo "***************************************************** Adding Database_url to the .env file ******************************************"
 touch .env
-echo "DATABASE_URL=postgres://{{ db_user }}:{{ db_password }}@postgres_app:5432/{{ db_name }}" >> .env
-echo "PROGRAM_TYPE={{ access_type }}" >> .env
-echo "STATE_NAME={{ state_name }}" >> .env
-echo "DB_USERNAME={{ db_user }}" >> .env
+echo "DATABASE_URL=postgres://cqube_user:cQube@123@postgres_app:5432/cqube" >> .env
+echo "PROGRAM_TYPE=NVSK" >> .env
+echo "STATE_NAME=JH" >> .env
+echo "DB_USERNAME=cqube_user" >> .env
 echo "DB_HOST=postgres_app" >> .env
-echo "DB_NAME={{ db_name }}" >> .env
-echo "DB_PASSWORD={{ db_password }}" >> .env
+echo "DB_NAME= cqube" >> .env
+echo "DB_PASSWORD=cQube@123" >> .env
 echo "DB_PORT=5432" >> .env
 echo "***************************************************** Installing the yarn ***********************************************************"
 yarn install
 
 npx prisma generate
 npx prisma migrate deploy
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+save it and run 
+
+bash cqube-ingest-install.sh
