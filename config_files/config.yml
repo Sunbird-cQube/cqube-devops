@@ -5,7 +5,7 @@ state_name: HR
 local_ipv4_address: 10.0.0.1
 mode_of_installation: public
 storage_type: local
-api_endpoint: hr-cqube-demo.samagra.io
+api_endpoint: localhost
 google_analytics_tracking_id: NA
 db_user: cqube_user
 db_name: cqube
