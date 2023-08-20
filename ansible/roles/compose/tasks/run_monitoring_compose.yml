@@ -1,0 +1,5 @@
+- name: docker compose for monitoring services
+  become_user: "{{ system_user_name }}"
+  docker_compose:
+    project_src: ./monitoring-compose.yml
+  tags: [ install, update ]

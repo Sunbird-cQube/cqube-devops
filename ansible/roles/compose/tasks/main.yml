@@ -1,3 +1,6 @@
 ---
 - include_tasks: run_compose.yml
   tags: [ install, update ]
+
+- include_tasks: run_monitoring_compose.yml
+  tags: [ install, update ]
