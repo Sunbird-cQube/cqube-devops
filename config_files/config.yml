@@ -1,9 +1,9 @@
 base_dir: /opt
-system_user_name: root
+system_user_name: gitpod
 access_type: VSK
-state_name: HR
+state_name: JH
 local_ipv4_address: 10.0.0.1
-mode_of_installation: public
+mode_of_installation: localhost
 storage_type: local
 api_endpoint: localhost
 google_analytics_tracking_id: NA
