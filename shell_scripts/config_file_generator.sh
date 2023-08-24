@@ -211,8 +211,8 @@ if [[ $yn == yes ]]; then
 fi
 
 if [[ $yn == no ]]; then
-printf "keycloak_adm_name: admin\n" >> config_files/asif.yml
-printf "keycloak_adm_password: Admin@123\n" >> config_files/asif.yml
+printf "keycloak_adm_name: admin\n" >> config_files/config.yml
+printf "keycloak_adm_password: Admin@123\n" >> config_files/config.yml
 fi
 }
 
