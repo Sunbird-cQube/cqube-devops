@@ -69,7 +69,7 @@ read login_status
         if ! [[ $login_status == "true" || $login_status == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
                         else
-                        printf "loginpage_status: $login_status\n" >> config_files/asif.yml
+                        printf "loginpage_status: $login_status\n" >> config_files/config.yml
                         break;
 
         fi
