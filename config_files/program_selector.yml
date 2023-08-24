@@ -1,7 +1,14 @@
 teacherAttendance: true
+teacherAttendance_loginStatus: public
 pgi: true
+pgi_loginStatus: public
 pmPoshan: true
+pmPoshan_loginStatus: public
 udise: true
+udise_loginStatus: public
 nas: true
+nas_loginStatus: public
 diksha: true
+diksha_loginStatus: public
 nishtha: true
+nishtha_loginStatus: public
