@@ -36,7 +36,7 @@ check_version(){
 
 check_state(){
 access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
-if [[ $access_type == "NVSK" ]]; then
+if [[ $access_type == "NVSK" || $access_type == "others" ]]; then
    printf "state_name: NA\n" >> config_files/config.yml
 else
   while true
@@ -58,6 +58,22 @@ else
   fi
   done
 fi
+}
+
+check_login(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter true or false to enable login screen for cqube dashboard ${normal}"
+echo -e "\e[0;38m${bold}please enter true or false. ${normal}"
+read login_status
+        if ! [[ $login_status == "true" || $login_status == "false" ]]; then
+        echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+                        else
+                        printf "loginpage_status: $login_status\n" >> config_files/asif.yml
+                        break;
+
+        fi
+done
 }
 
 check_api_endpoint(){
@@ -175,6 +191,32 @@ break;
     fi
 done
 }
+
+check_keycloak_creds(){
+echo -e "\e[0;33m${bold}Currently cQube having default keycloak credentiable with keycloak_adm_name and keycloak_adm_password. Follow Installation process with below config values.${normal}"
+echo -e "\e[0;38m${bold} keycloak_adm_name: admin ${normal}"
+echo -e "\e[0;38m${bold} keycloak_adm_password: Admin@123 ${normal}"
+echo -e "\e[0;33m${bold}If you want to edit keycloak credentials please enter yes.${normal}"
+while true; do
+ read -p "Do you still want to edit the keycloak credentials (yes/no)? "
+ case $yn in
+   yes) break;;
+   no) break 2;;
+   * ) echo "Please answer yes or no.";;
+ esac
+done
+if [[ $yn == yes ]]; then
+   check_keycloak_name
+   check_keycloak_password
+fi
+
+if [[ $yn == no ]]; then
+printf "keycloak_adm_name: admin\n" >> config_files/asif.yml
+printf "keycloak_adm_password: Admin@123\n" >> config_files/asif.yml
+fi
+}
+
+
 check_keycloak_password(){
 while true
 do
@@ -270,8 +312,8 @@ do
     echo -e "\e[0;36m${bold}Hint: enter NVSK or VSK${normal}"
     echo -e "\e[0;38m${bold}please enter the access_type${normal}"
     read access_typ
-      if ! [[ $access_typ == "NVSK" || $access_typ == "VSK" ]]; then
-         echo -e "\e[0;31m${bold}Error - Please enter either NVSK or VSK"; fail=1
+      if ! [[ $access_typ == "NVSK" || $access_typ == "VSK" || $access_typ == "others" ]]; then
+         echo -e "\e[0;31m${bold}Error - Please enter either NVSK or VSK or others"; fail=1
       else
         printf "access_type: $access_typ\n" >> config_files/config.yml
         break;
@@ -472,16 +514,15 @@ if [[ -e "config_files/config.yml" ]]; then
 check_base_dir
 check_sys_user
 check_access_type
+check_login
 check_state
 check_ip
 check_mode_of_installation
 check_storage_type
 check_api_endpoint
-check_google_analytics
 check_config_db
 check_config_read_only_db
-check_keycloak_name
-check_keycloak_password
+check_keycloak_creds
 fi
 
 
@@ -508,16 +549,15 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_base_dir
 				check_sys_user
 				check_access_type
+				check_login
 				check_state
 				check_ip
 				check_mode_of_installation
 				check_storage_type
 				check_api_endpoint
-				check_google_analytics
 				check_config_db
 				check_config_read_only_db
-				check_keycloak_name
-				check_keycloak_password
+				check_keycloak_creds
                           	fi
              fi
            done
