@@ -9,7 +9,7 @@
 - name: Fetching state private programs
   template:
     src: vsk_private_programs.j2
-    dest: "../microservices/keycloak/vsk_private_programs"
+    dest: "../microservices/keycloak-ms/vsk_private_programs"
     mode: "0644"
   when: access_type == "VSK"
   tags: [ install, update ]
@@ -17,15 +17,14 @@
 - name: Refining the state private programs list
   ansible.builtin.shell: sed 's/,\+/,/g; s/^,*//; s/,*$//' "vsk_private_programs" > "private_program_file"
   args:
-    chdir: ../microservices/keycloak
-  mode: "0644"
+    chdir: ../microservices/keycloak-ms
   when: access_type == "VSK"
   tags: [ install, update ]
 
 - name: Fetching state public programs
   template:
     src: vsk_public_programs.j2
-    dest: "../microservices/keycloak/vsk_public_programs"
+    dest: "../microservices/keycloak-ms/vsk_public_programs"
     mode: "0644"
   when: access_type == "VSK"
   tags: [ install, update ]
@@ -33,8 +32,7 @@
 - name: Refining the state public programs list
   ansible.builtin.shell: sed 's/,\+/,/g; s/^,*//; s/,*$//' "vsk_public_programs" > "guest_program_file"
   args:
-    chdir: ../microservices/keycloak
-  mode: "0644"
+    chdir: ../microservices/keycloak-ms
   when: access_type == "VSK"
   tags: [ install, update ]
 
