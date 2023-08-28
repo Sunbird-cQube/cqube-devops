@@ -4,7 +4,7 @@ export const environment = {
   config: "{{ access_type }}",
   cqubeVersion: "{{ cqube_version }}",
   stateCode: "{{ state_name }}",
-  loginNeeded: "{{ loginpage_status }}",
+  loginNeeded: {% if loginpage_status == true %}true{% else %}false{% endif %}{{''}},
   guestUsername: "guest-user",
   guestPassword: "Guest@123",
   numberFormat: {

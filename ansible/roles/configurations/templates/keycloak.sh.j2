@@ -3,8 +3,8 @@
 echo "Creating realm in keycloak. It will take 30 seconds to initialize keycloak."
 sleep 30
 
-sudo docker cp ../microservices/keycloak-ms/private_program_file keycloak_app:/
-sudo docker cp ../microservices/keycloak-ms/guest_program_file keycloak_app:/
+sudo docker cp microservices/keycloak-ms/private_program_file keycloak_app:/
+sudo docker cp microservices/keycloak-ms/guest_program_file keycloak_app:/
 
 sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user {{ keycloak_adm_name }} --password {{ keycloak_adm_password }}
@@ -25,13 +25,13 @@ sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username=guest-user -s enabled=true
 /opt/jboss/keycloak/bin/kcadm.sh set-password --username guest-user -r cQube -p Guest@123
 
-guest_variable=$(cat /guest_file.csv)
+guest_variable=$(cat /guest_program_file)
 
 /opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=guest -s 'attributes={"reports":['$guest_variable']}'
 
 /opt/jboss/keycloak/bin/kcadm.sh add-roles --rname default-roles-cqube --rolename guest -r cQube
 
-private_variable=$(cat /private_file.csv)
+private_variable=$(cat /private_program_file)
 
 /opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=private_user -s 'attributes={"reports":['$private_variable']}'
 EOF
