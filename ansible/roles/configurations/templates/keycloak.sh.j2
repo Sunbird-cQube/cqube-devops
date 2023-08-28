@@ -22,6 +22,9 @@ sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username={{ keycloak_adm_name }} -s enabled=true
 /opt/jboss/keycloak/bin/kcadm.sh set-password --username {{ keycloak_adm_name }} -r cQube -p {{ keycloak_adm_password }}
 
+/opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username=guest-user -s enabled=true
+/opt/jboss/keycloak/bin/kcadm.sh set-password --username guest-user -r cQube -p Guest@123
+
 guest_variable=$(cat /guest_file.csv)
 
 /opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=guest -s 'attributes={"reports":['$guest_variable']}'
