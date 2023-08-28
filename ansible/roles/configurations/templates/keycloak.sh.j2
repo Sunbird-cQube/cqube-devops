@@ -3,8 +3,13 @@
 echo "Creating realm in keycloak. It will take 30 seconds to initialize keycloak."
 sleep 30
 
+sudo docker cp ../microservices/keycloak-ms/private_program_file keycloak_app:/
+sudo docker cp ../microservices/keycloak-ms/guest_program_file keycloak_app:/
+
 sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user {{ keycloak_adm_name }} --password {{ keycloak_adm_password }}
+
+/opt/jboss/keycloak/bin/kcadm.sh create clients -r master -s clientId=keycloak-admin -s enabled=true -s clientAuthenticatorType=client-secret -s secret=4c19653b-4047-4b19-819a-69315c491763 -s directAccessGrantsEnabled=true -s "serviceAccountsEnabled=true"
 
 /opt/jboss/keycloak/bin/kcadm.sh create realms -s realm=cQube -s enabled=true -o
 
@@ -16,4 +21,14 @@ sudo docker exec -i keycloak_app sh << 'EOF'
 
 /opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username={{ keycloak_adm_name }} -s enabled=true
 /opt/jboss/keycloak/bin/kcadm.sh set-password --username {{ keycloak_adm_name }} -r cQube -p {{ keycloak_adm_password }}
+
+guest_variable=$(cat /guest_file.csv)
+
+/opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=guest -s 'attributes={"reports":['$guest_variable']}'
+
+/opt/jboss/keycloak/bin/kcadm.sh add-roles --rname default-roles-cqube --rolename guest -r cQube
+
+private_variable=$(cat /private_file.csv)
+
+/opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=private_user -s 'attributes={"reports":['$private_variable']}'
 EOF

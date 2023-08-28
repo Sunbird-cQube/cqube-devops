@@ -30,11 +30,15 @@
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME = 'process_input'
+      ORACLE_BUCKET = "{{ oracle_bucket }}"
       KEY_CLOCK_URL = 'https://{{ api_endpoint }}/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
       KEY_CLOAK_SECRET = 'd0b8122f-8dfb-46h7-b69a-f5cc4e25d000'
-      ORACLE_BUCKET = "{{ oracle_bucket }}"
+      KEY_CLOAK_ADMIN_CLIENT_ID = 'keycloak-admin'
+      KEY_CLOAK_ADMIN_CLIENT_SECRET = '4c19653b-4047-4b19-819a-69315c491763'
+      KEY_CLOAK_ADMIN_USERNAME = '{{ keycloak_adm_name }}'
+      KEY_CLOAK_ADMIN_PASSWORD = '{{ keycloak_adm_password }}'
   when: mode_of_installation != "localhost"   
   tags: [ install, update ]
 
@@ -63,11 +67,14 @@
       AZURE_CONNECTION_STRING = "{{ azure_connection_string }}"
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
-      CONTAINER_FOLDER_NAME= 'process_input'
+      ORACLE_BUCKET = "{{ oracle_bucket }}"
       KEY_CLOCK_URL = 'http://{{ keycloak_ip }}:8080/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
       KEY_CLOAK_SECRET = 'd0b8122f-8dfb-46h7-b69a-f5cc4e25d000'
-      ORACLE_BUCKET = "{{ oracle_bucket }}"
+      KEY_CLOAK_ADMIN_CLIENT_ID = 'keycloak-admin'
+      KEY_CLOAK_ADMIN_CLIENT_SECRET = '4c19653b-4047-4b19-819a-69315c491763'
+      KEY_CLOAK_ADMIN_USERNAME = '{{ keycloak_adm_name }}'
+      KEY_CLOAK_ADMIN_PASSWORD = '{{ keycloak_adm_password }}'
   when: mode_of_installation == "localhost"
   tags: [ install, update ]
