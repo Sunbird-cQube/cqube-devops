@@ -35,3 +35,8 @@ private_variable=$(cat /private_program_file)
 
 /opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=private_user -s 'attributes={"reports":['$private_variable']}'
 EOF
+
+sudo docker exec -i queryBuilder_app sh << 'EOF'
+apk add curl
+curl -X GET http://localhost:3002/queryBuilder/addUserInfo
+EOF
