@@ -3,8 +3,10 @@ export const environment = {
   apiURL: 'http://{{ api_endpoint }}:3002',
   config: "{{ access_type }}",
   stateCode: "{{ state_name }}",
-  loginNeeded: "{{ loginpage_status }}",
+  loginNeeded: {% if loginpage_status == true %}true{% else %}false{% endif %}{{''}},
   cqubeVersion: "{{ cqube_version }}",
+  guestUsername: "guest-user",
+  guestPassword: "Guest@123",
   numberFormat: {
     reports: {
       locale: 'en-IN',

@@ -1,11 +1,11 @@
 program_id,status
-nishtha,{% if nishtha == true %}true{% else %}false{% endif %}{{''}}
-pgi,{% if pgi == true %}true{% else %}false{% endif %}{{''}}
-pmPoshan,{% if pmPoshan == true %}true{% else %}false{% endif %}{{''}}
-diksha,{% if diksha == true %}true{% else %}false{% endif %}{{''}}
-microImprovement,{% if microImprovement == true %}true{% else %}false{% endif %}{{''}}
-nas,{% if nas == true %}true{% else %}false{% endif %}{{''}}
-udise,{% if udise == true %}true{% else %}false{% endif %}{{''}}
-nipunBharat,{% if nipunBharat == true %}true{% else %}false{% endif %}{{''}}
-quiz,{% if quiz == true %}true{% else %}false{% endif %}{{''}}
-ncf,{% if ncf == true %}true{% else %}false{% endif %}{{''}}
+nishtha,{% if nishtha == true %}true{% else %}false{% endif %}{{''}},{% if nishtha_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+pgi,{% if pgi == true %}true{% else %}false{% endif %}{{''}},{% if pgi_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+pmPoshan,{% if pmPoshan == true %}true{% else %}false{% endif %}{{''}},{% if pmPoshan_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+diksha,{% if diksha == true %}true{% else %}false{% endif %}{{''}},diksha,{% if diksha_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+microImprovement,{% if microImprovement == true %}true{% else %}false{% endif %}{{''}},{% if microImprovement_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+nas,{% if nas == true %}true{% else %}false{% endif %}{{''}},{% if nas_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+udise,{% if udise == true %}true{% else %}false{% endif %}{{''}},{% if udise_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+nipunBharat,{% if nipunBharat == true %}true{% else %}false{% endif %}{{''}},{% if nipunBharat_loginStatus == true %}public{% else %}false{% endif %}{{''}}
+quiz,{% if quiz == true %}true{% else %}false{% endif %}{{''}},{% if quiz_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+ncf,{% if ncf == true %}true{% else %}false{% endif %}{{''}},{% if ncf_loginStatus == true %}private{% else %}public{% endif %}{{''}}
