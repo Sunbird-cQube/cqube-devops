@@ -10,7 +10,7 @@ read teacher_Attendance
 if ! [[ $teacher_Attendance == "true" || $teacher_Attendance == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "teacherAttendance: $teacher_Attendance\n" >> config_files/program_selector.yml
+     printf "sch_att: $teacher_Attendance\n" >> config_files/program_selector.yml
 
      if ! [[ $teacher_Attendance == "false" ]]; then
            while true
@@ -21,13 +21,13 @@ else
              if ! [[ $teacher_Attendance_loginStatus == "true" || $teacher_Attendance_loginStatus == "false" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "teacherAttendance_loginStatus: $teacher_Attendance_loginStatus\n" >> config_files/program_selector.yml
+                   printf "sch_att_loginStatus: $teacher_Attendance_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "teacherAttendance_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "sch_att_loginStatus: false\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -79,7 +79,7 @@ read pm_Poshan
 if ! [[ $pm_Poshan == "true" || $pm_Poshan == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "pmPoshan: $pm_Poshan\n" >> config_files/program_selector.yml
+     printf "pm_poshan: $pm_Poshan\n" >> config_files/program_selector.yml
 
      if ! [[ $pm_Poshan == "false" ]]; then
            while true
@@ -90,13 +90,13 @@ else
              if ! [[ $pm_Poshan_loginStatus == "true" || $pm_Poshan_loginStatus == "false" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
              else
-                   printf "pmPoshan_loginStatus: $pm_Poshan_loginStatus\n" >> config_files/program_selector.yml
+                   printf "pm_poshan_loginStatus: $pm_Poshan_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "pmPoshan_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "pm_poshan_loginStatus: false\n" >> config_files/program_selector.yml
           break;
      fi
 fi

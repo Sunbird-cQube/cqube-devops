@@ -1,9 +1,9 @@
-teacherAttendance: true
-teacherAttendance_loginStatus: false
+sch_att: true
+sch_att_loginStatus: false
 pgi: true
 pgi_loginStatus: false
-pmPoshan: true
-pmPoshan_loginStatus: false
+pm_poshan: true
+pm_poshan_loginStatus: false
 udise: true
 udise_loginStatus: false
 nas: true
