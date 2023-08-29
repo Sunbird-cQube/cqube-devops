@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MY_PATH=microservices
-REPOSITORY=staging
+REPOSITORY=release-v5.0.3-nvsk
 
 cd "$MY_PATH"
 
