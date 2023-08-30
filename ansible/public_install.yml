@@ -23,6 +23,7 @@
           - spec
           - generator
           - dashboard
+          - admin_dashboard
           - querybuilder
           - nifi
           - nginx
