@@ -1,0 +1,15 @@
+- name: copying compose file to ansible directory
+  template:
+    src: public_defaults.ini.j2
+    dest: "monitoring/grafana/defaults.ini"
+    mode: "0644"
+  when: mode_of_installation != "localhost"
+  tags: [ install, update ]
+
+- name: copying compose file to ansible directory
+  template:
+    src: localhost_defaults.ini.j2
+    dest: "monitoring/grafana/defaults.ini"
+    mode: "0644"
+  when: mode_of_installation == "localhost"
+  tags: [ install, update ]
