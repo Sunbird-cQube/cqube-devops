@@ -25,6 +25,8 @@ sudo docker exec -i keycloak_app sh << 'EOF'
 /opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username=guest-user -s enabled=true
 /opt/jboss/keycloak/bin/kcadm.sh set-password --username guest-user -r cQube -p Guest@123
 
+/opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=admin
+
 guest_variable=$(cat /guest_program_file)
 
 /opt/jboss/keycloak/bin/kcadm.sh create roles -r cQube -s name=guest -s 'attributes={"reports":['$guest_variable']}'

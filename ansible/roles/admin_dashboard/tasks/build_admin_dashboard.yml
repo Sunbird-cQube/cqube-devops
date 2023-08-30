@@ -1,0 +1,8 @@
+- name: docker build dashboard ms
+  docker_image:
+    name: admin_dashboard_ms
+    tag: '1'
+    build:
+      path: ../microservices/admin-dashboard-ms/
+    source: build
+  tags: [ install, update ]

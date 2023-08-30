@@ -76,3 +76,18 @@ else
         cd ../../
 
 fi
+
+cd "$MY_PATH"
+if ! [[ -d admin-dashboard-ms ]]; then
+        git clone https://github.com/Sunbird-cQube/admin-dashboard-ms.git
+        cd "admin-dashboard-ms"
+        git checkout $REPOSITORY
+        cd ../../
+else
+        cd "admin-dashboard-ms"
+        git stash
+        git checkout $REPOSITORY
+        git pull
+        cd ../../
+
+fi
