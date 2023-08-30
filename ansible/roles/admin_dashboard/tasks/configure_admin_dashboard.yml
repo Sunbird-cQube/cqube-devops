@@ -1,0 +1,27 @@
+- name: Creating environmental variables
+  file:
+    path: ../microservices/admin-dashboard-ms/.env
+    state: touch
+    mode: u+rw,g+rw,o+rw
+  tags: [ install, update ]
+
+    
+- name: Loading required data inside .env file (public installation)
+  blockinfile:
+    path: ../microservices/admin-dashboard-ms/.env
+    block: |
+      REACT_APP_API_URL = 'https://{{ api_endpoint }}/api/queryBuilder'
+      REACT_APP_HEALTH_DASHBOARD_URL = 'http://{{ api_endpoint }}:3005/grafana'
+      REACT_APP_POSTHOG_URL = 'https://app.posthog.com/login'
+  when: mode_of_installation != "localhost"   
+  tags: [ install, update ]
+
+- name: Loading required data inside .env file (localhost installation)
+  blockinfile:
+    path: ../microservices/admin-dashboard-ms/.env
+    block: |
+      REACT_APP_API_URL = 'http://{{ api_endpoint }}:3002'
+      REACT_APP_HEALTH_DASHBOARD_URL = 'http://{{ api_endpoint }}:3005/grafana'
+      REACT_APP_POSTHOG_URL = 'https://app.posthog.com/login'
+  when: mode_of_installation == "localhost"   
+  tags: [ install, update ]
