@@ -10,6 +10,7 @@
   blockinfile:
     path: ../microservices/admin-dashboard-ms/.env
     block: |
+      PORT=4201
       REACT_APP_API_URL = 'https://{{ api_endpoint }}/api/queryBuilder'
       REACT_APP_HEALTH_DASHBOARD_URL = 'http://{{ api_endpoint }}:3005/grafana'
       REACT_APP_POSTHOG_URL = 'https://app.posthog.com/login'
@@ -20,6 +21,7 @@
   blockinfile:
     path: ../microservices/admin-dashboard-ms/.env
     block: |
+      PORT=4201
       REACT_APP_API_URL = 'http://{{ api_endpoint }}:3002'
       REACT_APP_HEALTH_DASHBOARD_URL = 'http://{{ api_endpoint }}:3005/grafana'
       REACT_APP_POSTHOG_URL = 'https://app.posthog.com/login'
