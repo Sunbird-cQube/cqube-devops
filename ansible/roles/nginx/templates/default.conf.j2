@@ -36,6 +36,11 @@ server {
                 #client_max_body_size 2G;
                 #try_files $uri $uri/ =404;
         }
+        location /admin {
+                proxy_pass http://{{ local_ipv4_address }}:4201;
+                #client_max_body_size 2G;
+                #try_files $uri $uri/ =404;
+        }
         location /api {
                 proxy_pass http://{{ local_ipv4_address }}:8000;
                 client_max_body_size 2G;

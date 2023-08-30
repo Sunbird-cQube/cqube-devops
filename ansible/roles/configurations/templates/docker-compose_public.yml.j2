@@ -131,6 +131,15 @@ services:
     networks:
       cqube_net:
         ipv4_address: "10.0.0.13"
+  admin_dashboard_app:
+    container_name: admin_dashboard_app
+    image: admin_dashboard_ms:1
+    restart: always
+    ports:
+      - 4201:80
+    networks:
+      cqube_net:
+        ipv4_address: "10.0.0.14"  
 networks:
   cqube_net:
     driver: bridge
