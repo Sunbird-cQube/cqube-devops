@@ -46,7 +46,7 @@ server {
                 client_max_body_size 2G;
                 #try_files $uri $uri/ =404;
         }
-        location /monitoring {
+        location /grafana {
                 proxy_pass http://{{ local_ipv4_address }}:3005;
                 #try_files $uri $uri/ =404;
         }
