@@ -11,9 +11,9 @@
     path: ../microservices/admin-dashboard-ms/.env
     block: |
       PORT=4201
-      NEXT_PUBLIC_API_URL = 'https://{{ api_endpoint }}/api/queryBuilder'
-      NEXT_PUBLIC_GRAFANA_URL = 'http://{{ api_endpoint }}:3005/grafana'
-      NEXT_PUBLIC_POSTHOG_URL = 'https://app.posthog.com/login'
+      NEXT_PUBLIC_API_URL = https://{{ api_endpoint }}/api/queryBuilder
+      NEXT_PUBLIC_GRAFANA_URL = http://{{ api_endpoint }}:3005/grafana
+      NEXT_PUBLIC_POSTHOG_URL = https://app.posthog.com/login
   when: mode_of_installation != "localhost"   
   tags: [ install, update ]
 
@@ -22,8 +22,8 @@
     path: ../microservices/admin-dashboard-ms/.env
     block: |
       PORT=4201
-      NEXT_PUBLIC_API_URL = 'http://{{ api_endpoint }}:3002'
-      NEXT_PUBLIC_GRAFANA_URL = 'http://{{ api_endpoint }}:3005/grafana'
-      NEXT_PUBLIC_POSTHOG_URL = 'https://app.posthog.com/login'
+      NEXT_PUBLIC_API_URL = http://{{ api_endpoint }}:3002
+      NEXT_PUBLIC_GRAFANA_URL = http://{{ api_endpoint }}:3005/grafana
+      NEXT_PUBLIC_POSTHOG_URL = https://app.posthog.com/login
   when: mode_of_installation == "localhost"   
   tags: [ install, update ]
