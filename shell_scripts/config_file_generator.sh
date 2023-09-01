@@ -42,7 +42,7 @@ else
   while true
   do
   echo -e "\e[0;36m${bold}Hint: Please enter state code ( refer to state_list )${normal}"
-  echo -e "\e[0;38m${bold}please enter the state_name ${normal} "
+  echo -e "\e[0;38m${bold}please enter the state_code ${normal} "
   read state_name
   state_found=0
   while read line; do
@@ -309,7 +309,7 @@ done
 check_access_type(){
 while true
 do
-    echo -e "\e[0;36m${bold}Hint: enter NVSK or VSK${normal}"
+    echo -e "\e[0;36m${bold}Hint: enter NVSK or VSK or others${normal}"
     echo -e "\e[0;38m${bold}please enter the access_type${normal}"
     read access_typ
       if ! [[ $access_typ == "NVSK" || $access_typ == "VSK" || $access_typ == "others" ]]; then
