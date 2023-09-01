@@ -56,7 +56,7 @@ else
              if ! [[ $pg_i_loginStatus == "true" || $pg_i_loginStatus == "false" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
              else
-                   printf "pgi_loginStatus: $pgi_loginStatus\n" >> config_files/program_selector.yml
+                   printf "pgi_loginStatus: $pg_i_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
