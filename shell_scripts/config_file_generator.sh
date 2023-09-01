@@ -198,7 +198,7 @@ echo -e "\e[0;38m${bold} keycloak_adm_name: admin ${normal}"
 echo -e "\e[0;38m${bold} keycloak_adm_password: Admin@123 ${normal}"
 echo -e "\e[0;33m${bold}If you want to edit keycloak credentials please enter yes.${normal}"
 while true; do
- read -p "Do you still want to edit the keycloak credentials (yes/no)? "
+ read -p "Do you still want to edit the keycloak credentials (yes/no)? " yn
  case $yn in
    yes) break;;
    no) break 2;;
@@ -259,9 +259,7 @@ else
     break;
     fi
 fi
-
 done
-
 }
 
 check_mode_of_installation(){
