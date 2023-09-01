@@ -1,6 +1,6 @@
 ---
-- include_tasks: build_admin_dashboard.yml
+- include_tasks: configure_admin_dashboard.yml
   tags: [ install, update ]
 
-- include_tasks: configure_admin_dashboard.yml
+- include_tasks: build_admin_dashboard.yml
   tags: [ install, update ]
