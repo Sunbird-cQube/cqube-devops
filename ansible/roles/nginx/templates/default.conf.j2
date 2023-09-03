@@ -1,4 +1,6 @@
 server {
+       listen 80;
+       listen [::]:80;
 
         gzip on;
         gzip_types      application/javascript text/css;
@@ -58,22 +60,4 @@ server {
                 proxy_set_header X-Forwarded-Proto https;
                 proxy_set_header Accept-Encoding "";
         }
-        listen [::]:443 ssl;
-        listen 443 ssl;
-        ssl_certificate /etc/ssl/{{ api_endpoint }}/cqube-cert.pem;
-        ssl_certificate_key /etc/ssl/{{ api_endpoint }}/cqube-key.pem;
 }
-
-server {
-    if ($host = {{ api_endpoint }}) {
-        return 301 https://$host$request_uri;
-    } 
-
-    server_name {{ api_endpoint }};
-
-    listen 80;
-    listen [::]:80;
-    return 404;
-
-}
-
