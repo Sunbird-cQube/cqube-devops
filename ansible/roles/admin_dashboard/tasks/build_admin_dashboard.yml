@@ -1,4 +1,4 @@
-- name: docker build dashboard ms
+- name: docker build admin dashboard ms
   docker_image:
     name: admin_dashboard_ms
     tag: '1'
