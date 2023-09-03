@@ -125,6 +125,7 @@ services:
     restart: always
     volumes:
       - /opt/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /opt/cqube/nginx/certs/{{ api_endpoint }}:/etc/ssl/{{ api_endpoint }}
     ports:
       - 80:80
       - 443:443

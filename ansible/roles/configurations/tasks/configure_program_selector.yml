@@ -21,6 +21,13 @@
   when: access_type == "VSK"
   tags: [ install, update ]
 
+- name: Remove state private programs dummy file
+  ansible.builtin.file:
+    path: ../microservices/keycloak-ms/vsk_private_programs
+    state: absent
+  when: access_type == "VSK"
+  tags: [ install, update ]
+
 - name: Fetching state public programs
   template:
     src: vsk_public_programs.j2
@@ -36,10 +43,61 @@
   when: access_type == "VSK"
   tags: [ install, update ]
 
+- name: Remove state public programs dummy file
+  ansible.builtin.file:
+    path: ../microservices/keycloak-ms/vsk_public_programs
+    state: absent
+  when: access_type == "VSK"
+  tags: [ install, update ]
+    
 - name: Generating national program selection csv file
   template:
     src: national_program_selector.csv.j2
     dest: "../microservices/query-builder/program_selector.csv"
     mode: "0644"
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Fetching national private programs
+  template:
+    src: nvsk_private_programs.j2
+    dest: "../microservices/keycloak-ms/nvsk_private_programs"
+    mode: "0644"
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Refining the national private programs list
+  ansible.builtin.shell: sed 's/,\+/,/g; s/^,*//; s/,*$//' "nvsk_private_programs" > "private_program_file"
+  args:
+    chdir: ../microservices/keycloak-ms
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Remove national private programs dummy file
+  ansible.builtin.file:
+    path: ../microservices/keycloak-ms/nvsk_private_programs
+    state: absent
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Fetching national public programs
+  template:
+    src: nvsk_private_programs.j2
+    dest: "../microservices/keycloak-ms/nvsk_public_programs"
+    mode: "0644"
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Refining the national public programs list
+  ansible.builtin.shell: sed 's/,\+/,/g; s/^,*//; s/,*$//' "nvsk_public_programs" > "guest_program_file"
+  args:
+    chdir: ../microservices/keycloak-ms
+  when: access_type == "NVSK"
+  tags: [ install, update ]
+
+- name: Remove national public programs dummy file
+  ansible.builtin.file:
+    path: ../microservices/keycloak-ms/nvsk_public_programs
+    state: absent
   when: access_type == "NVSK"
   tags: [ install, update ]

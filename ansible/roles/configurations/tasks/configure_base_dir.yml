@@ -26,6 +26,21 @@
     state: directory
   tags: [install, update]
 
+- name: Creating certificate directory directory
+  file:
+    path: "{{ base_dir }}/cqube/nginx/certs/{{ api_endpoint }}"
+    owner: "{{ system_user_name }}"
+    group: "{{ system_user_name }}"
+    recurse: yes
+    state: directory
+  tags: [install, update]
+
+- name: Copy cert files to nginx base directory
+  ansible.builtin.copy:
+    src: ../certs/ 
+    dest: "{{ base_dir }}/cqube/nginx/certs/{{ api_endpoint }}"
+  tags: [install, update]
+
 - name: Creating conf directory
   file:
     path: "{{ base_dir }}/cqube/Sunbird-cQube-processing-ms"
