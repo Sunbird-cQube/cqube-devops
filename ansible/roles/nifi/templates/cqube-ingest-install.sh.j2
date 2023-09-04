@@ -1,15 +1,15 @@
 #!/bin/bash
 
-result=$(curl -X GET --header "Accept: /" "https://api.github.com/repos/Sunbird-cQube/processing-ms/releases/latest")
-echo "******************************************************* Response from server ********************************************************"
-key='zipball_url'
-value=$(echo $result | jq -r ".$key")
-echo "$result"
-echo "$value"
+#result=$(curl -X GET --header "Accept: /" "https://api.github.com/repos/Sunbird-cQube/processing-ms/releases/latest")
+#echo "******************************************************* Response from server ********************************************************"
+#key='zipball_url'
+#value=$(echo $result | jq -r ".$key")
+#echo "$result"
+#echo "$value"
 rm -rf cqube-ingest.zip
 rm -rf Sunbird-cQube*
 echo "***************************************************** Downloading the zip file ******************************************************"
-wget -O cqube-ingest.zip $value
+wget -O cqube-ingest.zip 'https://api.github.com/repos/Sunbird-cQube/processing-ms/zipball/releasev5.0.3_vsk-Sep_4'
 echo "****************************************************** Unzipping the zip file *******************************************************"
 unzip cqube-ingest.zip
 mv Sunbird-cQube* Sunbird-cQube-processing-ms
