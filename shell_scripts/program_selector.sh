@@ -10,24 +10,24 @@ read teacher_Attendance
 if ! [[ $teacher_Attendance == "true" || $teacher_Attendance == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "sch_att: $teacher_Attendance\n" >> config_files/program_selector.yml
+     printf "sch_att_state: $teacher_Attendance\n" >> config_files/program_selector.yml
 
      if ! [[ $teacher_Attendance == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for teacher attandance or else enter false ${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for teacher attandance or else enter public ${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
            read teacher_Attendance_loginStatus
-             if ! [[ $teacher_Attendance_loginStatus == "true" || $teacher_Attendance_loginStatus == "false" ]]; then
+             if ! [[ $teacher_Attendance_loginStatus == "public" || $teacher_Attendance_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "sch_att_loginStatus: $teacher_Attendance_loginStatus\n" >> config_files/program_selector.yml
+                   printf "sch_att_state_loginStatus: $teacher_Attendance_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "sch_att_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "sch_att_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -45,24 +45,24 @@ read pg_i
 if ! [[ $pg_i == "true" || $pg_i == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "pgi: $pg_i\n" >> config_files/program_selector.yml
+     printf "pgi_state: $pg_i\n" >> config_files/program_selector.yml
 
      if ! [[ $pg_i == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for pgi or else enter false ${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pgi or else enter public ${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private .${normal}"
            read pg_i_loginStatus
-             if ! [[ $pg_i_loginStatus == "true" || $pg_i_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $pg_i_loginStatus == "private" || $pg_i_loginStatus == "public" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "pgi_loginStatus: $pg_i_loginStatus\n" >> config_files/program_selector.yml
+                   printf "pgi_state_loginStatus: $pg_i_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "pgi_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "pgi_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -79,24 +79,24 @@ read pm_Poshan
 if ! [[ $pm_Poshan == "true" || $pm_Poshan == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "pm_poshan: $pm_Poshan\n" >> config_files/program_selector.yml
+     printf "pm_poshan_state: $pm_Poshan\n" >> config_files/program_selector.yml
 
      if ! [[ $pm_Poshan == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for pmPoshan or else enter false ${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pmPoshan or else enter public ${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
            read pm_Poshan_loginStatus
-             if ! [[ $pm_Poshan_loginStatus == "true" || $pm_Poshan_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $pm_Poshan_loginStatus == "public" || $pm_Poshan_loginStatus == "private" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "pm_poshan_loginStatus: $pm_Poshan_loginStatus\n" >> config_files/program_selector.yml
+                   printf "pm_poshan_state_loginStatus: $pm_Poshan_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "pm_poshan_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "pm_poshan_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -114,24 +114,24 @@ read ud_ise
 if ! [[ $ud_ise == "true" || $ud_ise == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "udise: $ud_ise\n" >> config_files/program_selector.yml
+     printf "udise_state: $ud_ise\n" >> config_files/program_selector.yml
 
      if ! [[ $ud_ise == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for udise or else enter false${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for udise or else enter public${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
            read ud_ise_loginStatus
-             if ! [[ $ud_ise_loginStatus == "true" || $ud_ise_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $ud_ise_loginStatus == "public" || $ud_ise_loginStatus == "private" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "udise_loginStatus: $ud_ise_loginStatus\n" >> config_files/program_selector.yml
+                   printf "udise_state_loginStatus: $ud_ise_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "udise_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "udise_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -149,24 +149,24 @@ read n_as
 if ! [[ $n_as == "true" || $n_as == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "nas: $n_as\n" >> config_files/program_selector.yml
+     printf "nas_state: $n_as\n" >> config_files/program_selector.yml
 
      if ! [[ $n_as == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for nas or else enter false${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for nas or else enter public${normal}"
+           echo -e "\e[0;38m${bold}please enter private or public.${normal}"
            read n_as_loginStatus
-             if ! [[ $n_as_loginStatus == "true" || $n_as_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $n_as_loginStatus == "public" || $n_as_loginStatus == "private" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "nas_loginStatus: $n_as_loginStatus\n" >> config_files/program_selector.yml
+                   printf "nas_state_loginStatus: $n_as_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "nas_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "nas_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -183,24 +183,24 @@ read dik_sha
 if ! [[ $dik_sha == "true" || $dik_sha == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "diksha: $dik_sha\n" >> config_files/program_selector.yml
+     printf "diksha_state: $dik_sha\n" >> config_files/program_selector.yml
 
      if ! [[ $dik_sha == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for diksha or else enter false ${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for diksha or else enter public ${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
            read dik_sha_loginStatus
-             if ! [[ $dik_sha_loginStatus == "true" || $dik_sha_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $dik_sha_loginStatus == "public" || $dik_sha_loginStatus == "private" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "diksha_loginStatus: $dik_sha_loginStatus\n" >> config_files/program_selector.yml
+                   printf "diksha_state_loginStatus: $dik_sha_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "diksha_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "diksha_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi
@@ -218,24 +218,24 @@ read nish_tha
 if ! [[ $nish_tha == "true" || $nish_tha == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "nishtha: $nish_tha\n" >> config_files/program_selector.yml
+     printf "nishtha_state: $nish_tha\n" >> config_files/program_selector.yml
 
      if ! [[ $nish_tha == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter true if u need a login screen for nishtha or else enter false ${normal}"
-           echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for nishtha or else enter public ${normal}"
+           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
            read nish_tha_loginStatus
-             if ! [[ $nish_tha_loginStatus == "true" || $nish_tha_loginStatus == "false" ]]; then
-                   echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
+             if ! [[ $nish_tha_loginStatus == "public" || $nish_tha_loginStatus == "private" ]]; then
+                   echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "nishtha_loginStatus: $nish_tha_loginStatus\n" >> config_files/program_selector.yml
+                   printf "nishtha_state_loginStatus: $nish_tha_loginStatus\n" >> config_files/program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "nishtha_loginStatus: false\n" >> config_files/program_selector.yml
+          printf "nishtha_state_loginStatus: public\n" >> config_files/program_selector.yml
           break;
      fi
 fi

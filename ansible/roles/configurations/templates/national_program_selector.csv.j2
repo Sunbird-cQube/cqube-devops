@@ -1,11 +1,12 @@
-program_id,status
-nishtha,{% if nishtha == true %}true{% else %}false{% endif %}{{''}},{% if nishtha_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-pgi,{% if pgi == true %}true{% else %}false{% endif %}{{''}},{% if pgi_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-pmPoshan,{% if pmPoshan == true %}true{% else %}false{% endif %}{{''}},{% if pmPoshan_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-diksha,{% if diksha == true %}true{% else %}false{% endif %}{{''}},diksha,{% if diksha_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-microImprovement,{% if microImprovement == true %}true{% else %}false{% endif %}{{''}},{% if microImprovement_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-nas,{% if nas == true %}true{% else %}false{% endif %}{{''}},{% if nas_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-udise,{% if udise == true %}true{% else %}false{% endif %}{{''}},{% if udise_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-nipunBharat,{% if nipunBharat == true %}true{% else %}false{% endif %}{{''}},{% if nipunBharat_loginStatus == true %}public{% else %}false{% endif %}{{''}}
-quiz,{% if quiz == true %}true{% else %}false{% endif %}{{''}},{% if quiz_loginStatus == true %}private{% else %}public{% endif %}{{''}}
-ncf,{% if ncf == true %}true{% else %}false{% endif %}{{''}},{% if ncf_loginStatus == true %}private{% else %}public{% endif %}{{''}}
+program_id,status,access_type
+micro_improvements,{% if micro_improvements_nation == true %}true{% else %}false{% endif %}{{''}},{% if micro_improvements_nation_loginStatus == 'private' %}private{% else %}public{% endif %}{{''}}
+nipun_bharat,{% if nipun_bharat_nation == true %}true{% else %}false{% endif %}{{''}},{% if nipun_bharat_nation_loginStatus == 'public' %}public{% else %}private{% endif %}{{''}}
+ncert_quiz,{% if ncert_quiz_nation == true %}true{% else %}false{% endif %}{{''}},{% if ncert_quiz_nation_loginStatus == 'private' %}private{% else %}public{% endif %}{{''}}
+ncf,{% if ncf_nation == true %}true{% else %}false{% endif %}{{''}},{% if ncf_nation_loginStatus == 'private' %}private{% else %}public{% endif %}{{''}}
+pgi,{% if pgi_nation == true %}true{% endif %}{% if pgi_nation == false %}false{% endif %}{{''}},{% if pgi_nation_loginStatus == 'public' %}public{% endif %}{% if pgi_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+pm_poshan,{% if pm_poshan_nation == true %}true{% endif %}{% if pm_poshan_nation == false %}false{% endif %}{{''}},{% if pm_poshan_nation_loginStatus == 'public' %}public{% endif %}{% if pm_poshan_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+udise,{% if udise_nation == true %}true{% endif %}{% if udise_nation == false %}false{% endif %}{{''}},{% if udise_nation_loginStatus == 'public' %}public{% endif %}{% if udise_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+nas,{% if nas_nation == true %}true{% endif %}{% if nas_nation == false %}false{% endif %}{{''}},{% if nas_nation_loginStatus == 'public' %}public{% endif %}{% if nas_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+diksha,{% if diksha_nation == true %}true{% endif %}{% if diksha_nation == false %}false{% endif %}{{''}},{% if diksha_nation_loginStatus == 'public' %}public{% endif %}{% if diksha_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+nishtha,{% if nishtha_nation == true %}true{% endif %}{% if nishtha_nation == false %}false{% endif %}{{''}},{% if nishtha_nation_loginStatus == 'public' %}public{% endif %}{% if nishtha_nation_loginStatus == 'private' %}private{% endif %}{{''}}
+
