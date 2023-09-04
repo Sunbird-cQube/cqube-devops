@@ -44,7 +44,7 @@ read n_cf
 if ! [[ $n_cf == "true" || $n_cf == "false" ]]; then
      echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
 else
-     printf "ncf_nation: $n_cf\n" >> config_files/program_selector.yml
+     printf "ncf_nation: $n_cf\n" >> config_files/national_program_selector.yml
 
      if ! [[ $n_cf == "false" ]]; then
            while true
@@ -55,13 +55,13 @@ else
              if ! [[ $n_cf_loginStatus == "private" || $n_cf_loginStatus == "public" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
              else
-                   printf "ncf_nation_loginStatus: $n_cf_loginStatus\n" >> config_files/program_selector.yml
+                   printf "ncf_nation_loginStatus: $n_cf_loginStatus\n" >> config_files/national_program_selector.yml
                    break;
              fi
              done
              break;
      else
-          printf "ncf_nation_loginStatus: public\n" >> config_files/program_selector.yml
+          printf "ncf_nation_loginStatus: public\n" >> config_files/national_program_selector.yml
           break;
      fi
 fi
@@ -404,8 +404,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
             done
              if [[ -e "config_files/national_program_selector.yml" ]]; then
                           if [[ $yn == yes ]]; then
-                                 rm config_files/program_selector.yml
-                                touch config_files/program_selector.yml
+                                 rm config_files/national_program_selector.yml
+                                touch config_files/national_program_selector.yml
 				check_microImprovement
                                 check_ncf
                                 check_quiz
