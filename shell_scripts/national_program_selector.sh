@@ -83,7 +83,7 @@ else
      if ! [[ $Quiz == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pgi or else enter public ${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for ncert_quiz or else enter public ${normal}"
            echo -e "\e[0;38m${bold}please enter public or private .${normal}"
            read Quiz_loginStatus
              if ! [[ $Quiz_loginStatus == "private" || $Quiz_loginStatus == "public" ]]; then
@@ -106,7 +106,7 @@ done
 check_nipunBharat() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable nipunBharat program ${normal}"
+echo -e "\e[0;36m${bold}Hint: Enter true or false to enable nipun_bharat program ${normal}"
 echo -e "\e[0;38m${bold}please enter true or false.${normal}"
 read nipun_Bharat
 
@@ -118,7 +118,7 @@ else
      if ! [[ $nipun_Bharat == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pgi or else enter public ${normal}"
+           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for nipun_bharat or else enter public ${normal}"
            echo -e "\e[0;38m${bold}please enter public or private .${normal}"
            read nipun_Bharat_loginStatus
              if ! [[ $nipun_Bharat_loginStatus == "private" || $nipun_Bharat_loginStatus == "public" ]]; then
