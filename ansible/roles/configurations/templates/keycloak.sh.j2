@@ -8,6 +8,12 @@ sudo docker exec -i keycloak_app sh << 'EOF'
 
 /opt/jboss/keycloak/bin/kcadm.sh create realms -s realm=cQube -s enabled=true -o
 
-/opt/jboss/keycloak/bin/kcadm.sh create clients -r cQube -s clientId=cqube-5.0 -s enabled=true -s clientAuthenticatorType=client-secret -s secret=d0b8122f-8dfb-46h7-b69a-f5cc4e25d000
+{% if mode_of_installation == 'localhost' %}
+/opt/jboss/keycloak/bin/kcadm.sh create clients -r cQube -s clientId=cqube-5.0 -s enabled=true -s clientAuthenticatorType=client-secret -s secret=d0b8122f-8dfb-46h7-b69a-f5cc4e25d000 -s 'redirectUris=["http://{{ api_endpoint }}/*"]' -s directAccessGrantsEnabled=true
+{% else %}
+/opt/jboss/keycloak/bin/kcadm.sh create clients -r cQube -s clientId=cqube-5.0 -s enabled=true -s clientAuthenticatorType=client-secret -s secret=d0b8122f-8dfb-46h7-b69a-f5cc4e25d000 -s 'redirectUris=["https://{{ api_endpoint }}/*"]' -s directAccessGrantsEnabled=true
+{% endif %}
 
+/opt/jboss/keycloak/bin/kcadm.sh create users -r cQube -s username={{ keycloak_adm_name }} -s enabled=true
+/opt/jboss/keycloak/bin/kcadm.sh set-password --username {{ keycloak_adm_name }} -r cQube -p {{ keycloak_adm_password }}
 EOF
