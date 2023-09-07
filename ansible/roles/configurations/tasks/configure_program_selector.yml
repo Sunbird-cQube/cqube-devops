@@ -101,3 +101,24 @@
     state: absent
   when: access_type == "NVSK"
   tags: [ install, update ]
+
+- name: add a guest program file if the access type is others
+  file:
+    path: ../microservices/keycloak-ms/guest_program_file
+    state: touch
+  when: access_type == "others"
+  tags: [ install, update ]
+
+- name: add a guest program file if the access type is others
+  file:
+    path: ../microservices/keycloak-ms/private_program_file
+    state: touch
+  when: access_type == "others"
+  tags: [ install, update ]
+
+- name: add a dummy program selector csv file in the query builder if the access type is others
+  file:
+    path: ../microservices/query-builder/program_selector.csv
+    state: touch
+  when: access_type == "others"
+  tags: [ install, update ]
