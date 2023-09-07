@@ -24,7 +24,7 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'https://{{ api_endpoint }}/api/ingestion'
+      URL = 'http://ingest_app:3000'
       STORAGE_TYPE= "{{ storage_type }}"
       AWS_ACCESS_KEY = "{{ aws_access_key }}"
       AWS_SECRET_KEY = "{{ aws_secret_key }}"
@@ -55,7 +55,7 @@
       DB_NAME = "{{ db_name }}"
       NIFI_HOST = 'http://nifi_app'
       NIFI_PORT = 8096
-      URL = 'http://{{ api_endpoint }}:3000'
+      URL = 'http://ingest_app:3000'
       STORAGE_TYPE = "{{ storage_type }}"
       MINIO_END_POINT = "{{ minio_ip_address }}"
       MINIO_PORT = 9000
