@@ -42,10 +42,6 @@ if [[ $storage_type == "local" ]]; then
    . "shell_scripts/local_storage_config_generator.sh"
    chmod u+x shell_scripts/minio/install_minio.sh
    . "shell_scripts/minio/install_minio.sh"
- #  chmod u+x shell_scripts/minio/install_mc_client.sh
- #  . "shell_scripts/minio/install_mc_client.sh"
- #  chmod u+x shell_scripts/minio/crop_minio_ip.sh
- #  . "shell_scripts/minio/crop_minio_ip.sh"
 fi
 
 if [[ $storage_type == "oracle" ]]; then
@@ -60,7 +56,9 @@ access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_file
 if [[ $access_type == "VSK" ]]; then
    chmod u+x shell_scripts/program_selector.sh
    . "shell_scripts/program_selector.sh"
-else
+fi
+
+if [[ $access_type == "NVSK" ]]; then
    chmod u+x shell_scripts/national_program_selector.sh
    . "shell_scripts/national_program_selector.sh"
 fi
