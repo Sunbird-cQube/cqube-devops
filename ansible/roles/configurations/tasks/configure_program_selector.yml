@@ -101,3 +101,17 @@
     state: absent
   when: access_type == "NVSK"
   tags: [ install, update ]
+
+- name: add a guest program file if the access type is others
+  file:
+    path: ../microservices/keycloak-ms/guest_program_file
+    state: touch
+  when: access_type == "others"
+  tags: [ install, update ]
+
+- name: add a guest program file if the access type is others
+  file:
+    path: ../microservices/keycloak-ms/private_program_file
+    state: touch
+  when: access_type == "others"
+  tags: [ install, update ]
