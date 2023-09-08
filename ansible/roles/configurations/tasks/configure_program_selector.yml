@@ -82,7 +82,7 @@
 
 - name: Fetching national public programs
   template:
-    src: nvsk_private_programs.j2
+    src: nvsk_public_programs.j2
     dest: "../microservices/keycloak-ms/nvsk_public_programs"
     mode: "0644"
   when: access_type == "NVSK"

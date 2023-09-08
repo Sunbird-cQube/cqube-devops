@@ -53,40 +53,32 @@ THRESHOLD=15
 
 # Compare total RAM with the threshold
 if [ "$TOTAL_RAM" -ge "$THRESHOLD" ]; then
-    echo "$txtblue status check3: $txtgreen Total RAM is greater than or equal to 16GB. $txtreset"
+    echo "$txtblue status check4: $txtgreen Total RAM is greater than or equal to 16GB. $txtreset"
 else
-    echo "$txtblue status check4: $txtgreen Total RAM is less than 16GB. Please create a VM having minimun 16GB RAM $txtreset"
+    echo "$txtblue status check4: $txtred Total RAM is less than 16GB. Please create a VM having minimun 16GB RAM $txtreset"
 fi
 }
 
 check_port() {
-# Define the port to check
-PORT=$1
+ports=( 80 443 5432 3000 3001 3002 3003 3005 8000 8080 8096 9090 )
 
-# Check if the port is running
-if netstat -tuln | grep ":$PORT " > /dev/null; then
-    echo "$txtblue status check$2: $txtred Port $PORT is running. Kill the port using the process ID. $txtreset"
-    echo "Hint: Run the command sudo netstat -ntlp and note down the PID of the port $1"
-    echo "Run the following command to kill the port sudo kill -15 <PID>"
-else
-    echo "$txtblue status check$2:$txtgreen Port $PORT is not running. $txtreset"
-fi
+# Initialize a counter
+counter=5
+
+# Loop through the list of ports and check if they are running
+for port in "${ports[@]}"; do
+  if netstat -tuln | grep ":$port " >/dev/null; then
+    echo "$txtblue status check$counter. $txtred Port $port is running. $txtreset"
+  else
+    echo "$txtblue status check$counter. $txtgreen Port $port is not running. $txtreset"
+  fi
+  ((counter++))
+done
 }
+
 
 check_os_version
 check_cpu_cores
 check_storage
 check_ram
-check_port 22 4
-check_port 443 5
-check_port 9000 6
-check_port 9001 7
-check_port 8000 8
-check_port 4200 9
-check_port 3000 10
-check_port 3001 11
-check_port 3002 12
-check_port 3003 13
-check_port 8096 14
-check_port 5432 15
-check_port 8080 16
+check_port
