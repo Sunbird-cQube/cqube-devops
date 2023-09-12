@@ -56,7 +56,7 @@ if [[ $storage_type == "oracle" ]]; then
 fi
 
 #Running script to generate program selector config file
-access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/domain_specific_config.yml)
 if [[ $access_type == "VSK" ]]; then
    chmod u+x shell_scripts/program_selector.sh
    . "shell_scripts/program_selector.sh"
