@@ -13,6 +13,10 @@ fi
 chmod u+x shell_scripts/basic_requirements.sh
 . "shell_scripts/basic_requirements.sh"
 
+chmod u+x shell_scripts/domain_config_generator.sh
+echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a domain specific configuration file. Please refer to the hints provided and enter the correct value${normal}"
+. "shell_scripts/domain_config_generator.sh"
+
 #Running script to validate and genarat config file
 chmod u+x shell_scripts/config_file_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a configuration file. Please refer to the hints provided and enter the correct value${normal}"
@@ -52,7 +56,7 @@ if [[ $storage_type == "oracle" ]]; then
 fi
 
 #Running script to generate program selector config file
-access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/domain_specific_config.yml)
 if [[ $access_type == "VSK" ]]; then
    chmod u+x shell_scripts/program_selector.sh
    . "shell_scripts/program_selector.sh"

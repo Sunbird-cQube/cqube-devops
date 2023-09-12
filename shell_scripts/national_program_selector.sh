@@ -342,6 +342,11 @@ fi
 done
 }
 
+check_telemetry(){
+printf "telemetry_nation: true\n" >> config_files/national_program_selector.yml
+printf "telemetry_nation_loginStatus: private\n" >> config_files/national_program_selector.yml
+}
+
 check_config_file(){
 if [[ -e "config_files/national_program_selector.yml" ]]; then
         while true; do
@@ -374,6 +379,7 @@ check_pmPoshan
 check_nas
 check_diksha
 check_nishtha
+check_telemetry
 fi
 fi
 done
@@ -416,6 +422,7 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_nas
 				check_diksha
 				check_nishtha
+				check_telemetry
                                 
 fi
              fi

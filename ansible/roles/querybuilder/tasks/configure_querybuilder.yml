@@ -31,6 +31,7 @@
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME = 'process_input'
       ORACLE_BUCKET = "{{ oracle_bucket }}"
+      INGESTION_URL = 'http://ingest_app:3000'
       KEY_CLOCK_URL = 'http://keycloak_app:8080/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'
@@ -68,6 +69,7 @@
       AZURE_CONTAINER = "{{ azure_container }}"
       CONTAINER_FOLDER_NAME= 'process_input'
       ORACLE_BUCKET = "{{ oracle_bucket }}"
+      INGESTION_URL = 'http://ingest_app:3000'
       KEY_CLOCK_URL = 'http://keycloak_app:8080/auth'
       REALM = 'cQube'
       KEY_CLOAK_CLIENT_ID = 'cqube-5.0'

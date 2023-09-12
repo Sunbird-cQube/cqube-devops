@@ -32,7 +32,7 @@ provisioning = conf/provisioning
 #################################### Server ##############################
 [server]
 # Protocol (http, https, h2, socket)
-protocol = http
+protocol = https
 
 # The ip address to bind to, empty will bind to all interfaces
 http_addr =
@@ -63,8 +63,8 @@ static_root_path = public
 enable_gzip = false
 
 # https certs & key file
-cert_file = 
-cert_key = 
+cert_file = /etc/grafana/ssl_certificates/{{ nginx_cert_file }}
+cert_key =  /etc/grafana/ssl_certificates/{{ nginx_key_file }}
 
 # Unix socket gid
 # Changing the gid of a file without privileges requires that the target group is in the group of the process and that the process is the file owner
