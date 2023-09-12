@@ -5,6 +5,11 @@ txtred=$(tput setaf 1) # Red
 txtgreen=$(tput setaf 10) #green
 txtblue=$(tput setaf 6) #blue
 
+install_basics() {
+sudo apt-get update -y
+sudo apt-get install net-tools -y
+}
+
 check_os_version() {
 # Read the value of the VERSION_ID from the os-release file
 VERSION_ID=$(grep DISTRIB_RELEASE /etc/lsb-release | cut -d '=' -f 2)
@@ -68,9 +73,10 @@ counter=5
 # Loop through the list of ports and check if they are running
 for port in "${ports[@]}"; do
   if netstat -tuln | grep ":$port " >/dev/null; then
-    echo "$txtblue status check$counter. $txtred Port $port is running. $txtreset"
+    echo "$txtblue status check$counter. $txtred Port $port is already running which might affect cqube deployment. $txtreset"
+    echo "$txtblue use 'sudo netstat -ntllp' command to get the PID of $port and kill it using 'sudo kill -15 <PID> $txtreset
   else
-    echo "$txtblue status check$counter. $txtgreen Port $port is not running. $txtreset"
+    echo "$txtblue status check$counter. $txtgreen Port $port is free and can be used to deploy cqube. $txtreset"
   fi
   ((counter++))
 done
@@ -97,7 +103,7 @@ done
 }
 
 
-
+install_basics
 check_os_version
 check_cpu_cores
 check_storage

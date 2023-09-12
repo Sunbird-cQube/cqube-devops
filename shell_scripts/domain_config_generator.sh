@@ -45,7 +45,7 @@ check_state_id(){
 access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/domain_specific_config.yml)
 state_name=$(awk ''/^state_name:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/domain_specific_config.yml)
 if [[ $access_type == "VSK" ]]; then
-   state_id_check=$(grep -o "$state_name=[0-9]*" state_id_list | cut -d'=' -f2)
+   state_id_check=$(grep -o "$state_name=[0-9]*" sshell_scripts/tate_id_list | cut -d'=' -f2)
    printf "state_id: $state_id_check\n" >> config_files/domain_specific_config.yml
 else
    printf "state_id: NA\n" >> config_files/domain_specific_config.yml

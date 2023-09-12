@@ -478,7 +478,7 @@ printf "db_password: cQube@123\n" >> config_files/config.yml
 
 check_nginx_cert(){
 mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
-folder_path=../ansible/ssl_certificates
+folder_path=ansible/ssl_certificates
 if [[ $mode_of_installation == public ]]; then
    while true
    do
@@ -498,7 +498,7 @@ fi
 }
 
 check_nginx_key(){
-folder_path=../ansible/ssl_certificates
+folder_path=ansible/ssl_certificates
 mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 if [[ $mode_of_installation == public ]]; then
    while true
@@ -558,6 +558,8 @@ check_ip
 check_mode_of_installation
 check_storage_type
 check_api_endpoint
+check_nginx_cert
+check_nginx_key
 check_config_db
 check_config_read_only_db
 check_keycloak_creds
@@ -590,6 +592,8 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
 				check_mode_of_installation
 				check_storage_type
 				check_api_endpoint
+				check_nginx_cert
+                                check_nginx_key
 				check_config_db
 				check_config_read_only_db
 				check_keycloak_creds
