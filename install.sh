@@ -13,7 +13,7 @@ fi
 chmod u+x shell_scripts/basic_requirements.sh
 . "shell_scripts/basic_requirements.sh"
 
-chmod u+x shell_scripts/domainconfig_generator.sh
+chmod u+x shell_scripts/domain_config_generator.sh
 echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a domain specific configuration file. Please refer to the hints provided and enter the correct value${normal}"
 . "shell_scripts/domain_config_generator.sh"
 
