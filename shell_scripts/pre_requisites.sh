@@ -74,7 +74,7 @@ counter=5
 for port in "${ports[@]}"; do
   if netstat -tuln | grep ":$port " >/dev/null; then
     echo "$txtblue status check$counter. $txtred Port $port is already running which might affect cqube deployment. $txtreset"
-    echo "$txtblue use 'sudo netstat -ntllp' command to get the PID of $port and kill it using 'sudo kill -15 <PID> $txtreset
+    echo "$txtblue use 'sudo netstat -ntllp' command to get the PID of $port and kill it using 'sudo kill -15 <PID> $txtreset"
   else
     echo "$txtblue status check$counter. $txtgreen Port $port is free and can be used to deploy cqube. $txtreset"
   fi
