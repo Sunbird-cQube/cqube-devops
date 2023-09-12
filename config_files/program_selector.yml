@@ -12,3 +12,5 @@ diksha_state: true
 diksha_state_loginStatus: public
 nishtha_state: true
 nishtha_state_loginStatus: public
+telemetry_state: true
+telemetry_state_loginStatus: private

@@ -60,7 +60,7 @@ fi
 }
 
 check_port() {
-ports=( 80 443 5432 3000 3001 3002 3003 3005 8000 8080 8096 9090 )
+ports=( 80 443 5432 3000 3001 3002 3003 3005 4200 4201 8000 9000 9001 8080 8096 9090 9091 9092 9100 )
 
 # Initialize a counter
 counter=5
@@ -76,9 +76,31 @@ for port in "${ports[@]}"; do
 done
 }
 
+check_dimension(){
+while true
+do
+echo -e "\e[0;36m${bold}Hint: Enter yes or no to select if VSK data pull is needed ${normal}"
+echo -e "\e[0;38m${bold}please enter yes or no. ${normal}"
+read ingest_status
+if ! [[ $ingest_status == "yes" || $ingest_status == "no" ]]; then
+     echo -e "\e[0;31m${bold}Error - Please enter either yes or no ${normal}"; fail=1
+else
+     if  [[ $ingest_status == "yes" ]]; then
+           echo "test the ingestion files"
+           break;
+          else
+          echo "data ingestion is not chosen"
+          break;
+     fi
+fi
+done
+}
+
+
 
 check_os_version
 check_cpu_cores
 check_storage
 check_ram
 check_port
+#check_dimension

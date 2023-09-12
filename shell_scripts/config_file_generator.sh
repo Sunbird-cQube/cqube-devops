@@ -476,6 +476,49 @@ printf "db_password: cQube@123\n" >> config_files/config.yml
 
     }
 
+check_nginx_cert(){
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+folder_path=../ansible/ssl_certificates
+if [[ $mode_of_installation == public ]]; then
+   while true
+   do
+   echo -e "\e[0;36m${bold}Hint: Enter the SSL certificate file name ${normal}"     
+   echo -e "\e[0;38m${bold}please enter the name of cert file ${normal}"
+   read nginx_cert
+   if [ -e "${folder_path}/${nginx_cert}" ]; then
+      printf "nginx_cert_file: $nginx_cert\n" >> config_files/config.yml
+      break;
+   else
+      printf "\e[0;31m${bold}Error - The file '$nginx_cert' does not exist in the folder '$folder_path'. Please upload the file ${normal} "
+   fi
+   done
+else
+   printf "nginx_cert_file: NA\n" >> config_files/config.yml
+fi
+}
+
+check_nginx_key(){
+folder_path=../ansible/ssl_certificates
+mode_of_installation=$(awk ''/^mode_of_installation:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
+if [[ $mode_of_installation == public ]]; then
+   while true
+   do
+   echo -e "\e[0;36m${bold}Hint: Enter the SSL certificate key file name${normal}"
+   echo -e "\e[0;38m${bold}please enter the name of key file ${normal}"
+   read nginx_key
+   if [ -e "${folder_path}/${nginx_key}" ]; then
+      printf "nginx_key_file: $nginx_key\n" >> config_files/config.yml
+      break;
+   else
+      printf "\e[0;31m${bold}Error - The file '$nginx_key' does not exist in the folder '$folder_path'. Please upload the file ${normal} "
+   fi
+   done
+else
+   printf "nginx_key_file: NA\n" >> config_files/config.yml
+fi
+}
+
+
 check_config_read_only_db(){
         #while true; do
 echo -e "\e[0;33m${bold}Currently cQube having default database credentiable with read_only_db_user and read_only_db_password. Follow Installation process with below config values.${normal}"
@@ -511,9 +554,6 @@ touch config_files/config.yml
 if [[ -e "config_files/config.yml" ]]; then
 check_base_dir
 check_sys_user
-check_access_type
-check_login
-check_state
 check_ip
 check_mode_of_installation
 check_storage_type
@@ -546,9 +586,6 @@ echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${norm
                                 touch config_files/config.yml
 				check_base_dir
 				check_sys_user
-				check_access_type
-				check_login
-				check_state
 				check_ip
 				check_mode_of_installation
 				check_storage_type

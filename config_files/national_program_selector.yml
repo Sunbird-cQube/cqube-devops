@@ -18,3 +18,5 @@ diksha_nation: true
 diksha_nation_loginStatus: public
 nishtha_nation: true
 nishtha_nation_loginStatus: public
+telemetry_nation: true
+telemetry_nation_loginStatus: private

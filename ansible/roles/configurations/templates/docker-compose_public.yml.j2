@@ -39,6 +39,8 @@ services:
     container_name: ingest_app
     image: ingestion_ms:1
     restart: always
+    volumes:
+      - ./dimension_files:/app/dimension_files
     ports:
       - 3000:3000
     networks:
@@ -125,6 +127,7 @@ services:
     restart: always
     volumes:
       - /opt/cqube/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl_certificates/:/etc/ssl_certificates
     ports:
       - 80:80
       - 443:443
