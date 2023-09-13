@@ -85,7 +85,6 @@ if ! [[ $access_type == "NVSK" || $access_type == "others" ]]; then
      done
 else
 	printf "data_pull_status: NA\n" >> config_files/domain_specific_config.yml
-        break;
 fi
 }
 
@@ -114,7 +113,6 @@ if [[ $data_pull_status == "true" ]]; then
    done
 else
    printf "nvsk_api_endpoint: NA\n" >> config_files/domain_specific_config.yml
-   break;
 fi
 }
 
