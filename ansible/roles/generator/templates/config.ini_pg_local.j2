@@ -10,7 +10,7 @@ minio_access_key = {{ minio_username }}
 minio_secret_key = {{ minio_password }}
 minio_bucket = {{ minio_bucket }}
 instance_type = {{ access_type }}
-data_pull = {{ data_pull_status }}
+data_pull = {% if data_pull_status == true %}true{% else %}false{% endif %}{{''}}
 state_name = {{ state_name }}
 dimension_path = /opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/dimensions/
 program_path = /opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/programs/
