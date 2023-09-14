@@ -16,7 +16,7 @@
 
 - name: Copy ssl files directory into grafana
   ansible.builtin.copy:
-    src: ssl_certificates/
+    src: ssl_certificates
     dest: monitoring/
   when: mode_of_installation != "localhost"
   tags: [ install, update ]
