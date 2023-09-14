@@ -7,7 +7,7 @@ nifi_port = 8096
 oracle_bucket = {{ oracle_bucket }}
 instance_type = {{ access_type }}
 state_name = {{ state_name }}
-data_pull = {{ data_pull_status }}
+data_pull = {% if data_pull_status == true %}true{% else %}false{% endif %}{{''}}
 dimension_path = /opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/dimensions/
 program_path = /opt/nifi/nifi-current/Sunbird-cQube-processing-ms/impl/c-qube/ingest/programs/
 processing_time = * * * * * ?
