@@ -111,6 +111,13 @@ fi
 chmod u+x shell_scripts/keycloak.sh
 . "shell_scripts/keycloak.sh"
 
+#Data ingestion if the user wants to ingest the data automatically
+data_pull_status=$(awk ''/^data_pull_status:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/domain_specific_config.yml)
+if [[ $data_pull_status == "true" ]]; then
+chmod u+x shell_scripts/data_ingestion.sh
+. "shell_scripts/data_ingestion.sh"
+fi
+
 if [ $? = 0 ]; then
 echo -e "\e[0;32m${bold}cQube installed successfully!!${normal}"
 fi
