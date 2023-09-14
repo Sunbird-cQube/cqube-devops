@@ -9,3 +9,4 @@ instance_type = {{ access_type }}
 QUERY_BUILDER_URL = http://querybuilder_app:3002
 INGESTION_URL = http://ingest_app:3000
 SPEC_URL = http://spec_app:3001
+PROGRAM_NAMES = {% if access_type == 'VSK' %}pm-poshan,nas,udise{% else %}NA{% endif %}
