@@ -3,8 +3,7 @@
 check_access_type(){
 while true
 do
-    echo -e "\e[0;36m${bold}Hint: enter NVSK or VSK or others${normal}"
-    echo -e "\e[0;38m${bold}please enter the access_type${normal}"
+    echo -e "\e[0;38m${bold}please enter the access_type${normal} \e[0;36m${bold}Hint: enter NVSK or VSK or others${normal}"
     read access_typ
       if ! [[ $access_typ == "NVSK" || $access_typ == "VSK" || $access_typ == "others" ]]; then
          echo -e "\e[0;31m${bold}Error - Please enter either NVSK or VSK or others"; fail=1
@@ -22,8 +21,7 @@ if [[ $access_type == "NVSK" || $access_type == "others" ]]; then
 else
   while true
   do
-  echo -e "\e[0;36m${bold}Hint: Please enter state code ( refer to state_list )${normal}"
-  echo -e "\e[0;38m${bold}please enter the state_code ${normal} "
+  echo -e "\e[0;38m${bold}please enter the state_code ${normal} \e[0;36m${bold}Hint: Refer to state_list from cqube-devops directory ${normal}"
   read state_name
   state_found=0
   while read line; do
@@ -55,8 +53,7 @@ fi
 check_login(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable login screen for cqube dashboard ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false. ${normal}"
+echo -e "\e[0;38m${bold}Do you want to enable login screen for cqube instance. ${normal} \e[0;36m${bold}(Hint: Enter true or false) ${normal}"
 read login_status
         if ! [[ $login_status == "true" || $login_status == "false" ]]; then
         echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
@@ -73,8 +70,7 @@ access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_file
 if ! [[ $access_type == "NVSK" || $access_type == "others" ]]; then
      while true
      do
-     echo -e "\e[0;36m${bold}Hint: Enter true if you want to pull the data from NVSK server. Else enter false ${normal}"
-     echo -e "\e[0;38m${bold}please enter true or false. ${normal}"
+     echo -e "\e[0;38m${bold}Do you want to pull the data from NVSK server? (valid mostly for 'VSK' or 'other' instance type) ${normal} \e[0;36m${bold}(Hint: Enter true or false) ${normal}"
      read data_pull
      if ! [[ $data_pull == "true" || $data_pull == "false" ]]; then
           echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
@@ -93,8 +89,7 @@ data_pull_status=$(awk ''/^data_pull_status:' /{ if ($2 !~ /#.*/) {print $2}}' c
 if [[ $data_pull_status == "true" ]]; then
    while true
    do
-   echo -e "\e[0;36m${bold}Hint: enter NVSK domain name ( Example: cqubeprojects.com )${normal}"     
-   echo -e "\e[0;38m${bold}please enter the nvsk_endpoint${normal}" 
+   echo -e "\e[0;38m${bold}Please enter the end point to pull the data${normal} \e[0;36m${bold}(Hint: enter end point ( Example: cqubeprojects.com ))${normal}"
    read nvsk_endpoint
    if [[ (( $nvsk_endpoint =~ \-{2,} ))  ||  (( $nvsk_endpoint =~ \.{2,} )) ]]; then
     echo -e "\e[0;31m${bold}Error - Please provide the proper api endpoint${normal}"; fail=1
