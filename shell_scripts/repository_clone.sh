@@ -91,3 +91,18 @@ else
         cd ../../
 
 fi
+
+cd "$MY_PATH"
+if ! [[ -d csv-parser-ms ]]; then
+        git clone https://github.com/Sunbird-cQube/csv-parser-ms.git
+        cd "csv-parser-ms"
+        git checkout $REPOSITORY
+        cd ../../
+else
+        cd "csv-parser-ms"
+        git stash
+        git checkout $REPOSITORY
+        git pull
+        cd ../../
+
+fi

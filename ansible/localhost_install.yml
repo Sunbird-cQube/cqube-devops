@@ -22,6 +22,7 @@
           - keycloak  
           - ingestion
           - spec
+          - csv_parser
           - generator
           - dashboard
           - admin_dashboard
