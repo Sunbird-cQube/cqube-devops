@@ -1,0 +1,8 @@
+- name: docker build csvparser ms
+  docker_image:
+    name: csvparser_ms
+    tag: '1'
+    build:
+      path: ../microservices/csv-parser-ms/
+    source: build
+  tags: [ install, update ]

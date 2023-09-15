@@ -22,9 +22,9 @@ services:
         paths:
           - /api/queryBuilder
 
-  - name: generator-ms
-    url: http://generator_app:3003/api/generator
+  - name: csvparser-ms
+    url: http://csvParser_app:3004
     routes:
-      - name: generator-ms
+      - name: csvparser-ms
         paths:
-          - /api/generator
+          - /api/csv-parser

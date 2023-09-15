@@ -97,6 +97,17 @@ services:
     networks:
       cqube_net:
         ipv4_address: "10.0.0.11"
+  csvParser_app:
+    container_name: csvParser_app
+    image: csvparser-ms:1
+    restart: always
+    ports:
+      - ${EXTERNAL_PORT-5005}:3004
+    environment:
+      TMP_BASE_PATH: './tmp'
+    networks:
+      cqube_net:
+        ipv4_address: "10.0.0.20"
 networks:
   cqube_net:
     driver: bridge
