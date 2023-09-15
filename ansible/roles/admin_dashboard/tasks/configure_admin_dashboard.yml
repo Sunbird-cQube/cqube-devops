@@ -13,6 +13,8 @@
       PORT=4201
       NEXT_PUBLIC_API_URL = https://{{ api_endpoint }}/api/queryBuilder
       NEXT_PUBLIC_GRAFANA_URL = https://{{ api_endpoint }}:3005/grafana
+      NEXT_PUBLIC_CSV_PARSER_API = https://{{ api_endpoint }}/api/csv-parser
+      NEXT_PUBLIC_DEBUGGER_API = https://{{ api_endpoint }}/api/ingestion
       NEXT_PUBLIC_POSTHOG_URL = https://app.posthog.com/login
   when: mode_of_installation != "localhost"   
   tags: [ install, update ]
@@ -25,5 +27,7 @@
       NEXT_PUBLIC_API_URL = http://{{ api_endpoint }}:3002
       NEXT_PUBLIC_GRAFANA_URL = http://{{ api_endpoint }}:3005/grafana
       NEXT_PUBLIC_POSTHOG_URL = https://app.posthog.com/login
+      NEXT_PUBLIC_CSV_PARSER_API = http://{{ api_endpoint }}:3004
+      NEXT_PUBLIC_DEBUGGER_API = http://{{ api_endpoint }}:3000
   when: mode_of_installation == "localhost"   
   tags: [ install, update ]
