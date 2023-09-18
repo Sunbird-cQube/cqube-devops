@@ -3,8 +3,7 @@
 check_az_storage_connection_string(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter Azure connection string ${normal}"
-echo -e "\e[0;38m${bold}please enter the connection string${normal}"
+echo -e "\e[0;38m${bold}please enter the connection string${normal} \e[0;36m${bold}(Hint: Enter Azure connection string) ${normal}"
 read az_connection_string
 
     az_account_status=0
@@ -25,8 +24,7 @@ check_az_key(){
 
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter Azure account key ${normal}"
-echo -e "\e[0;38m${bold}please enter the azure account key${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account key${normal} \e[0;36m${bold}(Hint: Enter Azure account key) ${normal}"
 read az_key
     printf "azure_account_key: $az_key\n" >> config_files/azure_container_config.yml
         break;
@@ -38,8 +36,7 @@ done
 check_az_storage_account_name(){
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter Azure account name ${normal}"
-echo -e "\e[0;38m${bold}please enter the azure account name${normal}"
+echo -e "\e[0;38m${bold}please enter the azure account name${normal} \e[0;36m${bold}(Hint: Enter Azure account name) ${normal}"
 read az_name
 azure_account_key=$(awk ''/^azure_account_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/azure_container_config.yml)
     az_account_status=0
