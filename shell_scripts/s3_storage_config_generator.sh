@@ -44,8 +44,7 @@ while true
 do
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 if [[ $storage_type == aws ]]; then
-echo -e "\e[0;36m${bold}Hint: AWS Secret key for creation of s3 bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal}"
+   echo -e "\e[0;38m${bold}please enter the aws_secret_key ${normal} \e[0;36m${bold}(Hint: AWS Secret key for creation of s3 bucket)${normal}"
 aws_access_key=$(awk ''/^aws_access_key:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/aws_s3_config.yml)
 read aws_secret_key
 if [[ -z $aws_secret_key ]]; then
@@ -109,8 +108,7 @@ while true; do
             if [[ $yn == yes ]]; then
 
 
-echo -e "\e[0;36m${bold}Hint: aws s3  bucket${normal}"
-echo -e "\e[0;38m${bold}please enter the unique  s3 bucket name ${normal}"
+echo -e "\e[0;38m${bold}please enter the unique  s3 bucket name ${normal} \e[0;36m${bold}(Hint: aws s3 bucket name)${normal}"
 read s3_bucket_2
 
 create_bucket=`aws s3api create-bucket --bucket $s3_bucket_2 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1 2>&1`
