@@ -34,48 +34,6 @@ check_version(){
    fi
 }
 
-check_state(){
-access_type=$(awk ''/^access_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
-if [[ $access_type == "NVSK" || $access_type == "others" ]]; then
-   printf "state_name: NA\n" >> config_files/config.yml
-else
-  while true
-  do
-  echo -e "\e[0;36m${bold}Hint: Please enter state code ( refer to state_list )${normal}"
-  echo -e "\e[0;38m${bold}please enter the state_code ${normal} "
-  read state_name
-  state_found=0
-  while read line; do
-  if [[ $line == $state_name ]] ; then
-     state_found=1
-  fi
-  done < shell_scripts/state_codes
-  if [[ $state_found == 0 ]] ; then
-     echo -e "\e[0;31m${bold}Error - Invalid State Code. Please refer to the state_list file and enter the correct value.${normal}"; fail=1
-  else
-     printf "state_name: $state_name\n" >> config_files/config.yml
-     break;
-  fi
-  done
-fi
-}
-
-check_login(){
-while true
-do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable login screen for cqube dashboard ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false. ${normal}"
-read login_status
-        if ! [[ $login_status == "true" || $login_status == "false" ]]; then
-        echo -e "\e[0;31m${bold}Error - Please enter either true or false ${normal}"; fail=1
-                        else
-                        printf "loginpage_status: $login_status\n" >> config_files/config.yml
-                        break;
-
-        fi
-done
-}
-
 check_api_endpoint(){
 while true
 do

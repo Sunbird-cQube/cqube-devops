@@ -3,8 +3,7 @@
 check_teacherAttendance() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable teacherAttendance program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable teacherAttendance program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read teacher_Attendance
 
 if ! [[ $teacher_Attendance == "true" || $teacher_Attendance == "false" ]]; then
@@ -15,8 +14,7 @@ else
      if ! [[ $teacher_Attendance == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for teacher attandance or else enter public ${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
+           echo -e "\e[0;38m${bold}Do you want to enable login screen for teacherAttendance program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read teacher_Attendance_loginStatus
              if ! [[ $teacher_Attendance_loginStatus == "public" || $teacher_Attendance_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -38,8 +36,7 @@ done
 check_pgi() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable pgi program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable pgi program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read pg_i
 
 if ! [[ $pg_i == "true" || $pg_i == "false" ]]; then
@@ -50,8 +47,7 @@ else
      if ! [[ $pg_i == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pgi or else enter public ${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private .${normal}"
+           echo -e "\e[0;38m${bold}Do you want to enable login screen for pgi program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read pg_i_loginStatus
              if ! [[ $pg_i_loginStatus == "private" || $pg_i_loginStatus == "public" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -72,8 +68,7 @@ done
 check_pmPoshan() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable pmPoshan program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable the pmPoshan program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read pm_Poshan
 
 if ! [[ $pm_Poshan == "true" || $pm_Poshan == "false" ]]; then
@@ -84,8 +79,7 @@ else
      if ! [[ $pm_Poshan == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for pmPoshan or else enter public ${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
+	   echo -e "\e[0;38m${bold}Do you want to enable login screen for pmPoshan program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read pm_Poshan_loginStatus
              if ! [[ $pm_Poshan_loginStatus == "public" || $pm_Poshan_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -107,8 +101,7 @@ done
 check_udise() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable udise program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable the udise program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read ud_ise
 
 if ! [[ $ud_ise == "true" || $ud_ise == "false" ]]; then
@@ -119,8 +112,7 @@ else
      if ! [[ $ud_ise == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for udise or else enter public${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
+	   echo -e "\e[0;38m${bold}Do you want to enable login screen for udise program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read ud_ise_loginStatus
              if ! [[ $ud_ise_loginStatus == "public" || $ud_ise_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -142,8 +134,7 @@ done
 check_nas() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable nas program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable the nas program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read n_as
 
 if ! [[ $n_as == "true" || $n_as == "false" ]]; then
@@ -154,8 +145,7 @@ else
      if ! [[ $n_as == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for nas or else enter public${normal}"
-           echo -e "\e[0;38m${bold}please enter private or public.${normal}"
+	   echo -e "\e[0;38m${bold}Do you want to enable login screen for nas program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read n_as_loginStatus
              if ! [[ $n_as_loginStatus == "public" || $n_as_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -176,8 +166,7 @@ done
 check_diksha() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable diksha program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable the diksha program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read dik_sha
 
 if ! [[ $dik_sha == "true" || $dik_sha == "false" ]]; then
@@ -188,8 +177,7 @@ else
      if ! [[ $dik_sha == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for diksha or else enter public ${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
+	   echo -e "\e[0;38m${bold}Do you want to enable login screen for diksha program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read dik_sha_loginStatus
              if ! [[ $dik_sha_loginStatus == "public" || $dik_sha_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -211,8 +199,7 @@ done
 check_nishtha() {
 while true
 do
-echo -e "\e[0;36m${bold}Hint: Enter true or false to enable nishtha program ${normal}"
-echo -e "\e[0;38m${bold}please enter true or false.${normal}"
+echo -e "\e[0;38m${bold} Do you want to enable the nishtha program ${normal} \e[0;36m${bold}(Hint: Please enter true or false.)${normal}"
 read nish_tha
 
 if ! [[ $nish_tha == "true" || $nish_tha == "false" ]]; then
@@ -223,8 +210,7 @@ else
      if ! [[ $nish_tha == "false" ]]; then
            while true
            do
-           echo -e "\e[0;36m${bold}Hint: enter private if u need a login screen for nishtha or else enter public ${normal}"
-           echo -e "\e[0;38m${bold}please enter public or private.${normal}"
+	   echo -e "\e[0;38m${bold}Do you want to enable login screen for nishtha program${normal} \e[0;36m${bold} (Hint: Please enter private to enable login screen or else enter public.)${normal}"
            read nish_tha_loginStatus
              if ! [[ $nish_tha_loginStatus == "public" || $nish_tha_loginStatus == "private" ]]; then
                    echo -e "\e[0;31m${bold}Error - Please enter either public or private ${normal}"; fail=1
@@ -294,8 +280,7 @@ if [[ -e "config_files/program_selector.yml" ]]; then
         while true; do
 echo -e "\e[0;33m${bold}please preview the program_selector.yml file and confirm if everything is correct.${normal}"
 echo -e "\e[0;38m${bold} `cat config_files/program_selector.yml` ${normal}"
-echo -e "\e[0;33m${bold}Currently cQube program_selector.yml is entered. Follow Installation process with above config values.${normal}"
-echo -e "\e[0;33m${bold}If you want to edit config value please enter yes.${normal}"
+echo -e "\e[0;33m${bold}If you want to edit config values please enter yes or else enter no${normal}"
             while true; do
 
              read -p "Do you still want to edit the program_selector.yml file (yes/no)? " yn
