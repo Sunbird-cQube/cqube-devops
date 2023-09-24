@@ -4,6 +4,7 @@ txtreset=$(tput sgr0) # Text reset
 txtred=$(tput setaf 1) # Red
 txtgreen=$(tput setaf 10) #green
 txtblue=$(tput setaf 6) #blue
+txtyellow=$(tput setaf 3) #yellow
 
 install_basics() {
 sudo apt-get update -y
@@ -45,7 +46,7 @@ THRESHOLD=245
 if [ "$AVAILABLE_SPACE" -ge "$THRESHOLD" ]; then
     echo "$txtblue status check3: $txtgreen Available storage is greater than or equal to 256GB. $txtreset"
 else
-    echo "$txtblue status check3: $txtred Available storage is less than 256GB. Please make sure to extend the storage to more than or equal to 100GB $txtreset"
+    echo "$txtblue status check3: $txtred Available storage is less than 256GB. Please make sure to extend the storage to more than or equal to 256GB $txtreset"
 fi
 }
 
@@ -64,11 +65,19 @@ else
 fi
 }
 
+check_dimension(){
+echo "$txtblue status check5: $txtyellow If you are opting to pull the data from NVSK instance, Make sure to upload the dimension files into cqube-devops/ansible/dimension_files folder ( Ignore this step if you are selecting access type as NVSK or Others ) $txtreset"
+}
+
+check_ssl(){
+echo "$txtblue status check6: $txtyellow If you are opting for public mode of inatllation, Make sure to upload the SSL certificate files into cqube-devops/ansible/ssl_certificates folder ( Make sure SSL certificates are in the format which supports nginx.) $txtreset"
+}
+
 check_port() {
 ports=( 80 443 5432 3000 3001 3002 3003 3005 4200 4201 8000 9000 9001 8080 8096 9090 9091 9092 9100 )
 
 # Initialize a counter
-counter=5
+counter=7
 
 # Loop through the list of ports and check if they are running
 for port in "${ports[@]}"; do
@@ -82,31 +91,12 @@ for port in "${ports[@]}"; do
 done
 }
 
-check_dimension(){
-while true
-do
-echo -e "\e[0;36m${bold}Hint: Enter yes or no to select if VSK data pull is needed ${normal}"
-echo -e "\e[0;38m${bold}please enter yes or no. ${normal}"
-read ingest_status
-if ! [[ $ingest_status == "yes" || $ingest_status == "no" ]]; then
-     echo -e "\e[0;31m${bold}Error - Please enter either yes or no ${normal}"; fail=1
-else
-     if  [[ $ingest_status == "yes" ]]; then
-           echo "test the ingestion files"
-           break;
-          else
-          echo "data ingestion is not chosen"
-          break;
-     fi
-fi
-done
-}
-
 
 install_basics
 check_os_version
 check_cpu_cores
 check_storage
 check_ram
+check_dimension
+check_ssl
 check_port
-#check_dimension
