@@ -12,7 +12,7 @@ schema_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pag
 usage_documentation="https://project-sunbird.atlassian.net/wiki/spaces/CQUB/pages/3280764974/Usage+Documentation"
 
 if [[ $mode_of_installation == public ]]; then
-echo -e "\e[0;36m${bold}cQube dashboard can be accessible using https://$api_endpoint/"
+echo -e "\e[0;36m${bold}cQube dashboard can be accessible using https://$api_endpoint/dashboard"
 echo -e "\e[0;36m${bold}cQube admin dashboard can be accessible using https://$api_endpoint/admin"
 echo -e "\e[0;36m${bold}cQube keycloak can be accessible using https://$api_endpoint/auth"
 echo -e "\e[0;36m${bold}cQube ingestion api's can be accessible using https://$api_endpoint/api/ingestion"
