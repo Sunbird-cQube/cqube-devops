@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 api_endpoint=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 db_user=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 db_name=$(awk ''/^api_endpoint:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
