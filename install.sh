@@ -19,7 +19,7 @@ echo -e "\e[0;36m${bold}NOTE: We are going through a process of generating a con
 . "shell_scripts/config_file_generator.sh"
 
 # create a docker network using a defined subnet
-docker network create --driver=bridge --subnet=10.0.0.0/16 --gateway=10.0.0.1 cqube_net
+docker network create --driver=bridge --subnet=172.20.0.0/16 --gateway=172.20.0.1 cqube_net
 
 storage_type=$(awk ''/^storage_type:' /{ if ($2 !~ /#.*/) {print $2}}' config_files/config.yml)
 
