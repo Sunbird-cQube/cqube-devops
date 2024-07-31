@@ -10,3 +10,4 @@ sudo apt install net-tools -y
 sudo apt install docker.io -y
 sudo pip3 install docker==6.0.1
 sudo pip install docker-compose==1.29.2
+sudo pip install requests==2.31.0
